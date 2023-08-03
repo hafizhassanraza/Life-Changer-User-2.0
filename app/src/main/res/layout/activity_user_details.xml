@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.ActivityUserDetails">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:text="User Details."/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:textColor="@color/gray"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="5dp"
+            android:text="Please provide following information to continue the services of Life Changer (Pvt.) Ltd."/>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            app:cardElevation="6dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="3dp"
+            app:cardCornerRadius="8dp">
+
+
+            <RelativeLayout
+                android:id="@+id/layInvestorPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/secondary_m">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/primary"
+                            android:textStyle="bold"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Add Phone Number"/>
+
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/baseline_keyboard_arrow_right_24"
+                            android:tint="@color/primary" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add and verify your phone number for alerts!"
+                        android:textSize="12dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="#7C7B7B" />
+
+                    <TextView
+                        android:id="@+id/tvHeaderUserPhoneNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Required*"
+                        android:textColor="@color/red"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/imgCheckUserPhoneNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="25dp"
+                    android:layout_marginRight="26dp"
+                    android:src="@drawable/check_dark" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            app:cardElevation="6dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="3dp"
+            app:cardCornerRadius="8dp">
+
+
+            <RelativeLayout
+                android:id="@+id/layInvestorBank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/secondary_m">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/primary"
+                            android:textStyle="bold"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Bank Account Details"/>
+
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/baseline_keyboard_arrow_right_24"
+                            android:tint="@color/primary" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add your bank account for funds transfer"
+                        android:textSize="12dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="#7C7B7B" />
+
+                    <TextView
+                        android:id="@+id/tvHeaderUserBank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Required*"
+                        android:textColor="@color/red"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/imgCheckUserBank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="25dp"
+                    android:layout_marginRight="26dp"
+                    android:src="@drawable/check_dark" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            app:cardElevation="6dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="3dp"
+            app:cardCornerRadius="8dp">
+
+
+            <RelativeLayout
+                android:id="@+id/layInvestorProfilePhoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/secondary_m">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/primary"
+                            android:textStyle="bold"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Profile Photo"/>
+
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/baseline_keyboard_arrow_right_24"
+                            android:tint="@color/primary" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Upload your profile photo for clear identity"
+                        android:textSize="12dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="#7C7B7B" />
+
+                    <TextView
+                        android:id="@+id/tvHeaderUserPhoto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Required*"
+                        android:textColor="@color/red"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/imgCheckUserPhoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="25dp"
+                    android:layout_marginRight="26dp"
+                    android:src="@drawable/check_dark" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            app:cardElevation="6dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="3dp"
+            app:cardCornerRadius="8dp">
+
+
+            <RelativeLayout
+                android:id="@+id/layInvestorCNIC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/secondary_m">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/primary"
+                            android:textStyle="bold"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Add CNIC"/>
+
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/baseline_keyboard_arrow_right_24"
+                            android:tint="@color/primary" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Upload both side photo of your CNIC"
+                        android:textSize="12dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="#7C7B7B" />
+
+                    <TextView
+                        android:id="@+id/tvHeaderUserCnic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Required*"
+                        android:textColor="@color/red"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/imgCheckUserCnic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="25dp"
+                    android:layout_marginRight="26dp"
+                    android:src="@drawable/check_dark" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            app:cardElevation="6dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="3dp"
+            app:cardCornerRadius="8dp">
+
+
+            <RelativeLayout
+                android:id="@+id/layAddNominee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/secondary_m">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/primary"
+                            android:textStyle="bold"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Add Nominee"/>
+
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/baseline_keyboard_arrow_right_24"
+                            android:tint="@color/primary" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Effortlessly nominate deserving individuals"
+                        android:textSize="12dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="#7C7B7B" />
+
+                    <TextView
+                        android:id="@+id/tvHeaderNominee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Required*"
+                        android:textColor="@color/red"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/imgCheckNominee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="25dp"
+                    android:layout_marginRight="26dp"
+                    android:src="@drawable/check_dark" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            app:cardElevation="6dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="3dp"
+            app:cardCornerRadius="8dp">
+
+
+            <RelativeLayout
+                android:id="@+id/layInvestorNomineeBank"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/secondary_m">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/primary"
+                            android:textStyle="bold"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Nominee Bank Account"/>
+
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/baseline_keyboard_arrow_right_24"
+                            android:tint="@color/primary" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add your nominee bank account for funds claim"
+                        android:textSize="12dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="#7C7B7B" />
+
+                    <TextView
+                        android:id="@+id/tvHeaderNomineeBank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Required*"
+                        android:textColor="@color/red"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/imgCheckNomineeBank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="25dp"
+                    android:layout_marginRight="26dp"
+                    android:src="@drawable/check_dark" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            app:cardElevation="6dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="8dp">
+
+
+            <RelativeLayout
+                android:id="@+id/layInvestorNomineeCNIC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/secondary_m">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/primary"
+                            android:textStyle="bold"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Add Nominee CNIC"/>
+
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/baseline_keyboard_arrow_right_24"
+                            android:tint="@color/primary" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Upload both side photo of your nominee CNIC"
+                        android:textSize="12dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="#7C7B7B" />
+
+                    <TextView
+                        android:id="@+id/tvHeaderNomineeCnic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Required*"
+                        android:textColor="@color/red"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/imgCheckNomineeCnic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="25dp"
+                    android:layout_marginRight="26dp"
+                    android:src="@drawable/check_dark" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/bg_button"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/primary"
+            android:drawableRight="@drawable/baseline_keyboard_arrow_right_24"
+            android:drawableTint="@color/white"
+            android:text="Get Started" />
+
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,76 @@
+<resources>
+    <string name="app_name">Life Changer</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="tvCreateAccount">Don\'t have an account?</string>
+
+
+    <string name="term_condition"><b><u>Term and Conditions</u></b></string>
+    <string name="login"><b><u>Login</u></b></string>
+    <string name="timer"><b><u>00 sec</u></b></string>
+    <string name="signUp"><b><u>Signup</u></b></string>
+    <string name="fgPassword"><b><u>Forget Password?</u></b></string>
+    <string name="clear"><b>Clear all</b></string>
+    <string name="upload"><b><u>Select</u></b></string>
+
+
+    <string-array name="nomineeRelationSpiner">
+        <item>Father</item>
+        <item>Mother</item>
+        <item>Son</item>
+        <item>Daughter</item>
+        <item>Wife</item>
+        <item>Brother</item>
+        <item>Sister</item>
+        <item>Grandfather</item>
+        <item>Grandmother</item>
+        <item>Husband</item>
+        <item>Grand-son</item>
+        <item>Grand-daughter</item>
+        <item>Uncle</item>
+        <item>Aunt</item>
+        <item>Nephew</item>
+        <item>Niece</item>
+        <item>Cousin</item>
+        <item>Friend</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="listofbanks">
+        <item>Allied Bank Limited (ABL)</item>
+        <item>Askari Bank</item>
+        <item>Bank Alfalah Limited (BAFL)</item>
+        <item>Bank Al-Habib Limited (BAHL)</item>
+        <item>BankIslami Pakistan Limited</item>
+        <item>Bank of Punjab (BOP)</item>
+        <item>Bank of Khyber</item>
+        <item>EasyPaisa</item>
+        <item>Faysal Bank Limited (FBL)</item>
+        <item>Habib Bank Limited (HBL)</item>
+        <item>Habib Metropolitan Bank Limited</item>
+        <item>HBL Konnect</item>
+        <item>JS Bank Limited</item>
+        <item>JazzCash</item>
+        <item>MCB Bank Limited</item>
+        <item>MCB Islamic Bank Limited</item>
+        <item>Meezan Bank Limited</item>
+        <item>National Bank of Pakistan (NBP)</item>
+        <item>NayaPay</item>
+        <item>Sindh Bank</item>
+        <item>Summit Bank Pakistan</item>
+        <item>United Bank Limited (UBL)</item>
+        <item>Upaisa</item>
+        <item>Zarai Taraqiati Bank Limited (ZTBL)</item>
+    </string-array>
+    <string name="title_activity_withdraw">ActivityWithdraw</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+
+
+</resources>
+
