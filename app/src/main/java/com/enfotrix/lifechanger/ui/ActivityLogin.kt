@@ -36,12 +36,12 @@ class ActivityLogin : AppCompatActivity() {
 
     private lateinit var utils: Utils
     private lateinit var mContext: Context
+    private lateinit var dialogPinUpdate: Dialog
+
     private lateinit var constants: Constants
     private lateinit var user: User
     private lateinit var sharedPrefManager : SharedPrefManager
     private lateinit var dialog : Dialog
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +50,7 @@ class ActivityLogin : AppCompatActivity() {
         mContext=this@ActivityLogin
         utils = Utils(mContext)
         constants= Constants()
+
         sharedPrefManager = SharedPrefManager(mContext)
 
 
@@ -57,8 +58,7 @@ class ActivityLogin : AppCompatActivity() {
         binding.btnSignIn.setOnClickListener(View.OnClickListener {
 
 
-            if((!IsEmpty()) && IsValid() ) checkCNIC(utils.cnicFormate(   binding.etCNIC.editText?.text.toString()))
-
+            if((!IsEmpty()) && IsValid()) checkCNIC(utils.cnicFormate(   binding.etCNIC.editText?.text.toString()))
 
 
         })
@@ -70,7 +70,7 @@ class ActivityLogin : AppCompatActivity() {
 
         })
         binding.tvForgotPassword.setOnClickListener{
-            Toast.makeText(mContext, "Available soon...", Toast.LENGTH_SHORT).show()
+             showForgetPasswordDialog()
         }
 
 
@@ -158,8 +158,6 @@ class ActivityLogin : AppCompatActivity() {
             }
 
 
-
-
         }
         else {
             Toast.makeText(mContext, "Incorrect Pin", Toast.LENGTH_SHORT).show()
@@ -227,6 +225,26 @@ class ActivityLogin : AppCompatActivity() {
 
         return result.value!!
     }
+
+
+    private fun showForgetPasswordDialog()
+    {
+     //   dialogUpdateTaken = Dialog(requireContext())
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
 
 }
 

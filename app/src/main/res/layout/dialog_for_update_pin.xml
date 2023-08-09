@@ -28,8 +28,8 @@
                 android:id="@+id/tvHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Enter New 6-Digits Pin !"
-                android:textColor="@color/black_m"
+                android:text="Enter previous 6-Digits Pin !"
+                android:textColor="@color/primary"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="20dp"
                 android:textSize="20dp"
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/SecondaryVariant"
                 android:layout_marginHorizontal="20dp"
-                android:text="Set 6-digit code for your account and transactions. So, you can login and access all the feature"></TextView>
+                android:text="Set 6-digit code of your account. So, you can update your password"></TextView>
 
 
             <GridLayout
@@ -172,9 +172,8 @@
             </RelativeLayout>
 
 
-
             <Button
-                android:id="@+id/btnSetPin"
+                android:id="@+id/btnSetpin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -184,8 +183,7 @@
                 android:backgroundTint="@color/primary"
                 android:drawableRight="@drawable/baseline_keyboard_arrow_right_24"
                 android:drawableTint="@color/white"
-                android:text="Set Pin" />
-
+                android:text="Press to Enter New" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

@@ -57,7 +57,7 @@ class ActivityPhoneNumber : AppCompatActivity() {
 
         binding = ActivityPhoneNumberBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        mContext=this@ActivityPhoneNumber
+        mContext=this@ActivityPhoneNumber   //I have to set phone number manually by my self
         repo= Repo(mContext)
         utils = Utils(mContext)
         constants= Constants()
@@ -82,7 +82,25 @@ class ActivityPhoneNumber : AppCompatActivity() {
                 }
                 else Toast.makeText(mContext, "Invalid Number", Toast.LENGTH_SHORT).show()
             })*/
-            if(IsValid() ) sendOTPCode( binding.ccp.getFullNumberWithPlus())
+            if(IsValid() ){
+                lifecycleScope.launch {
+                    var user:User=sharedPrefManager.getUser()
+                    user.phone= binding.ccp.getFullNumberWithPlus()
+
+                    userViewModel.updateUser(user).observe(this@ActivityPhoneNumber) {
+                        utils.endLoadingAnimation()
+                        if (it == true) {
+                            sharedPrefManager.saveUser(user)
+                            sharedPrefManager.putInvestorPhoneNumber(true)
+                            Toast.makeText(mContext, "Phone number verified and saved!", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(mContext,ActivityUserDetails::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
+                            finish()
+                        }
+                        else Toast.makeText(mContext, constants.SOMETHING_WENT_WRONG_MESSAGE, Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+            }
 
 
         }
@@ -121,7 +139,7 @@ class ActivityPhoneNumber : AppCompatActivity() {
                     utils.endLoadingAnimation()
 
                     // Proceed to enter the OTP
-                    showEnterOtpDialog()
+//                    showEnterOtpDialog()
                 }
             })
             .build()
@@ -134,7 +152,7 @@ class ActivityPhoneNumber : AppCompatActivity() {
                 if (task.isSuccessful) {
                     utils.endLoadingAnimation()
                     // OTP verification successful
-                    Toast.makeText(mContext, "OTP verification successful", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(mContext, "OTP verification successful", Toast.LENGTH_SHORT).show()
                     dialog.dismiss()
 
                     lifecycleScope.launch {
@@ -190,8 +208,11 @@ class ActivityPhoneNumber : AppCompatActivity() {
         val btnSetPin = dialog.findViewById<Button>(R.id.btnSetPin)
 
         tvHeader.setText("Enter your OTP !")
+
         tvDisc.setText("Enter your OTP to verify your provided phone.")
+
         btnSetPin.setText("Verify")
+
         etPin1.requestFocus();
         utils.moveFocus( listOf(etPin1, etPin2, etPin3, etPin4, etPin5, etPin6))
 

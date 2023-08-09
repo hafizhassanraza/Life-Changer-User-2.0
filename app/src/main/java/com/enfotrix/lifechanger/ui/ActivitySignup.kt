@@ -127,7 +127,7 @@ class ActivitySignup : AppCompatActivity() {
         val tvClearAll = dialog.findViewById<TextView>(R.id.tvClearAll)
         val btnSetPin = dialog.findViewById<Button>(R.id.btnSetPin)
 
-        etPin1.requestFocus();
+        etPin1.requestFocus()
         utils.moveFocus( listOf(etPin1, etPin2, etPin3, etPin4, etPin5, etPin6))
 
         tvClearAll.setOnClickListener{

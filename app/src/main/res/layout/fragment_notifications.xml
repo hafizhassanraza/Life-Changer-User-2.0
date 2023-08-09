@@ -422,6 +422,7 @@
                     android:tint="@color/primary" />
 
                 <TextView
+                    android:id="@+id/updatepassword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="You can change reset transaction/login pin."
@@ -480,6 +481,7 @@
                     android:text="Logout your profile."
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="10dp"
+                    android:clickable="true"
                     android:layout_below="@+id/tvHeader7"
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="15dp"
@@ -487,10 +489,7 @@
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
-
-
             </RelativeLayout>
-
         </androidx.cardview.widget.CardView>
 
 

@@ -9,9 +9,6 @@
     android:orientation="vertical"
     tools:context=".ui.ActivityNewInvestmentReq">
 
-
-
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,14 +46,13 @@
                     android:layout_marginLeft="15dp"
                     android:text="Bank Name"/>
 
-
                 <TextView
                     android:id="@+id/tvAccountTittle"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Account Tittle"
+                    android:layout_height="26dp"
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="15dp"
+                    android:text="Account Tittle"
                     android:textColor="@color/SecondaryVariant"
                     android:textSize="15sp"
                     android:textStyle="bold" />

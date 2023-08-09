@@ -44,19 +44,11 @@
             android:paddingHorizontal="20dp"
             >
 
-
-
-
-
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/SecondaryVariant"
                 android:text="Please provide the following details to create your account and start investing"/>
-
-
-
 
 
 
@@ -112,10 +104,7 @@
                     android:lines="1"
 
                     />
-
             </com.google.android.material.textfield.TextInputLayout>
-
-
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/etCNIC"
@@ -140,7 +129,6 @@
                     android:inputType="number"
                     android:maxLength="13"/>
             </com.google.android.material.textfield.TextInputLayout>
-
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -168,12 +156,6 @@
                     android:gravity="top|start"
                     android:scrollbars="vertical"/>
             </com.google.android.material.textfield.TextInputLayout>
-
-
-
-
-
-
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -229,7 +211,6 @@
                     android:padding="5dp"
                     android:text="@string/login"
                     android:textColor="@color/SecondaryVariant" />
-
 
             </LinearLayout>
 

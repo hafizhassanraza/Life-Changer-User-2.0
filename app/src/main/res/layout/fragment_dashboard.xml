@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Fragments.DashboardFragment">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="255dp">
@@ -29,7 +26,7 @@
                 android:elevation="10dp"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
-                android:text="Announcement !"/>
+                android:text="Announcement !" />
 
             <ImageView
                 android:layout_width="match_parent"
@@ -56,10 +53,11 @@
                 />
 
         </RelativeLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:background="@drawable/bg_grad_fade"/>
+            android:background="@drawable/bg_grad_fade" />
 
 
 
@@ -69,6 +67,7 @@
             android:text="Discus your Investment Plans !"
             android:textStyle="bold"
             android:textSize="16dp"
+            android:layout_marginTop="10dp"
             android:layout_marginVertical="10dp"
             android:textColor="@color/secondary"
             android:layout_marginLeft="20dp"/>
@@ -79,6 +78,7 @@
             android:layout_height="wrap_content"
             app:cardCornerRadius="8dp"
             app:cardElevation="5dp"
+            android:layout_marginTop="10dp"
             app:cardBackgroundColor="@color/secondary_m"
             android:layout_marginBottom="10dp"
             android:layout_marginHorizontal="25dp"
@@ -88,13 +88,15 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:id="@+id/myFinancialAdvisor"
+                >
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:alpha=".18"
                     android:scaleType="fitXY"
-                    android:src="@drawable/cardbg" />
+                    android:src="@drawable/cardbg"/>
                 <TextView
                     android:id="@+id/tvHeader1"
                     android:layout_width="wrap_content"
@@ -104,7 +106,7 @@
                     android:textColor="@color/primary"
                     android:textStyle="bold"
                     android:layout_marginLeft="15dp"
-                    android:textSize="12dp"
+                    android:textSize="14dp"
                     android:layout_gravity="center_horizontal"
                     android:text="My Financial Advisor"/>
 
@@ -153,7 +155,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Mr. Ramzan"
-
                             android:layout_alignParentTop="true"
                             android:layout_alignParentLeft="true"
                             android:textColor="@color/gray"
@@ -196,6 +197,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
+            android:layout_marginBottom="60dp"
             android:layout_marginHorizontal="15dp"
             app:columnCount="4"
             app:rowCount="2">
@@ -227,10 +229,10 @@
 
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/contactLinear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-
                 app:layout_column="1"
                 app:layout_row="0"
                 app:layout_columnWeight="1"
@@ -383,14 +385,10 @@
             android:layout_width="100dp"
             android:layout_height="2dp"
             android:background="@color/secondary"
+            android:layout_marginBottom="100dp"
             android:layout_gravity="center_horizontal"/>
 
 
-
     </LinearLayout>
-
-
-
-
 
 </ScrollView>

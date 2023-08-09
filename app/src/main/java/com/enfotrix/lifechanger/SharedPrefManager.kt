@@ -20,9 +20,6 @@ import java.lang.reflect.Type
 class SharedPrefManager(context: Context) {
 
 
-
-
-
     private val sharedPref: SharedPreferences = context.getSharedPreferences("myAppPrefs", Context.MODE_PRIVATE)
 
     private val editor: SharedPreferences.Editor = sharedPref.edit()
@@ -309,10 +306,8 @@ class SharedPrefManager(context: Context) {
     }*/
 
     fun getUser(): User {
-
         val json = sharedPref.getString("Investor", "") ?: ""
         return Gson().fromJson(json, User::class.java)
-
         /*return User(
             sharedPref.getString("cnic", "")!!,
             sharedPref.getString("firstName", "")!!,
@@ -323,7 +318,6 @@ class SharedPrefManager(context: Context) {
             sharedPref.getString("pin", "")!!
 
         )*/
-
     }
 
 
@@ -399,6 +393,11 @@ class SharedPrefManager(context: Context) {
 
     fun getTotalAmount(): String {
         return sharedPref.getString("totalAmount", "")!!
+    }
+    fun clearWholeSharedPref()
+    {
+        sharedPref.edit().clear().apply()
+
     }
 
 }

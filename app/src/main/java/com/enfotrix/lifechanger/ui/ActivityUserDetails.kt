@@ -101,7 +101,6 @@ class ActivityUserDetails : AppCompatActivity() {
         binding.btnStart.visibility = View.GONE
         //imageURI = Uri.parse("https://www.google.com/search?q=place+holder+image&tbm=isch&ved=2ahUKEwjMh5DChNr_AhVMricCHXqrDJsQ2-cCegQIABAA&oq=place+holder+&gs_lcp=CgNpbWcQARgAMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDoECCMQJzoKCAAQigUQsQMQQzoHCAAQigUQQzoICAAQgAQQsQM6CAgAELEDEIMBUIoOWJ4wYOY9aAFwAHgAgAH0AYgByRmSAQQyLTE1mAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=OuaVZMyCJszcnsEP-tay2Ak&bih=1081&biw=1920#imgrc=wqFTpxdyrrUpwM");
 
-
         checkData()
 
 
@@ -113,6 +112,12 @@ class ActivityUserDetails : AppCompatActivity() {
             if(sharedPrefManager.isPhoneNumberAdded()) Toast.makeText(mContext, "Phone already added", Toast.LENGTH_SHORT).show()
             else startActivity(Intent(mContext,ActivityPhoneNumber::class.java).putExtra(constants.KEY_ACTIVITY_FLOW,constants.VALUE_ACTIVITY_FLOW_USER_DETAILS))
         }
+
+
+
+
+
+
         binding.layAddNominee.setOnClickListener{
 
             //Toast.makeText(mContext, sharedPrefManager.getNominee().acc_number+"", Toast.LENGTH_SHORT).show()
@@ -155,7 +160,6 @@ class ActivityUserDetails : AppCompatActivity() {
 
             startApp()
         }
-
 
     }
     fun startApp(){

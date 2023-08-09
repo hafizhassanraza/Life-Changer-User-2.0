@@ -70,7 +70,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginVertical="20dp"/>
 
-                <com.google.android.material.textfield.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/etCNIC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -92,8 +92,6 @@
                         android:inputType="number"
                         android:maxLength="13"/>
                 </com.google.android.material.textfield.TextInputLayout>
-
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

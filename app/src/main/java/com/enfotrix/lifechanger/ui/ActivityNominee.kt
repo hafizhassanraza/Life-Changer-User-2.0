@@ -80,10 +80,13 @@ class ActivityNominee : AppCompatActivity() {
                     binding.spNominee.selectedItem.toString()
                 ))
             }
+
         }
-
-
     }
+
+
+
+
 
 
     fun saveNominee(nominee:ModelNominee){
@@ -96,7 +99,6 @@ class ActivityNominee : AppCompatActivity() {
                 if (it == true) {
                     sharedPrefManager.saveNominee(nominee)// id overwrite in repo
                     Toast.makeText(mContext, constants.NOMINEE_SIGNUP_MESSAGE, Toast.LENGTH_SHORT).show()
-
                     if(intent.getStringExtra(constants.KEY_ACTIVITY_FLOW).equals(constants.VALUE_ACTIVITY_FLOW_USER_DETAILS)){
                         startActivity(Intent(mContext,ActivityUserDetails::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
                         finish()
@@ -107,7 +109,6 @@ class ActivityNominee : AppCompatActivity() {
             }
         }
     }
-
 
 
     private fun IsEmpty(): Boolean {

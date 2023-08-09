@@ -78,10 +78,9 @@ public class Constants  {
 
     public var FROM_PROFIT= "ActivityProfit"
     public var FROM_TAX= "ActivityTax"
-
     public var FROM_INVESTOR_ACCOUNTS= "ActivityInvestorAccounts"
     public var FROM_NEW_WITHDRAW_REQ= "ActivityNewWithdrawReq"
-    public var FROM_NEW_INVESTMENT_REQ= "ActivityNewInvestmentReq"
+        public var FROM_NEW_INVESTMENT_REQ= "ActivityNewInvestmentReq"
     public var FROM_PENDING_WITHDRAW_REQ= "FragmentPendingWithdrawReq"
     public var FROM_PENDING_INVESTMENT_REQ= "FragmentPendingInvestmentReq"
     public var FROM_APPROVED_WITHDRAW_REQ= "FragmentApprovedWithdrawReq"

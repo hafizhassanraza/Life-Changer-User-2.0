@@ -79,38 +79,38 @@ class HomeFragment : Fragment() {
 
 
         binding.btnInvest.setOnClickListener{
-            /*if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
-            else startActivity(Intent(mContext, ActivityNewInvestmentReq::class.java))*/
-            startActivity(Intent(mContext, ActivityNewInvestmentReq::class.java))
+            if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
+            else startActivity(Intent(mContext, ActivityNewInvestmentReq::class.java))
+
         }
 
         binding.btnWithdraw.setOnClickListener{
-            /*if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
-            else startActivity(Intent(mContext, ActivityNewWithdrawReq::class.java))*/
-            startActivity(Intent(mContext, ActivityNewWithdrawReq::class.java))
+            if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
+            else startActivity(Intent(mContext, ActivityNewWithdrawReq::class.java))
+
         }
 
         binding.layInvestment.setOnClickListener{
-            /*if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
-            else startActivity(Intent(mContext, ActivityInvestment::class.java))*/
-            startActivity(Intent(mContext, ActivityInvestment::class.java))
+            if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
+            else startActivity(Intent(mContext, ActivityInvestment::class.java))
+
 
         }
         binding.layProfit.setOnClickListener{
-            /*if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
-            else startActivity(Intent(mContext, ActivityProfitTax::class.java))*/
-            startActivity(Intent(mContext, ActivityProfitTax::class.java))
+            if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
+            else startActivity(Intent(mContext, ActivityProfitTax::class.java))
+
         }
 
         binding.layWithdraw.setOnClickListener{
-            /*if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
-            else startActivity(Intent(mContext, ActivityWithdraw::class.java))*/
-
-            startActivity(Intent(mContext, ActivityWithdraw::class.java))
+            if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
+            else startActivity(Intent(mContext, ActivityWithdraw::class.java))
         }
 
         binding.layTax.setOnClickListener{
             if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
+            else startActivity(Intent(mContext, ActivityProfitTax::class.java))
+
         }
 
 
@@ -155,6 +155,39 @@ class HomeFragment : Fragment() {
                     }
                 }
             }
+        val listAdminAccounts = ArrayList<ModelBankAccount>()
+        val query = db.collection(constants.ACCOUNTS_COLLECTION)
+            .whereEqualTo("account_holder", "Admin")
+
+        query.addSnapshotListener { snapshot, firebaseFirestoreException ->
+            if (firebaseFirestoreException != null) {
+                // Handle any errors that occurred while listening to the snapshot
+                Toast.makeText(mContext, firebaseFirestoreException.message.toString(), Toast.LENGTH_SHORT).show()
+                return@addSnapshotListener
+            }
+
+            snapshot?.let { querySnapshot ->
+                listAdminAccounts.clear() // Clear the existing list to avoid duplicates
+
+                for (document in querySnapshot) {
+                    val modelBankAccount = document.toObject(ModelBankAccount::class.java)
+                    if (modelBankAccount.account_holder == constants.ADMIN) {
+                        listAdminAccounts.add(modelBankAccount)
+                    }
+                }
+
+                // Update your UI or perform any action with the updated listAdminAccounts here
+            }
+        }
+
+
+
+
+
+
+
+
+
 
 
 
