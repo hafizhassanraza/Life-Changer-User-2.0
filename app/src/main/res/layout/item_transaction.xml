@@ -135,9 +135,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:text="12/5/23"
+                            android:text=""
                             android:textColor="@color/SecondaryVariant"
-                            android:textSize="15sp"/>
+                            android:textSize="15sp" />
                         <View
                             android:layout_width="1dp"
                             android:layout_marginHorizontal="5dp"

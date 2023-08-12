@@ -185,6 +185,30 @@ class SharedPrefManager(context: Context) {
             emptyList()
         }
     }
+    fun getProfitList(): List<TransactionModel>{
+
+        val json = sharedPref.getString("Profit", "") ?: ""
+        val type: Type = object : TypeToken<List<TransactionModel?>?>() {}.getType()
+        //return Gson().fromJson(json, type)
+
+        return if (!json.isNullOrEmpty()) {
+            Gson().fromJson(json, type) ?: emptyList()
+        } else {
+            emptyList()
+        }
+    }
+    fun getTaxList(): List<TransactionModel>{
+
+        val json = sharedPref.getString("Tax", "") ?: ""
+        val type: Type = object : TypeToken<List<TransactionModel?>?>() {}.getType()
+        //return Gson().fromJson(json, type)
+
+        return if (!json.isNullOrEmpty()) {
+            Gson().fromJson(json, type) ?: emptyList()
+        } else {
+            emptyList()
+        }
+    }
     fun getInvestmentReqList(): List<TransactionModel>{
 
         val json = sharedPref.getString("ListInvestmentReq", "") ?: ""

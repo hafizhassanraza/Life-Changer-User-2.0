@@ -9,18 +9,24 @@ import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.enfotrix.lifechanger.Adapters.TransactionsAdapter
 import com.enfotrix.lifechanger.Constants
 import com.enfotrix.lifechanger.Models.InvestmentViewModel
 import com.enfotrix.lifechanger.Models.ModelProfitTax
+import com.enfotrix.lifechanger.Models.TransactionModel
 import com.enfotrix.lifechanger.Models.UserViewModel
 import com.enfotrix.lifechanger.R
 import com.enfotrix.lifechanger.SharedPrefManager
 import com.enfotrix.lifechanger.Utils
 import com.enfotrix.lifechanger.databinding.ActivityLoginBinding
 import com.enfotrix.lifechanger.databinding.ActivityProfitTaxBinding
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 
 class ActivityProfitTax : AppCompatActivity() {
+
+    private val db = Firebase.firestore
 
     private val investmentViewModel: InvestmentViewModel by viewModels()
     private val userViewModel: UserViewModel by viewModels()
@@ -44,11 +50,42 @@ class ActivityProfitTax : AppCompatActivity() {
         sharedPrefManager = SharedPrefManager(mContext)
 
         binding.rvProfitTax.layoutManager = LinearLayoutManager(mContext)
-        binding.rvProfitTax.adapter= investmentViewModel.getProfitAdapter(constants.FROM_PROFIT)
 
-        setTitle("Profit")
+       /* binding.rvProfitTax.adapter=
+            TransactionsAdapter(constants.FROM_PROFIT,sharedPrefManager.getProfitList().filter{ it.status.equals(constants.TRANSACTION_STATUS_APPROVED) }.sortedByDescending { it.createdAt })
+*/
+        setTitle("Profit/Tax")
+
+        getData()
 
 
+
+
+    }
+
+    fun getData(){
+
+
+
+        db.collection(constants.TRANSACTION_REQ_COLLECTION)
+            .whereEqualTo(constants.TRANSACTION_TYPE,constants.PROFIT_TYPE).get()
+            .addOnCompleteListener{task->
+                if(task.isSuccessful){
+                    if(task.result.size()>0){
+                        val listTransaction = ArrayList<TransactionModel>()
+
+                        for(document in task.result)listTransaction.add( document.toObject(TransactionModel::class.java))
+
+                        binding.rvProfitTax.adapter=
+                            TransactionsAdapter(constants.FROM_PROFIT,sharedPrefManager.getProfitList()
+                                .filter{ it.status.equals(constants.TRANSACTION_STATUS_APPROVED) }
+                                .sortedByDescending { it.createdAt })
+
+
+
+                    }
+                }
+            }
     }
 
 }

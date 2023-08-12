@@ -71,6 +71,8 @@ class TransactionsAdapter (var activity:String, val data: List<TransactionModel>
             }
             else if(activity.equals(constant.FROM_APPROVED_INVESTMENT_REQ)){
 
+                if(transactionModel.transactionAt!=null) itemBinding.tvApprovedDate.text==SimpleDateFormat("dd/MM/yy", Locale.getDefault()).format(transactionModel.transactionAt!!.toDate()).toString()
+
 //                itemBinding.tvApprovedDate.text==SimpleDateFormat("dd/MM/yy",
                 //                Locale.getDefault()).format(transactionModel.transactionAt!!.toDate()).toString()
 
