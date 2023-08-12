@@ -28,6 +28,7 @@ import com.enfotrix.lifechanger.Utils
 import com.enfotrix.lifechanger.databinding.FragmentNotificationsBinding
 import com.enfotrix.lifechanger.ui.ActivityInvestorAccounts
 import com.enfotrix.lifechanger.ui.ActivityLogin
+import com.enfotrix.lifechanger.ui.ActivityUpdatePassword
 import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
@@ -193,8 +194,9 @@ class NotificationsFragment : Fragment() {
                 if (completePin.contains("-")) {
                     Toast.makeText(requireContext(), "Enter valid pin", Toast.LENGTH_SHORT).show()
                 } else {
-                    showNewPasswordDialog()
-                    dialogPinUpdate.dismiss()
+                    startActivity(Intent(requireContext(),ActivityUpdatePassword::class.java ))
+                    activity?.finish()
+
                 }
             } else {
                 Toast.makeText(requireContext(), "Invalid password, try another", Toast.LENGTH_SHORT).show()
@@ -204,57 +206,12 @@ class NotificationsFragment : Fragment() {
         dialogPinUpdate.show()
     }
 
-    private fun showNewPasswordDialog() {
-        dialogUpdateTaken = Dialog(requireContext())
-        dialogUpdateTaken.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialogUpdateTaken.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialogUpdateTaken.setContentView(R.layout.dialog_update_taken_pin)
-        dialogUpdateTaken.setCancelable(true)
-        val pin1 = dialogUpdateTaken.findViewById<EditText>(R.id.etPin1)
-        val pin2 = dialogUpdateTaken.findViewById<EditText>(R.id.etPin2)
-        val pin3 = dialogUpdateTaken.findViewById<EditText>(R.id.etPin3)
-        val pin4 = dialogUpdateTaken.findViewById<EditText>(R.id.etPin4)
-        val pin5 = dialogUpdateTaken.findViewById<EditText>(R.id.etPin5)
-        val pin6 = dialogUpdateTaken.findViewById<EditText>(R.id.etPin6)
-        val btnSetPin = dialogUpdateTaken.findViewById<Button>(R.id.btnSetpin)
 
-        pin1.requestFocus()
-        utils.moveFocus(listOf(pin1, pin2, pin3, pin4, pin5, pin6))
 
-        val tvClearAll = dialogUpdateTaken.findViewById<TextView>(R.id.tvClearAll)
-        tvClearAll.setOnClickListener {
-            utils.clearAll(listOf(pin1, pin2, pin3, pin4, pin5, pin6))
-            pin1.requestFocus()
-        }
-                btnSetPin.setOnClickListener {
 
-                    val completePin = "${pin1.text}${pin2.text}${pin3.text}${pin4.text}${pin5.text}${pin6.text}"
-                   if(completePin.contains("-"))
-                   {
-                       Toast.makeText(requireContext(), "Please Enter Valid Password", Toast.LENGTH_SHORT).show()
-                   }
-                    else{
-                       Toast.makeText(requireContext(), ""+completePin, Toast.LENGTH_SHORT).show()
-                       storeInFireStore(completePin)
-                       dialogUpdateTaken.dismiss()
 
-                   }
-                }
-                  dialogUpdateTaken.show()
-    }
 
-    private fun storeInFireStore(completePin: String) {
 
-        var user = sharedPrefManager.getUser()
-        user.pin = completePin
-        db.collection("Users").document(sharedPrefManager.getToken()).set(user)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    sharedPrefManager.saveUser(user)
-                }
-            }
-
-    }
 
 
 

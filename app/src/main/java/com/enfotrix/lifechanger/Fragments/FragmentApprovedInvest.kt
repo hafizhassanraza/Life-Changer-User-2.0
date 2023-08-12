@@ -39,19 +39,13 @@ class FragmentApprovedInvest : Fragment() {
         _binding = FragmentApprovedInvestBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-
         mContext=requireContext()
         utils = Utils(mContext)
         constants= Constants()
         sharedPrefManager = SharedPrefManager(mContext)
 
-
         binding.rvWithdrawPending.layoutManager = LinearLayoutManager(mContext)
         binding.rvWithdrawPending.adapter= investmentViewModel.getApprovedInvestmentReqAdapter(constants.FROM_APPROVED_INVESTMENT_REQ)
-
-
-
-
         return root
     }
 

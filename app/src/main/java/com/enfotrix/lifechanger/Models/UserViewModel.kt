@@ -3,18 +3,16 @@ package com.enfotrix.lifechanger.Models
 import User
 import android.app.Application
 import android.net.Uri
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.enfotrix.lifechanger.Adapters.InvestorAccountsAdapter
 import com.enfotrix.lifechanger.Constants
 import com.enfotrix.lifechanger.Data.Repo
 import com.enfotrix.lifechanger.SharedPrefManager
+import com.enfotrix.lifechanger.ui.ActivityLogin
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 
@@ -95,23 +93,18 @@ class UserViewModel(context: Application) : AndroidViewModel(context) {
         return userRepo.uploadPhotoRefrence(imageUri,type)
     }
 
-    fun getInvestorAccountsAdapter( fromActivity:String,listener: InvestorAccountsAdapter.OnItemClickListener): InvestorAccountsAdapter {
+    fun getInvestorAccountsAdapter(fromActivity:String, listener: InvestorAccountsAdapter.OnItemClickListener ): InvestorAccountsAdapter {
         return InvestorAccountsAdapter(fromActivity,sharedPrefManager.getInvestorBankList(), listener)
     }
-    fun getAdminAccountsAdapter( fromActivity:String,listener: InvestorAccountsAdapter.OnItemClickListener): InvestorAccountsAdapter {
+    fun getAdminAccountsAdapter(fromActivity:String, listener: InvestorAccountsAdapter.OnItemClickListener ): InvestorAccountsAdapter {
         return InvestorAccountsAdapter(fromActivity,sharedPrefManager.getAdminBankList(), listener)
     }
-
-
-    //suspend fun getBalance(): String = userRepo.getBalance()
-
-    /*suspend fun updateUser(
-        firstName: String,
-        lastName: String,
-        address: String,
-        mobileNumber: String
-    ): LiveData<Boolean> {
-        return userRepo.updateUser(firstName, lastName, address, mobileNumber)
-    }*/
+//      *  firstName: String,
+//        lastName: String,
+//        address: String,
+//        mobileNumber: String
+//    ): LiveData<Boolean> {
+//        return userRepo.updateUser(firstName, lastName, address, mobileNumber)
+//    }*/
 
 }

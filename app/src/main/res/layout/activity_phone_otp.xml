@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/secondary_m"
     android:orientation="vertical"
-    tools:context=".ui.ActivityPhoneNumber">
+    tools:context=".ui.ActivityPhoneOtp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:visibility="gone"
             android:layout_gravity="center_vertical"
             android:src="@drawable/baseline_arrow_back_ios_24"/>
         <TextView
@@ -42,14 +43,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="20dp">
-
-
-
-
-
-
-
-
 
             <TextView
                 android:layout_width="wrap_content"
@@ -128,23 +121,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <CheckBox
-                    android:id="@+id/cbTermCondition"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:buttonTint="@color/SecondaryVariant"
-                    android:text="Agree with"
 
-                    android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/tvTermsCondition"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/term_condition"
-                    android:textSize="13dp"
-                    android:textColor="@color/SecondaryVariant"
-                    android:padding="5dp"/>
+
             </LinearLayout>
 
 
@@ -152,7 +131,8 @@
                 android:id="@+id/btnSendOtp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="20dp"
+
                 android:background="@drawable/bg_button"
                 android:drawableRight="@drawable/baseline_keyboard_arrow_right_24"
                 android:drawableTint="@color/white"

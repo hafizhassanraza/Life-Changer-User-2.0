@@ -47,6 +47,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
@@ -57,45 +58,44 @@ class ActivityUserDetails : AppCompatActivity() {
 
     private lateinit var uploadedImageURI: Uri
 
-    private  var imageURI: Uri?=null
-    private  var NomineeCnicFrontURI: Uri?=null
-    private  var NomineeCnicBackURI: Uri?=null
-    private  var UserCnicFrontURI: Uri? =null
-    private  var UserCnicBackURI: Uri?=null
+    private var imageURI: Uri? = null
+    private var NomineeCnicFrontURI: Uri? = null
+    private var NomineeCnicBackURI: Uri? = null
+    private var UserCnicFrontURI: Uri? = null
+    private var UserCnicBackURI: Uri? = null
 
     private lateinit var imgSelectCnicBack: ImageView
     private lateinit var imgSelectCnicFront: ImageView
 
-    private var NomineeCnicFront:Boolean=false
-    private var NomineeCnicBack:Boolean=false
-    private var UserCnicFront:Boolean=false
-    private var UserCnicBack:Boolean=false
-    private var UserProfilePhoto:Boolean=false
+    private var NomineeCnicFront: Boolean = false
+    private var NomineeCnicBack: Boolean = false
+    private var UserCnicFront: Boolean = false
+    private var UserCnicBack: Boolean = false
+    private var UserProfilePhoto: Boolean = false
 
     private val userViewModel: UserViewModel by viewModels()
     private val nomineeViewModel: NomineeViewModel by viewModels()
     private val investmentViewModel: InvestmentViewModel by viewModels()
 
-    private lateinit var binding : ActivityUserDetailsBinding
+    private lateinit var binding: ActivityUserDetailsBinding
 
     private lateinit var imgProfilePhoto: ImageView
-
 
 
     private lateinit var utils: Utils
     private lateinit var mContext: Context
     private lateinit var constants: Constants
     private lateinit var user: User
-    private lateinit var sharedPrefManager : SharedPrefManager
-    private lateinit var dialog : Dialog
+    private lateinit var sharedPrefManager: SharedPrefManager
+    private lateinit var dialog: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUserDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        mContext=this@ActivityUserDetails
+        mContext = this@ActivityUserDetails
         utils = Utils(mContext)
-        constants= Constants()
+        constants = Constants()
         sharedPrefManager = SharedPrefManager(mContext)
 
         binding.btnStart.visibility = View.GONE
@@ -105,12 +105,21 @@ class ActivityUserDetails : AppCompatActivity() {
 
 
 
-        binding.layInvestorPhone.setOnClickListener{
+        binding.layInvestorPhone.setOnClickListener {
 
             //Toast.makeText(mContext, sharedPrefManager.getNominee().acc_number+"", Toast.LENGTH_SHORT).show()
 
-            if(sharedPrefManager.isPhoneNumberAdded()) Toast.makeText(mContext, "Phone already added", Toast.LENGTH_SHORT).show()
-            else startActivity(Intent(mContext,ActivityPhoneNumber::class.java).putExtra(constants.KEY_ACTIVITY_FLOW,constants.VALUE_ACTIVITY_FLOW_USER_DETAILS))
+            if (sharedPrefManager.isPhoneNumberAdded()) Toast.makeText(
+                mContext,
+                "Phone already added",
+                Toast.LENGTH_SHORT
+            ).show()
+            else startActivity(
+                Intent(
+                    mContext,
+                    ActivityPhoneNumber::class.java
+                ).putExtra(constants.KEY_ACTIVITY_FLOW, constants.VALUE_ACTIVITY_FLOW_USER_DETAILS)
+            )
         }
 
 
@@ -118,87 +127,145 @@ class ActivityUserDetails : AppCompatActivity() {
 
 
 
-        binding.layAddNominee.setOnClickListener{
+
+        binding.layAddNominee.setOnClickListener {
 
             //Toast.makeText(mContext, sharedPrefManager.getNominee().acc_number+"", Toast.LENGTH_SHORT).show()
 
-            if(sharedPrefManager.isNomineeAdded()) Toast.makeText(mContext, "Nominee already added", Toast.LENGTH_SHORT).show()
-            else startActivity(Intent(mContext,ActivityNominee::class.java).putExtra(constants.KEY_ACTIVITY_FLOW,constants.VALUE_ACTIVITY_FLOW_USER_DETAILS))
+            if (sharedPrefManager.isNomineeAdded()) Toast.makeText(
+                mContext,
+                "Nominee already added",
+                Toast.LENGTH_SHORT
+            ).show()
+            else startActivity(
+                Intent(
+                    mContext,
+                    ActivityNominee::class.java
+                ).putExtra(constants.KEY_ACTIVITY_FLOW, constants.VALUE_ACTIVITY_FLOW_USER_DETAILS)
+            )
         }
-        binding.layInvestorBank.setOnClickListener{
+        binding.layInvestorBank.setOnClickListener {
 
-            if(sharedPrefManager.isUserBankAdded()) Toast.makeText(mContext, "User Bank already added!", Toast.LENGTH_SHORT).show()
+            if (sharedPrefManager.isUserBankAdded()) Toast.makeText(
+                mContext,
+                "User Bank already added!",
+                Toast.LENGTH_SHORT
+            ).show()
             else showAddAccountDialog(constants.VALUE_DIALOG_FLOW_INVESTOR_BANK)
 
 
         }
-        binding.layInvestorNomineeBank.setOnClickListener{
+        binding.layInvestorNomineeBank.setOnClickListener {
 
-            if(sharedPrefManager.isNomineeAdded()){
-                if(sharedPrefManager.isNomineeBankAdded()) Toast.makeText(mContext, "Nominee Bank details already added!", Toast.LENGTH_SHORT).show()
+            if (sharedPrefManager.isNomineeAdded()) {
+                if (sharedPrefManager.isNomineeBankAdded()) Toast.makeText(
+                    mContext,
+                    "Nominee Bank details already added!",
+                    Toast.LENGTH_SHORT
+                ).show()
                 else showAddAccountDialog(constants.VALUE_DIALOG_FLOW_NOMINEE_BANK)
-            }
-            else Toast.makeText(mContext, "Please Add Nominee First!", Toast.LENGTH_SHORT).show()
-
+            } else Toast.makeText(mContext, "Please Add Nominee First!", Toast.LENGTH_SHORT).show()
         }
-        binding.layInvestorProfilePhoto.setOnClickListener{
+        binding.layInvestorProfilePhoto.setOnClickListener {
             //showPhotoDialog()
-            if(sharedPrefManager.isUserPhotoAdded()) Toast.makeText(mContext, "User photo already added!", Toast.LENGTH_SHORT).show()
+            if (sharedPrefManager.isUserPhotoAdded()) Toast.makeText(
+                mContext,
+                "User photo already added!",
+                Toast.LENGTH_SHORT
+            ).show()
             else showPhotoDialog()
         }
-        binding.layInvestorCNIC.setOnClickListener{
-            if(sharedPrefManager.isUserCnicAdded()) Toast.makeText(mContext, "User CNIC already added!", Toast.LENGTH_SHORT).show()
+        binding.layInvestorCNIC.setOnClickListener {
+            if (sharedPrefManager.isUserCnicAdded()) Toast.makeText(
+                mContext,
+                "User CNIC already added!",
+                Toast.LENGTH_SHORT
+            ).show()
             else showAddCnicDialog(constants.VALUE_DIALOG_FLOW_INVESTOR_CNIC)
         }
-        binding.layInvestorNomineeCNIC.setOnClickListener{
+        binding.layInvestorNomineeCNIC.setOnClickListener {
 
-            if(sharedPrefManager.isNomineeCnicAdded()) Toast.makeText(mContext, "Nominee CNIC already added!", Toast.LENGTH_SHORT).show()
+            if (sharedPrefManager.isNomineeCnicAdded()) Toast.makeText(
+                mContext,
+                "Nominee CNIC already added!",
+                Toast.LENGTH_SHORT
+            ).show()
             else showAddCnicDialog(constants.VALUE_DIALOG_FLOW_NOMINEE_CNIC)
 
         }
-        binding.btnStart.setOnClickListener{
+        binding.btnStart.setOnClickListener {
 
             startApp()
         }
 
     }
-    fun startApp(){
-        var user:User=sharedPrefManager.getUser()
 
-        if(user.status.equals(constants.INVESTOR_STATUS_INCOMPLETE)){
+    fun startApp() {
+        var user: User = sharedPrefManager.getUser()
+
+        if (user.status.equals(constants.INVESTOR_STATUS_INCOMPLETE)) {
             utils.startLoadingAnimation()
             lifecycleScope.launch {
-                user.status= constants.INVESTOR_STATUS_PENDING
+                user.status = constants.INVESTOR_STATUS_PENDING
                 userViewModel.updateUser(user).observe(this@ActivityUserDetails) {
                     if (it == true) {
                         sharedPrefManager.saveUser(user)
                         lifecycleScope.launch {
                             utils.endLoadingAnimation()
-                            investmentViewModel.addInvestment(InvestmentModel(sharedPrefManager.getToken(),
-                                "0",
-                                "",
-                                "",
-                                "",
-                                "",
-                                "",
-                                "",
-                                "",
-                                "",
-                                "",
-                                "",
-                                "",
-                                "")).observe(this@ActivityUserDetails){
+                            investmentViewModel.addInvestment(
+                                InvestmentModel(
+                                    sharedPrefManager.getToken(),
+                                    "0",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    ""
+                                )
+                            ).observe(this@ActivityUserDetails) {
 
-                                if (it == true){
+                                if (it == true) {
                                     //dialog.dismiss()
-                                    Toast.makeText(mContext, "Profile Completed Successfully!", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(
+                                        mContext,
+                                        "Profile Completed Successfully!",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
 
                                     sharedPrefManager.setLogin(it)
-                                    startActivity(Intent(mContext,MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
-                                    finish()
-                                }
-                                else {
-                                    Toast.makeText(mContext, constants.SOMETHING_WENT_WRONG_MESSAGE, Toast.LENGTH_SHORT).show()
+                                    lifecycleScope.launch {
+
+                                        // Use async to execute Firebase calls asynchronously
+                                        val saveAdminDeferred = async { saveAdminAccounts() }
+                                        val saveUserDeferred = async { saveUserAccounts() }
+
+                                        // Wait for both async tasks to complete
+                                        saveAdminDeferred.await()
+                                        saveUserDeferred.await()
+
+
+
+                                        startActivity(
+                                            Intent(
+                                                mContext,
+                                                MainActivity::class.java
+                                            ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                                        )
+                                        finish()
+                                    }
+                                } else {
+                                    Toast.makeText(
+                                        mContext,
+                                        constants.SOMETHING_WENT_WRONG_MESSAGE,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
 
 
@@ -206,19 +273,19 @@ class ActivityUserDetails : AppCompatActivity() {
                         }
 
 
-
-                    }
-                    else {
+                    } else {
                         utils.endLoadingAnimation()
-                        Toast.makeText(mContext, constants.SOMETHING_WENT_WRONG_MESSAGE, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            mContext,
+                            constants.SOMETHING_WENT_WRONG_MESSAGE,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                 }
             }
         }
     }
-
-
 
 
     @Deprecated("Deprecated in Java")
@@ -232,25 +299,27 @@ class ActivityUserDetails : AppCompatActivity() {
                     UserCnicFrontURI = data?.data
                     imgSelectCnicFront.setImageResource(R.drawable.check_small)
                 }
+
                 UserCnicBack -> {
                     UserCnicBackURI = data?.data
                     imgSelectCnicBack.setImageResource(R.drawable.check_small)
                 }
+
                 NomineeCnicFront -> {
                     NomineeCnicFrontURI = data?.data
                     imgSelectCnicFront.setImageResource(R.drawable.check_small)
                 }
+
                 NomineeCnicBack -> {
                     NomineeCnicBackURI = data?.data
                     imgSelectCnicBack.setImageResource(R.drawable.check_small)
                 }
+
                 UserProfilePhoto -> {
                     Glide.with(mContext).load(data?.data).into(imgProfilePhoto)
                     imageURI = data?.data
                 }
             }
-
-
 
 
         }
@@ -261,101 +330,105 @@ class ActivityUserDetails : AppCompatActivity() {
         menuInflater.inflate(R.menu.top_right_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.top_logout -> {
                 Toast.makeText(applicationContext, "click on setting", Toast.LENGTH_LONG).show()
                 true
             }
-            R.id.top_contactUs ->{
+
+            R.id.top_contactUs -> {
                 Toast.makeText(applicationContext, "click on share", Toast.LENGTH_LONG).show()
                 return true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
+
     @SuppressLint("ResourceAsColor")
     private fun checkData() {
 
-        var checkCounter:Int=0
-        if(sharedPrefManager.isNomineeAdded()){
+        var checkCounter: Int = 0
+        if (sharedPrefManager.isNomineeAdded()) {
             checkCounter++
-            binding.tvHeaderNominee.text ="Completed"
+            binding.tvHeaderNominee.text = "Completed"
             binding.tvHeaderNominee.setTextColor(Color.parseColor("#2F9B47"))
             binding.imgCheckNominee.setImageResource(R.drawable.check_small)
         }
-        if(sharedPrefManager.isNomineeBankAdded()){
+        if (sharedPrefManager.isNomineeBankAdded()) {
             checkCounter++
-            binding.tvHeaderNomineeBank.text ="Completed"
+            binding.tvHeaderNomineeBank.text = "Completed"
             binding.tvHeaderNomineeBank.setTextColor(Color.parseColor("#2F9B47"))
             binding.imgCheckNomineeBank.setImageResource(R.drawable.check_small)
         }
-        if(sharedPrefManager.isUserBankAdded()){
+        if (sharedPrefManager.isUserBankAdded()) {
             checkCounter++
-            binding.tvHeaderUserBank.text ="Completed"
+            binding.tvHeaderUserBank.text = "Completed"
             binding.tvHeaderUserBank.setTextColor(Color.parseColor("#2F9B47"))
             binding.imgCheckUserBank.setImageResource(R.drawable.check_small)
         }
 
-        if(sharedPrefManager.isUserPhotoAdded()){
+        if (sharedPrefManager.isUserPhotoAdded()) {
             checkCounter++
-            binding.tvHeaderUserPhoto.text ="Completed"
+            binding.tvHeaderUserPhoto.text = "Completed"
             binding.tvHeaderUserPhoto.setTextColor(Color.parseColor("#2F9B47"))
             binding.imgCheckUserPhoto.setImageResource(R.drawable.check_small)
         }
-        if(sharedPrefManager.isUserCnicAdded()){
+        if (sharedPrefManager.isUserCnicAdded()) {
             checkCounter++
-            binding.tvHeaderUserCnic.text ="Completed"
+            binding.tvHeaderUserCnic.text = "Completed"
             binding.tvHeaderUserCnic.setTextColor(Color.parseColor("#2F9B47"))
             binding.imgCheckUserCnic.setImageResource(R.drawable.check_small)
         }
-        if(sharedPrefManager.isNomineeCnicAdded()){
+        if (sharedPrefManager.isNomineeCnicAdded()) {
             checkCounter++
-            binding.tvHeaderNomineeCnic.text ="Completed"
+            binding.tvHeaderNomineeCnic.text = "Completed"
             binding.tvHeaderNomineeCnic.setTextColor(Color.parseColor("#2F9B47"))
             binding.imgCheckNomineeCnic.setImageResource(R.drawable.check_small)
         }
-        if(sharedPrefManager.isPhoneNumberAdded()){
+        if (sharedPrefManager.isPhoneNumberAdded()) {
             checkCounter++
-            binding.tvHeaderUserPhoneNumber.text ="Completed"
+            binding.tvHeaderUserPhoneNumber.text = "Completed"
             binding.tvHeaderUserPhoneNumber.setTextColor(Color.parseColor("#2F9B47"))
             binding.imgCheckUserPhoneNumber.setImageResource(R.drawable.check_small)
         }
 
 
-        if(checkCounter==7) {
+        if (checkCounter == 7) {
             binding.btnStart.visibility = View.VISIBLE
 
         }
     }
 
-    fun showAddCnicDialog(type:String) {
+    fun showAddCnicDialog(type: String) {
 
-        NomineeCnicFront=false
-        NomineeCnicBack=false
-        UserCnicFront=false
-        UserCnicBack=false
-        UserProfilePhoto=false
+        NomineeCnicFront = false
+        NomineeCnicBack = false
+        UserCnicFront = false
+        UserCnicBack = false
+        UserProfilePhoto = false
 
-        NomineeCnicFrontURI=null
-        NomineeCnicBackURI=null
-        UserCnicFrontURI=null
-        UserCnicBackURI=null
-        imageURI=null
+        NomineeCnicFrontURI = null
+        NomineeCnicBackURI = null
+        UserCnicFrontURI = null
+        UserCnicBackURI = null
+        imageURI = null
 
-        dialog = Dialog (mContext)
+        dialog = Dialog(mContext)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setContentView(R.layout.dialog_upload_cnic)
 
-         imgSelectCnicFront = dialog.findViewById<ImageView>(R.id.imgSelectCnicFront)
-         imgSelectCnicBack = dialog.findViewById<ImageView>(R.id.imgSelectCnicBack)
+        imgSelectCnicFront = dialog.findViewById<ImageView>(R.id.imgSelectCnicFront)
+        imgSelectCnicBack = dialog.findViewById<ImageView>(R.id.imgSelectCnicBack)
         val tvSelectCnicFront = dialog.findViewById<TextView>(R.id.tvSelectCnicFront)
         val tvSelectCnicBack = dialog.findViewById<TextView>(R.id.tvSelectCnicBack)
         val tvHeaderDesc = dialog.findViewById<TextView>(R.id.tvHeaderDesc)
         val tvHeader = dialog.findViewById<TextView>(R.id.tvHeader)
         val btnUploadCNIC = dialog.findViewById<Button>(R.id.btnUploadCNIC)
-        if(type.equals(constants.VALUE_DIALOG_FLOW_NOMINEE_CNIC)){
+        if (type.equals(constants.VALUE_DIALOG_FLOW_NOMINEE_CNIC)) {
             tvHeader.setText("Nominee CNIC Photo !")
             tvHeaderDesc.setText("Upload both (Front and Back) side photo of your Nominee CNIC")
         }
@@ -369,14 +442,11 @@ class ActivityUserDetails : AppCompatActivity() {
             NomineeCnicBack = false
 
 
-
             val pickImage = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(pickImage, IMAGE_PICKER_REQUEST_CODE)
 
         }
         tvSelectCnicBack.setOnClickListener {
-
-
 
 
             NomineeCnicFront = false
@@ -385,32 +455,33 @@ class ActivityUserDetails : AppCompatActivity() {
             NomineeCnicBack = type == constants.VALUE_DIALOG_FLOW_NOMINEE_CNIC
 
 
-
             val pickImage = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(pickImage, IMAGE_PICKER_REQUEST_CODE)
 
 
         }
         btnUploadCNIC.setOnClickListener {
-            if(type.equals(constants.VALUE_DIALOG_FLOW_NOMINEE_CNIC)){
+            if (type.equals(constants.VALUE_DIALOG_FLOW_NOMINEE_CNIC)) {
 
-                if(NomineeCnicFrontURI!=null && NomineeCnicBackURI!=null ){
-                    Toast.makeText(mContext, NomineeCnicFrontURI.toString()+"", Toast.LENGTH_SHORT).show()
-                    Toast.makeText(mContext, NomineeCnicBackURI.toString()+"", Toast.LENGTH_SHORT).show()
-                    lifecycleScope.launch{
-                        addUserCNIC(NomineeCnicFrontURI!!,NomineeCnicBackURI!!,type)
+                if (NomineeCnicFrontURI != null && NomineeCnicBackURI != null) {
+                    Toast.makeText(
+                        mContext,
+                        NomineeCnicFrontURI.toString() + "",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    Toast.makeText(mContext, NomineeCnicBackURI.toString() + "", Toast.LENGTH_SHORT)
+                        .show()
+                    lifecycleScope.launch {
+                        addUserCNIC(NomineeCnicFrontURI!!, NomineeCnicBackURI!!, type)
                     }
-                }
-                else Toast.makeText(mContext, "Please Select both photos", Toast.LENGTH_SHORT).show()
+                } else Toast.makeText(mContext, "Please Select both photos", Toast.LENGTH_SHORT)
+                    .show()
 
 
-
-
-            }
-            else if(type.equals(constants.VALUE_DIALOG_FLOW_INVESTOR_CNIC)){
-                if(UserCnicFrontURI!=null && UserCnicBackURI!=null )
-                    lifecycleScope.launch{
-                        addUserCNIC(UserCnicFrontURI!!,UserCnicBackURI!!,type)
+            } else if (type.equals(constants.VALUE_DIALOG_FLOW_INVESTOR_CNIC)) {
+                if (UserCnicFrontURI != null && UserCnicBackURI != null)
+                    lifecycleScope.launch {
+                        addUserCNIC(UserCnicFrontURI!!, UserCnicBackURI!!, type)
                     }
                 else Toast.makeText(mContext, "Please Select Image", Toast.LENGTH_SHORT).show()
             }
@@ -419,9 +490,10 @@ class ActivityUserDetails : AppCompatActivity() {
 
         dialog.show()
     }
-    fun showAddAccountDialog(type:String) {
 
-        dialog = Dialog (mContext)
+    fun showAddAccountDialog(type: String) {
+
+        dialog = Dialog(mContext)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setContentView(R.layout.dialog_add_account)
@@ -433,38 +505,44 @@ class ActivityUserDetails : AppCompatActivity() {
         val etAccountNumber = dialog.findViewById<EditText>(R.id.etAccountNumber)
         val btnAddAccount = dialog.findViewById<Button>(R.id.btnAddAccount)
 
-        if(type.equals(constants.VALUE_DIALOG_FLOW_NOMINEE_BANK)){
+        if (type.equals(constants.VALUE_DIALOG_FLOW_NOMINEE_BANK)) {
             tvHeaderBank.setText("Add Nominee Account");
             tvHeaderBankDisc.setText("Add nominee bank account details for funds transfer and other servicest");
         }
 
         btnAddAccount.setOnClickListener {
 
-            addUserBankAccount(type,spBank.selectedItem.toString(), etAccountTittle.text.toString(), etAccountNumber.text.toString())
+            addUserBankAccount(
+                type,
+                spBank.selectedItem.toString(),
+                etAccountTittle.text.toString(),
+                etAccountNumber.text.toString()
+            )
         }
 
         dialog.show()
     }
+
     fun showPhotoDialog() {
 
 
-        NomineeCnicFront=false
-        NomineeCnicBack=false
-        UserCnicFront=false
-        UserCnicBack=false
-        UserProfilePhoto=false
+        NomineeCnicFront = false
+        NomineeCnicBack = false
+        UserCnicFront = false
+        UserCnicBack = false
+        UserProfilePhoto = false
 
-        dialog = Dialog (mContext)
+        dialog = Dialog(mContext)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setContentView(R.layout.dialog_profile_photo_upload)
 
-         imgProfilePhoto = dialog.findViewById<ImageView>(R.id.imgProfilePhoto)
+        imgProfilePhoto = dialog.findViewById<ImageView>(R.id.imgProfilePhoto)
         val tvSelect = dialog.findViewById<TextView>(R.id.tvSelect)
         val btnUplodProfile = dialog.findViewById<Button>(R.id.btnUplodProfile)
 
-        tvSelect.setOnClickListener{
-            UserProfilePhoto=true
+        tvSelect.setOnClickListener {
+            UserProfilePhoto = true
             val pickImage = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(pickImage, IMAGE_PICKER_REQUEST_CODE)
         }
@@ -472,7 +550,7 @@ class ActivityUserDetails : AppCompatActivity() {
         btnUplodProfile.setOnClickListener {
 
             lifecycleScope.launch {
-                if (imageURI!=null) addUserPhoto(imageURI!!,"InvestorProfilePhoto")
+                if (imageURI != null) addUserPhoto(imageURI!!, "InvestorProfilePhoto")
                 else Toast.makeText(mContext, "Please Select Image", Toast.LENGTH_SHORT).show()
             }
 
@@ -481,93 +559,122 @@ class ActivityUserDetails : AppCompatActivity() {
 
         dialog.show()
     }
-    fun addUserBankAccount(type: String ,bankName: String, accountTittle: String, accountNumber: String) {
 
-        if(type.equals(constants.VALUE_DIALOG_FLOW_NOMINEE_BANK)){
+    fun addUserBankAccount(
+        type: String,
+        bankName: String,
+        accountTittle: String,
+        accountNumber: String
+    ) {
+
+        if (type.equals(constants.VALUE_DIALOG_FLOW_NOMINEE_BANK)) {
             utils.startLoadingAnimation()
 
             var nominee: ModelNominee = sharedPrefManager.getNominee()
-            nominee.acc_number=accountNumber
-            nominee.acc_tittle=accountTittle
-            nominee.bank_name=bankName
+            nominee.acc_number = accountNumber
+            nominee.acc_tittle = accountTittle
+            nominee.bank_name = bankName
 
             lifecycleScope.launch {
                 nomineeViewModel.updateNominee(nominee)
                     .observe(this@ActivityUserDetails) {
                         utils.endLoadingAnimation()
                         if (it == true) {
-
+                            //this is for adding nominee bank accounts //
                             sharedPrefManager.saveNominee(nominee)
                             sharedPrefManager.putNomineeBank(true)
-                            Toast.makeText(mContext, constants.ACCOPUNT_ADDED_MESSAGE, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                mContext,
+                                constants.ACCOPUNT_ADDED_MESSAGE,
+                                Toast.LENGTH_SHORT
+                            ).show()
                             dialog.dismiss()
                             checkData()
-                        }
-                        else {
-                            Toast.makeText(mContext, constants.SOMETHING_WENT_WRONG_MESSAGE, Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(
+                                mContext,
+                                constants.SOMETHING_WENT_WRONG_MESSAGE,
+                                Toast.LENGTH_SHORT
+                            ).show()
                             dialog.dismiss()
                         }
 
                     }
             }
-        }
-        else {
+        } else {
 
             utils.startLoadingAnimation()
             lifecycleScope.launch {
-                userViewModel.addUserAccount(ModelBankAccount("",bankName,accountTittle,accountNumber,""))
+                userViewModel.addUserAccount(
+                    ModelBankAccount(
+                        "",
+                        bankName,
+                        accountTittle,
+                        accountNumber,
+                        ""
+                    )
+                )
                     .observe(this@ActivityUserDetails) {
-                    utils.endLoadingAnimation()
-                    if (it == true) {
-                        sharedPrefManager.putUserBank(true)
-                        Toast.makeText(mContext, constants.ACCOPUNT_ADDED_MESSAGE, Toast.LENGTH_SHORT).show()
-                        dialog.dismiss()
-                        checkData()
-                    }
-                    else {
-                        Toast.makeText(mContext, constants.SOMETHING_WENT_WRONG_MESSAGE, Toast.LENGTH_SHORT).show()
-                        dialog.dismiss()
-                    }
+                        utils.endLoadingAnimation()
+                        if (it == true) {
+                            sharedPrefManager.putUserBank(true)
+                            Toast.makeText(
+                                mContext,
+                                constants.ACCOPUNT_ADDED_MESSAGE,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            dialog.dismiss()
+                            checkData()
+                        } else {
+                            Toast.makeText(
+                                mContext,
+                                constants.SOMETHING_WENT_WRONG_MESSAGE,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            dialog.dismiss()
+                        }
 
-                }
+                    }
             }
 
         }
-
 
 
     }
 
 
-    suspend fun addUserPhoto(imageUri: Uri, type: String ) {
+    suspend fun addUserPhoto(imageUri: Uri, type: String) {
 
-       /* utils.startLoadingAnimation()
-        userViewModel.uploadPhotoRefrence(imageUri,type)
-            .downloadUrl.addOnSuccessListener {uri ->
-                var user:User=sharedPrefManager.getUser()
-                user.photo= uri.toString()
-                lifecycleScope.launch {
+        /* utils.startLoadingAnimation()
+         userViewModel.uploadPhotoRefrence(imageUri,type)
+             .downloadUrl.addOnSuccessListener {uri ->
+                 var user:User=sharedPrefManager.getUser()
+                 user.photo= uri.toString()
+                 lifecycleScope.launch {
 
-                    userViewModel.updateUser(user).observe(this@ActivityUserDetails) {
-                        utils.endLoadingAnimation()
-                        if (it == true) {
-                            sharedPrefManager.saveUser(user)
-                            sharedPrefManager.putUserPhoto(true)
-                            Toast.makeText(mContext, "Profile Photo Updated", Toast.LENGTH_SHORT).show()
-                            dialog.dismiss()
-                            checkData()
-                        }
-                        else Toast.makeText(mContext, constants.SOMETHING_WENT_WRONG_MESSAGE, Toast.LENGTH_SHORT).show()
+                     userViewModel.updateUser(user).observe(this@ActivityUserDetails) {
+                         utils.endLoadingAnimation()
+                         if (it == true) {
+                             sharedPrefManager.saveUser(user)
+                             sharedPrefManager.putUserPhoto(true)
+                             Toast.makeText(mContext, "Profile Photo Updated", Toast.LENGTH_SHORT).show()
+                             dialog.dismiss()
+                             checkData()
+                         }
+                         else Toast.makeText(mContext, constants.SOMETHING_WENT_WRONG_MESSAGE, Toast.LENGTH_SHORT).show()
 
-                    }
-                }
-        }*/
+                     }
+                 }
+         }*/
+
+
+
 
         utils.startLoadingAnimation()
         userViewModel.uploadPhoto(imageUri, type)
-            .addOnSuccessListener {taskSnapshot ->
+            .addOnSuccessListener { taskSnapshot ->
                 taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
-                    var user:User=sharedPrefManager.getUser()
+                    var user: User = sharedPrefManager.getUser()
                     user.photo = uri.toString()
 
                     lifecycleScope.launch {
@@ -577,36 +684,43 @@ class ActivityUserDetails : AppCompatActivity() {
                             if (it == true) {
                                 sharedPrefManager.saveUser(user)
                                 sharedPrefManager.putUserPhoto(true)
-                                Toast.makeText(mContext, "Profile Photo Updated", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    mContext,
+                                    "Profile Photo Updated",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                                 dialog.dismiss()
                                 checkData()
-                            }
-                            else Toast.makeText(mContext, constants.SOMETHING_WENT_WRONG_MESSAGE, Toast.LENGTH_SHORT).show()
+                            } else Toast.makeText(
+                                mContext,
+                                constants.SOMETHING_WENT_WRONG_MESSAGE,
+                                Toast.LENGTH_SHORT
+                            ).show()
 
                         }
                     }
 
                 }
                     .addOnFailureListener { exception ->
-                        Toast.makeText(mContext, exception.message+"", Toast.LENGTH_SHORT).show()
-                }
+                        Toast.makeText(mContext, exception.message + "", Toast.LENGTH_SHORT).show()
+                    }
             }
             .addOnFailureListener {
                 Toast.makeText(mContext, "Failed to upload profile pic", Toast.LENGTH_SHORT).show()
             }
     }
 
-    suspend fun addUserCNIC(imageUriFront: Uri,imageUriBack: Uri, type: String ) {
+    suspend fun addUserCNIC(imageUriFront: Uri, imageUriBack: Uri, type: String) {
 
         //Toast.makeText(mContext, "debug1", Toast.LENGTH_SHORT).show()
 
 
-
-
         utils.startLoadingAnimation()
 
-        val frontUploadTask = userViewModel.uploadPhoto(imageUriFront, type + "Front") // from_investorFront
-        val backUploadTask = userViewModel.uploadPhoto(imageUriBack, type + "Back")  // from_investorBack
+        val frontUploadTask =
+            userViewModel.uploadPhoto(imageUriFront, type + "Front") // from_investorFront
+        val backUploadTask =
+            userViewModel.uploadPhoto(imageUriBack, type + "Back")  // from_investorBack
 
         val downloadUrlTasks = mutableListOf<Task<Uri>>()
 
@@ -641,41 +755,47 @@ class ActivityUserDetails : AppCompatActivity() {
                 }
 
 
-                if(type.equals(constants.VALUE_DIALOG_FLOW_INVESTOR_CNIC)){
+                if (type.equals(constants.VALUE_DIALOG_FLOW_INVESTOR_CNIC)) {
                     // Update user photo in the user object
                     val user: User = sharedPrefManager.getUser()
                     user.cnic_front = downloadUrls[0] // Assuming the front image URL is at index 0
                     user.cnic_back = downloadUrls[1] // Assuming the front image URL is at index 0
 
 
-
                     // Update user in the database
                     lifecycleScope.launch {
-                        userViewModel.updateUser(user).observe(this@ActivityUserDetails) { updateResult ->
-                            utils.endLoadingAnimation()
-                            if (updateResult == true) {
+                        userViewModel.updateUser(user)
+                            .observe(this@ActivityUserDetails) { updateResult ->
+                                utils.endLoadingAnimation()
+                                if (updateResult == true) {
 
-                                sharedPrefManager.saveUser(user)
-                                sharedPrefManager.putUserCnic(true)
-                                Toast.makeText(mContext, "CNIC Updated!", Toast.LENGTH_SHORT).show()
-                                dialog.dismiss()
-                                checkData()
-                            } else {
-                                Toast.makeText(mContext, constants.SOMETHING_WENT_WRONG_MESSAGE, Toast.LENGTH_SHORT).show()
+                                    sharedPrefManager.saveUser(user)
+                                    sharedPrefManager.putUserCnic(true)
+                                    Toast.makeText(mContext, "CNIC Updated!", Toast.LENGTH_SHORT)
+                                        .show()
+                                    dialog.dismiss()
+                                    checkData()
+                                } else {
+                                    Toast.makeText(
+                                        mContext,
+                                        constants.SOMETHING_WENT_WRONG_MESSAGE,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
                             }
-                        }
                     }
-                }
-                else if(type.equals(constants.VALUE_DIALOG_FLOW_NOMINEE_CNIC)){
+                } else if (type.equals(constants.VALUE_DIALOG_FLOW_NOMINEE_CNIC)) {
                     // Update user photo in the user object
 
 
                     // Update user in the database
                     lifecycleScope.launch {
 
-                        var nominee:ModelNominee=sharedPrefManager.getNominee()
-                        nominee.cnic_front = downloadUrls[0] // Assuming the front image URL is at index 0
-                        nominee.cnic_back = downloadUrls[1] // Assuming the front image URL is at index 0
+                        var nominee: ModelNominee = sharedPrefManager.getNominee()
+                        nominee.cnic_front =
+                            downloadUrls[0] // Assuming the front image URL is at index 0
+                        nominee.cnic_back =
+                            downloadUrls[1] // Assuming the front image URL is at index 0
 
                         nomineeViewModel.updateNominee(nominee).observe(this@ActivityUserDetails) {
                             utils.endLoadingAnimation()
@@ -687,8 +807,11 @@ class ActivityUserDetails : AppCompatActivity() {
                                 Toast.makeText(mContext, "CNIC Updated!", Toast.LENGTH_SHORT).show()
                                 dialog.dismiss()
                                 checkData()
-                            }
-                            else Toast.makeText(mContext, constants.SOMETHING_WENT_WRONG_MESSAGE, Toast.LENGTH_SHORT).show()
+                            } else Toast.makeText(
+                                mContext,
+                                constants.SOMETHING_WENT_WRONG_MESSAGE,
+                                Toast.LENGTH_SHORT
+                            ).show()
 
 
                         }
@@ -702,12 +825,84 @@ class ActivityUserDetails : AppCompatActivity() {
                 }
             }
         }
+    }
 
+    private fun saveAdminAccounts() {
+        lifecycleScope.launch {
+            userViewModel.getUserAccounts(constants.ADMIN)
+                .addOnCompleteListener { task ->
+                    utils.endLoadingAnimation()
+                    if (task.isSuccessful) {
+                        val list = ArrayList<ModelBankAccount>()
+                        if (task.result.size() > 0) {
+                            for (document in task.result) list.add(
+                                document.toObject(
+                                    ModelBankAccount::class.java
+                                )
+                            )
+                            sharedPrefManager.putAdminBankList(list)
+                            Toast.makeText(
+                                mContext,
+                                constants.ACCOPUNT_ADDED_MESSAGE,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    } else Toast.makeText(
+                        mContext,
+                        constants.SOMETHING_WENT_WRONG_MESSAGE,
+                        Toast.LENGTH_SHORT
+                    ).show()
 
+                }
+                .addOnFailureListener {
+                    utils.endLoadingAnimation()
+                    Toast.makeText(mContext, it.message + "", Toast.LENGTH_SHORT).show()
 
-
+                }
+        }
 
     }
 
+    private fun saveUserAccounts() {
+        lifecycleScope.launch {
+            userViewModel.getUserAccounts(sharedPrefManager.getToken())
+                .addOnCompleteListener { task ->
+                    utils.endLoadingAnimation()
+                    if (task.isSuccessful) {
+                        val list = ArrayList<ModelBankAccount>()
+                        if (task.result.size() > 0) {
+                            for (document in task.result) list.add(
+                                document.toObject(
+                                    ModelBankAccount::class.java
+                                )
+                            )
+                            sharedPrefManager.putInvestorBankList(list)
+                            sharedPrefManager.getInvestorAccount()
+                            Toast.makeText(
+                                mContext,
+                                constants.ACCOPUNT_ADDED_MESSAGE,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    } else Toast.makeText(
+                        mContext,
+                        constants.SOMETHING_WENT_WRONG_MESSAGE,
+                        Toast.LENGTH_SHORT
+                    ).show()
 
+                }
+                .addOnFailureListener {
+                    utils.endLoadingAnimation()
+                    Toast.makeText(mContext, it.message + "", Toast.LENGTH_SHORT).show()
+
+                }
+        }
+
+
+    }
 }
+
+
+
+
+

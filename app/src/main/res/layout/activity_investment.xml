@@ -7,8 +7,10 @@
     android:background="@color/secondary_m"
 
     tools:context=".ui.ActivityInvestment">
+      ////HERE IS THE BUTTON THAT WE WILL USE TO DOWNLOAD PDF//////////
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/save_as_pdf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -140,19 +142,24 @@
             app:tabMode="fixed"
             app:tabTextColor="@color/black_m"
 
-
             />
 
     </androidx.cardview.widget.CardView>
-
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="40dp"
         android:layout_below="@+id/v2"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="-3dp"
+        android:layout_marginBottom="1dp"
+        android:paddingTop="40dp">
+
+
     </androidx.viewpager2.widget.ViewPager2>
 
 </RelativeLayout>

@@ -75,7 +75,6 @@ class HomeFragment : Fragment() {
         sharedPrefManager = SharedPrefManager(mContext)
 
 
-        //Toast.makeText(mContext, sharedPrefManager.getToken(), Toast.LENGTH_SHORT).show()
 
 
         binding.btnInvest.setOnClickListener{
@@ -99,7 +98,6 @@ class HomeFragment : Fragment() {
         binding.layProfit.setOnClickListener{
             if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
             else startActivity(Intent(mContext, ActivityProfitTax::class.java))
-
         }
 
         binding.layWithdraw.setOnClickListener{
@@ -116,13 +114,12 @@ class HomeFragment : Fragment() {
 
 
         checkData()
-        setData()
+       setData()
 
         return root
     }
 
     private fun checkData() {
-
 
         db.collection(constants.INVESTOR_COLLECTION).document(sharedPrefManager.getToken())
             .addSnapshotListener { snapshot, firebaseFirestoreException ->
@@ -181,18 +178,6 @@ class HomeFragment : Fragment() {
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     private fun setData() {
@@ -247,26 +232,26 @@ class HomeFragment : Fragment() {
         }
     }*/
 
-    /*lifecycleScope.launch {
-               userViewModel.getUserAccounts(constants.ADMIN)
-                   .addOnCompleteListener{task ->
-                       utils.endLoadingAnimation()
-                       if (task.isSuccessful) {
-                           val list = ArrayList<ModelBankAccount>()
-                           if(task.result.size()>0){
-                               for (document in task.result) list.add( document.toObject(ModelBankAccount::class.java))
-                               sharedPrefManager.putAdminBankList(list)
-                               Toast.makeText(mContext, constants.ACCOPUNT_ADDED_MESSAGE, Toast.LENGTH_SHORT).show()
-                           }
-                       }
-                       else Toast.makeText(mContext, constants.SOMETHING_WENT_WRONG_MESSAGE, Toast.LENGTH_SHORT).show()
-
-                   }
-                   .addOnFailureListener{
-                       utils.endLoadingAnimation()
-                       Toast.makeText(mContext, it.message+"", Toast.LENGTH_SHORT).show()
-
-                   }
-           }*/
+//    lifecycleScope.launch {
+//               userViewModel.getUserAccounts(constants.ADMIN)
+//                   .addOnCompleteListener{task ->
+//                       utils.endLoadingAnimation()
+//                       if (task.isSuccessful) {
+//                           val list = ArrayList<ModelBankAccount>()
+//                           if(task.result.size()>0){\
+//                               for (document in task.result) list.add( document.toObject(ModelBankAccount::class.java))
+//                               sharedPrefManager.putAdminBankList(list)
+//                               Toast.makeText(mContext, constants.ACCOPUNT_ADDED_MESSAGE, Toast.LENGTH_SHORT).show()
+//                           }
+//                       }
+//                       else Toast.makeText(mContext, constants.SOMETHING_WENT_WRONG_MESSAGE, Toast.LENGTH_SHORT).show()
+//
+//                   }
+//                   .addOnFailureListener{
+//                       utils.endLoadingAnimation()
+//                       Toast.makeText(mContext, it.message+"", Toast.LENGTH_SHORT).show()
+//
+//                   }
+//           }
 
 }

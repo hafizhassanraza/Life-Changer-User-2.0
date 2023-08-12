@@ -71,7 +71,12 @@ class TransactionsAdapter (var activity:String, val data: List<TransactionModel>
             }
             else if(activity.equals(constant.FROM_APPROVED_INVESTMENT_REQ)){
 
-                itemBinding.tvApprovedDate.text==SimpleDateFormat("dd/MM/yy", Locale.getDefault()).format(transactionModel.transactionAt!!.toDate()).toString()
+//                itemBinding.tvApprovedDate.text==SimpleDateFormat("dd/MM/yy",
+                //                Locale.getDefault()).format(transactionModel.transactionAt!!.toDate()).toString()
+
+                val dateFormat = SimpleDateFormat("dd/MM/yy", Locale.getDefault())
+                val formattedDate = dateFormat.format(transactionModel.transactionAt!!.toDate())
+                itemBinding.tvApprovedDate.text = formattedDate
                 itemBinding.tvNewBalance.text=transactionModel.newBalance
                 itemBinding.tvReqAmount.text=transactionModel.amount
                 itemBinding.tvNewBalance.setTextColor(0xFF2F9B47.toInt())

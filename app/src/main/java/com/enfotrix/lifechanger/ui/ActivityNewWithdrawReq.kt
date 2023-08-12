@@ -1,8 +1,6 @@
 package com.enfotrix.lifechanger.ui
-import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity

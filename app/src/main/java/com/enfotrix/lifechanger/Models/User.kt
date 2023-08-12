@@ -26,5 +26,5 @@ data class User(
         var pin: String = "",
         var id: String = "",
         var fa_id: String = "",
-    val createdAt: Timestamp = Timestamp.now() // Creation timestamp
+         val createdAt: Timestamp = Timestamp.now() // Creation timestamp
 )

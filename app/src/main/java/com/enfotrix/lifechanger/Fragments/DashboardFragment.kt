@@ -51,10 +51,12 @@ class DashboardFragment : Fragment() {
     //private lateinit var user: User
    private lateinit var designatorWhatsapp:String
     private lateinit var designatorMail:String
+    private lateinit var designatorPhone:String
     var list=ArrayList<ContactUsModel>()
     var listDesignation=ArrayList<String>()
     var listwhatsapp=ArrayList<String>()
     var listmail=ArrayList<String>()
+    var listPhoneNumber=ArrayList<String>()
     //private lateinit var contactUsModel: ContactUsModel
     private lateinit var sharedPrefManager : SharedPrefManager
     private lateinit var dialog : Dialog
@@ -70,7 +72,6 @@ class DashboardFragment : Fragment() {
     ): View {
         val dashboardViewModel =
             ViewModelProvider(this).get(DashboardViewModel::class.java)
-
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
         mContext=requireContext()
@@ -115,6 +116,10 @@ class DashboardFragment : Fragment() {
                 for(doc in list){
                     listmail.add(doc.email)
                 }
+                for(doc in list){
+                    listPhoneNumber.add(doc.mobile)
+                }
+
 
 
 
@@ -126,17 +131,25 @@ class DashboardFragment : Fragment() {
 
         val whatsapp = dialog.findViewById<ImageView>(R.id.whatsapp)
         val mail = dialog.findViewById<ImageView>(R.id.mail)
+        val phone = dialog.findViewById<ImageView>(R.id.dailor)
 
         whatsapp?.setOnClickListener {
-             openWhatsApp("+923087207572")
+             openWhatsApp(designatorWhatsapp)
 
         }
 
         mail?.setOnClickListener {
             Toast.makeText(requireContext(), ""+designatorMail, Toast.LENGTH_SHORT).show()
 
-            openEmail("hussainnhussain1122@gmail.com")
+            openEmail(designatorMail)
         }
+        phone?.setOnClickListener{
+            openDialer(designatorPhone)
+
+        }
+
+
+
 
         binding.myFinancialAdvisor.setOnClickListener{
 
@@ -145,26 +158,6 @@ class DashboardFragment : Fragment() {
 
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         checkData()
@@ -223,7 +216,8 @@ class DashboardFragment : Fragment() {
         else {
             binding.tvFAName.text = sharedPrefManager.getFA().firstName
             binding.tvFADesignation.text = sharedPrefManager.getFA().designantion
-            Glide.with(mContext).load(sharedPrefManager.getFA().photo).centerCrop().placeholder(R.drawable.ic_launcher_background).into(binding.imgFA);
+            Glide.with(mContext).load(sharedPrefManager.getFA().photo).centerCrop().placeholder(R.drawable.
+            ic_launcher_background).into(binding.imgFA);
         }
     }
     override fun onDestroyView() {
@@ -253,6 +247,7 @@ class DashboardFragment : Fragment() {
 
                             designatorWhatsapp = listwhatsapp.get(position)
                             designatorMail=listmail.get(position)
+                            designatorPhone=listPhoneNumber.get(position)
 
 
 
@@ -323,6 +318,14 @@ class DashboardFragment : Fragment() {
         val intent = Intent(Intent.ACTION_SENDTO, uri)
         startActivity(intent)
     }
+
+
+    private fun openDialer(phoneNumber: String) {
+        val uri = Uri.parse("tel:$phoneNumber")
+        val intent = Intent(Intent.ACTION_DIAL, uri)
+        startActivity(intent)
+    }
+
 
 
 

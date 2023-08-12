@@ -58,7 +58,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_column="1"
+                    app:layout_column="0"
                     app:layout_row="0"
                     app:layout_columnWeight="1"
                     app:layout_rowWeight="1"
@@ -80,7 +80,6 @@
                             android:layout_centerInParent="true"
                             android:layout_marginHorizontal="6dp"
                             android:gravity="center"
-                            android:text="Old Balance"
                             android:textColor="@color/SecondaryVariant"
                             android:textSize="15sp"
                             android:textStyle="bold" />

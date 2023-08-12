@@ -142,7 +142,6 @@
             app:tabMode="fixed"
             app:tabTextColor="@color/black_m"
 
-
             />
 
     </androidx.cardview.widget.CardView>
@@ -158,4 +157,5 @@
     </androidx.viewpager2.widget.ViewPager2>
 
 </RelativeLayout>
+
 

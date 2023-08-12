@@ -9,9 +9,6 @@ android {
     compileSdk 33
 
 
-
-
-
     defaultConfig {
 
         applicationId "com.enfotrix.lifechanger"
@@ -123,6 +120,14 @@ dependencies {
     implementation "com.airbnb.android:lottie:3.4.0"
     //country code picker
     implementation 'com.hbb20:ccp:2.6.1'
+
+    implementation platform('com.google.firebase:firebase-bom:28.4.1')
+    implementation 'com.google.firebase:firebase-auth-ktx'
+
+    //to download pdf file
+
+    implementation 'com.itextpdf:itext7-core:7.1.16'
+
 
 
 
