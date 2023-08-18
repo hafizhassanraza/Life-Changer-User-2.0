@@ -166,7 +166,7 @@ class ActivityNewWithdrawReq : AppCompatActivity(), InvestorAccountsAdapter.OnIt
                     constants.TRANSACTION_STATUS_PENDING,
                     binding.tvBalance.text.toString(),
                     accountID,
-                    sharedPrefManager.getBalance()
+                    sharedPrefManager.getInvestment().investmentBalance
                 )
             )
             confirmationDialog.dismiss()

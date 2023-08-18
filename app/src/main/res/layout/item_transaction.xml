@@ -27,7 +27,7 @@
                     android:layout_height="wrap_content"
                     app:layout_column="0"
                     app:layout_row="0"
-                    app:layout_columnWeight="1"
+                    app:layout_columnWeight="0.85"
                     app:layout_rowWeight="1">
 
                     <TextView
@@ -46,10 +46,10 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_column="0"
+                    app:layout_column="1"
                     app:layout_row="0"
 
-                    app:layout_columnWeight="1"
+                    app:layout_columnWeight="1.17"
                     app:layout_rowWeight="0"
                     android:orientation="horizontal">
 
@@ -66,11 +66,11 @@
 
                         <TextView
                             android:id="@+id/tvPreviousBalance"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:text="400"
-                            android:visibility="gone"
+                            android:gravity="center_horizontal"
                             android:textColor="@color/SecondaryVariant"
                             android:textSize="15sp"
                             android:textStyle="bold" />

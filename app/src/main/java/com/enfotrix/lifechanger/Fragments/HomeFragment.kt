@@ -34,6 +34,7 @@ import com.enfotrix.lifechanger.ui.ActivityInvestment
 import com.enfotrix.lifechanger.ui.ActivityNewInvestmentReq
 import com.enfotrix.lifechanger.ui.ActivityNewWithdrawReq
 import com.enfotrix.lifechanger.ui.ActivityProfitTax
+import com.enfotrix.lifechanger.ui.ActivityTax
 import com.enfotrix.lifechanger.ui.ActivityWithdraw
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.ktx.firestore
@@ -107,7 +108,7 @@ class HomeFragment : Fragment() {
 
         binding.layTax.setOnClickListener{
             if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
-            else startActivity(Intent(mContext, ActivityProfitTax::class.java))
+            else startActivity(Intent(mContext, ActivityTax::class.java))
 
         }
 

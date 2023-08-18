@@ -77,7 +77,7 @@ class ActivityNewInvestmentReq : AppCompatActivity(), InvestorAccountsAdapter.On
                     constants.TRANSACTION_STATUS_PENDING,
                     binding.tvBalance.text.toString(),
                     adminAccountID,
-                    sharedPrefManager.getBalance(),
+                    sharedPrefManager.getInvestment().investmentBalance,
                     accountID
                 )
             )
