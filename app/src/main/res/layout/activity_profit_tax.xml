@@ -87,7 +87,7 @@
                             android:layout_centerInParent="true"
                             android:layout_marginHorizontal="6dp"
                             android:gravity="center"
-                            android:text="Old Balance"
+                            android:text="Previous Profit"
                             android:textColor="@color/secondary_m"
                             android:textSize="15sp"
                             android:textStyle="bold" />
@@ -115,7 +115,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:gravity="center"
-                        android:text="Profit"
+                        android:text="Profit*"
                         android:textColor="@color/secondary_m"
                         android:textSize="15sp"
                         android:textStyle="bold" />
@@ -176,7 +176,7 @@
                         android:layout_centerInParent="true"
                         android:layout_marginHorizontal="4dp"
                         android:gravity="center"
-                        android:text="New Balance"
+                        android:text="New Profit "
                         android:textColor="@color/secondary_m"
                         android:textSize="15sp"
                         android:textStyle="bold" />

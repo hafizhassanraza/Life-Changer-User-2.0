@@ -90,7 +90,7 @@
                             android:layout_centerInParent="true"
                             android:layout_marginHorizontal="6dp"
                             android:gravity="center"
-                            android:text="OLD Balance"
+                            android:text="OLD Balance+Profit"
                             android:textColor="@color/SecondaryVariant"
                             android:textSize="15sp"
                             android:textStyle="bold" />
@@ -183,7 +183,7 @@
                         android:layout_centerInParent="true"
                         android:layout_marginHorizontal="4dp"
                         android:gravity="center"
-                        android:text="New Balance"
+                        android:text="New Balance+Profit"
                         android:textColor="@color/SecondaryVariant"
                         android:textSize="15sp"
                         android:textStyle="bold" />

@@ -184,6 +184,19 @@ class HomeFragment : Fragment() {
     private fun setData() {
         binding.tvUserName.text= sharedPrefManager.getUser().firstName
          binding.tvBalance.text= sharedPrefManager.getInvestment().investmentBalance
+        if(sharedPrefManager.getInvestment().lastProfit.isEmpty())
+        {
+            binding.availableProfit.text="0"
+        }
+        else if(sharedPrefManager.getInvestment().lastProfit==null){
+            binding.availableProfit.text="0"
+        }
+        else
+        {
+            binding.availableProfit.text=sharedPrefManager.getInvestment().lastProfit
+
+
+        }
     }
 
     override fun onDestroyView() {

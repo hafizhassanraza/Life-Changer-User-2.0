@@ -64,22 +64,44 @@ class ActivityNewWithdrawReq : AppCompatActivity(), InvestorAccountsAdapter.OnIt
         binding.layInvestorAccountSelect.setOnClickListener { getInvestorAccounts() }
         binding.layBalance.setOnClickListener { showAddBalanceDialog() }
         binding.btnWithdraw.setOnClickListener {
+
+
+
+
+
             val balance = binding.tvBalance.text.toString()
             var bankTitle=binding.tvAccountTittle.text.toString()
             var accountNumber=binding.tvAccountNumber.text.toString()
             if (balance.isEmpty() || balance.toDoubleOrNull() == 0.0) {
                 Toast.makeText(mContext, "Please enter a valid balance", Toast.LENGTH_SHORT).show()
             }
-            else if(bankTitle.isEmpty()||bankTitle.equals("Account Tittle")){
+             if(bankTitle.isEmpty()||bankTitle.equals("Account Tittle")){
 
                 Toast.makeText(mContext, "Please Enter Account Details", Toast.LENGTH_SHORT).show()
             }
 
 
+            val investmentBalance = sharedPrefManager.getInvestment()?.investmentBalance?.takeIf { it.isNotBlank() }?.toInt() ?: 0
+            val lastProfit = sharedPrefManager.getInvestment()?.lastProfit?.takeIf { it.isNotBlank() }?.toInt() ?: 0
+            val Balance = binding.tvBalance.text.toString()
+            var totalInvestorBalance=(investmentBalance + lastProfit)
+            Toast.makeText(mContext, ""+totalInvestorBalance, Toast.LENGTH_SHORT).show()
+            Toast.makeText(mContext, ""+Balance, Toast.LENGTH_SHORT).show()
 
-            else {
-                showConfirmationDialog()
+            if (Balance.isNotBlank()) {
+                Toast.makeText(mContext, "yes", Toast.LENGTH_SHORT).show()
+                val balanceValue = Balance.toInt()
+
+                if (totalInvestorBalance >= balanceValue) {
+                    showConfirmationDialog()
+                } else if (totalInvestorBalance < balanceValue) {
+                    Toast.makeText(mContext, "Please Enter Valid Amount", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(mContext, "Please Enter a Valid Amount1", Toast.LENGTH_SHORT).show()
             }
+
+
         }
     }
 

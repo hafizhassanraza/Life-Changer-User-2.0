@@ -12,7 +12,6 @@ data class InvestmentModel @JvmOverloads constructor(
     var lastWithdrawReq: String = "",
     var lastProfit: String = "",
     var upcomingProfit: String = "",
-
     var lastInvestmentDate: String = "",
     var lastInvestmentReqDate: String = "",
     var lastWithdrawDate: String = "",
