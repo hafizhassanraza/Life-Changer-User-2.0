@@ -8,11 +8,6 @@
     tools:context=".ui.ActivityProfitTax">
 
 
-    <View
-        android:id="@+id/v2"
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:background="@color/primary"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,15 +20,15 @@
             android:id="@+id/layItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:background="@color/primary"
             android:orientation="vertical">
-
 
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray"/>
+                android:background="@color/PrimaryVariant"/>
+
             <androidx.gridlayout.widget.GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -60,7 +55,7 @@
                             android:layout_marginHorizontal="6dp"
                             android:gravity="center"
                             android:text="Request Date"
-                            android:textColor="@color/SecondaryVariant"
+                            android:textColor="@color/secondary_m"
                             android:textSize="15sp"
                             android:textStyle="bold" />
                         <View
@@ -93,7 +88,7 @@
                             android:layout_marginHorizontal="6dp"
                             android:gravity="center"
                             android:text="Old Balance"
-                            android:textColor="@color/SecondaryVariant"
+                            android:textColor="@color/secondary_m"
                             android:textSize="15sp"
                             android:textStyle="bold" />
                         <View
@@ -121,7 +116,7 @@
                         android:layout_centerInParent="true"
                         android:gravity="center"
                         android:text="Profit"
-                        android:textColor="@color/SecondaryVariant"
+                        android:textColor="@color/secondary_m"
                         android:textSize="15sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
@@ -153,7 +148,7 @@
                             android:gravity="center"
                             android:text="Clear
                             Date"
-                            android:textColor="@color/SecondaryVariant"
+                            android:textColor="@color/secondary_m"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
@@ -182,7 +177,7 @@
                         android:layout_marginHorizontal="4dp"
                         android:gravity="center"
                         android:text="New Balance"
-                        android:textColor="@color/SecondaryVariant"
+                        android:textColor="@color/secondary_m"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 

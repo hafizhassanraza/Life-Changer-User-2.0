@@ -44,7 +44,7 @@ class ActivityInvestment : AppCompatActivity() {
         utils = Utils(mContext)
         constants= Constants()
         sharedPrefManager = SharedPrefManager(mContext)
-        setTitle("My Withdraws")
+        setTitle("My Investments")
         fabButton = findViewById(R.id.save_as_pdf)
 
         getData()

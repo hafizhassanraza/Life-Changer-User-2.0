@@ -51,7 +51,7 @@ class ActivityTax : AppCompatActivity() {
         /* binding.rvProfitTax.adapter=
              TransactionsAdapter(constants.FROM_PROFIT,sharedPrefManager.getProfitList().filter{ it.status.equals(constants.TRANSACTION_STATUS_APPROVED) }.sortedByDescending { it.createdAt })
  */
-        setTitle("Tax")
+        setTitle("Tax Details")
 
         getData()
 

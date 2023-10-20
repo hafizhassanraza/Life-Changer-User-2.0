@@ -88,6 +88,8 @@ class ActivityNewInvestmentReq : AppCompatActivity(), InvestorAccountsAdapter.On
     fun addInvestmentReq(transactionModel: TransactionModel){
 
 
+
+
         utils.startLoadingAnimation()
         lifecycleScope.launch {
             investmentViewModel.addTransactionReq(transactionModel).observe(this@ActivityNewInvestmentReq){
@@ -122,8 +124,19 @@ class ActivityNewInvestmentReq : AppCompatActivity(), InvestorAccountsAdapter.On
 
 
         btnAddBalance.setOnClickListener {
-            dialog.dismiss()
-            binding.tvBalance.text=etBalance.text
+
+            var balance: Int
+            balance= Integer.parseInt(etBalance.text.toString())
+            if(balance>0){
+
+                if(etBalance.text.toString().isNullOrEmpty()) Toast.makeText(mContext, "enter amount", Toast.LENGTH_SHORT).show()
+                else{
+                    dialog.dismiss()
+                    binding.tvBalance.text=etBalance.text
+                }
+
+            }
+
         }
 
         dialog.show()
@@ -149,6 +162,7 @@ class ActivityNewInvestmentReq : AppCompatActivity(), InvestorAccountsAdapter.On
 
     }
     override fun onItemClick(modelBankAccount: ModelBankAccount) {
+
         dialog.dismiss()
 
         if(investorAccount){
