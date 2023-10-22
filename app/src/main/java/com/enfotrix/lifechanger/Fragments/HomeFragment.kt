@@ -182,8 +182,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun setData() {
+
+
         binding.tvUserName.text= sharedPrefManager.getUser().firstName
-         binding.tvBalance.text= sharedPrefManager.getInvestment().investmentBalance
+        binding.tvBalance.text= sharedPrefManager.getInvestment().investmentBalance
+
         if(sharedPrefManager.getInvestment().lastProfit.isEmpty())
         {
             binding.availableProfit.text="0"
@@ -194,6 +197,17 @@ class HomeFragment : Fragment() {
         else
         {
             binding.availableProfit.text=sharedPrefManager.getInvestment().lastProfit
+        }
+        if(sharedPrefManager.getInvestment().lastInvestment.isEmpty())
+        {
+            binding.tvInActiveInvestment.text="0"
+        }
+        else if(sharedPrefManager.getInvestment().lastInvestment==null){
+            binding.tvInActiveInvestment.text="0"
+        }
+        else
+        {
+            binding.tvInActiveInvestment.text=sharedPrefManager.getInvestment().lastInvestment
 
 
         }

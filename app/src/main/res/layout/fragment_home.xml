@@ -98,6 +98,9 @@
                     android:textColor="@color/gray"
                     android:textSize="8dp" />
 
+
+
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -130,7 +133,46 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:gravity="top"
+                        android:paddingTop="5dp"
+                        android:text="Rs."
+                        android:textColor="@color/gray"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/tvInActiveInvestment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="00"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter"
+                        android:text="(In-Active Investment)"
+                        android:textColor="@color/gray"
+                        android:textSize="9sp"
+                        android:layout_marginLeft="3dp"
+                        android:textStyle="bold" />
+
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     >
                     <TextView
@@ -147,7 +189,7 @@
                         android:id="@+id/availableProfit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="20"
+                        android:text="00"
                         android:textColor="@color/black"
                         android:textSize="15sp"
                         android:textStyle="bold"/>
