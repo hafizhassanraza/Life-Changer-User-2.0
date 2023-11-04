@@ -47,7 +47,7 @@
                 android:textSize="12dp"
                 android:layout_marginTop="3dp"
                 android:textColor="@color/red_m"
-                android:text="kjsfdgjksjgk jkdgjkdjk kjlsdgfjks jksdg sdfdsf dsfsfd jksdg kdgjksdgjk jsdg kjsdgjksjkdfjjsdfjk kjsdfjk jskdfjksdfjksdkjfsjkdf kjsdf jdfsdsf jdfjksdfjkkjsfd"
+                android:text="No announcement "
 
                 />
 
@@ -66,6 +66,7 @@
             android:text="Discus your Investment Plans !"
             android:textStyle="bold"
             android:textSize="16dp"
+            android:visibility="gone"
             android:layout_marginTop="10dp"
             android:layout_marginVertical="10dp"
             android:textColor="@color/secondary"
@@ -88,6 +89,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
+
                 android:id="@+id/myFinancialAdvisor"
                 >
                 <ImageView
@@ -187,6 +190,8 @@
             android:text="Connected With Us!"
             android:layout_marginLeft="20dp"
             android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="4dp"
             android:textSize="16dp"
             android:textColor="@color/secondary"/>
 
@@ -385,6 +390,7 @@
             android:layout_height="2dp"
             android:background="@color/secondary"
             android:layout_marginBottom="100dp"
+            android:layout_marginTop="35dp"
             android:layout_gravity="center_horizontal"/>
 
 

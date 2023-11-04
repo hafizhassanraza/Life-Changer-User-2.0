@@ -139,7 +139,6 @@ class DashboardFragment : Fragment() {
         }
 
         mail?.setOnClickListener {
-            Toast.makeText(requireContext(), ""+designatorMail, Toast.LENGTH_SHORT).show()
 
             openEmail(designatorMail)
         }
@@ -267,7 +266,6 @@ class DashboardFragment : Fragment() {
             spinnerWithdrawType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                     // Handle the selected value when the list is empty
-                    Toast.makeText(requireContext(), "Empty", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {

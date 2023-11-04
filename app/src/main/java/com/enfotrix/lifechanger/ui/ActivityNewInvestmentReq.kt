@@ -70,17 +70,39 @@ class ActivityNewInvestmentReq : AppCompatActivity(), InvestorAccountsAdapter.On
 
         binding.layBalance.setOnClickListener { showAddBalanceDialog() }
         binding.btnInvestment.setOnClickListener {
-            addInvestmentReq(
-                TransactionModel(
-                    sharedPrefManager.getToken(),
-                    constants.TRANSACTION_TYPE_INVESTMENT,
-                    constants.TRANSACTION_STATUS_PENDING,
-                    binding.tvBalance.text.toString(),
-                    adminAccountID,
-                    sharedPrefManager.getInvestment().investmentBalance,
-                    accountID
+            if(binding.tvAccountNumber.text.isEmpty()|| binding.tvAccountNumber.text=="0000"){
+                Toast.makeText(mContext, "Please Select bank Account ", Toast.LENGTH_SHORT).show()
+
+            }
+
+           else  if(binding.tvBalance.text.isEmpty()){
+                Toast.makeText(mContext, "Please Enter balance for investment", Toast.LENGTH_SHORT).show()
+            }
+
+           else  if(binding.tvAdminAccountNumber.text.isEmpty()|| binding.tvAdminAccountNumber.text=="0000")
+            {
+                Toast.makeText(mContext, "Select Admin bank Account please", Toast.LENGTH_SHORT).show()
+            }
+            else if(binding.tvBalance.text.toString().toInt()<5){
+                Toast.makeText(mContext, "Please Enter valid balance for investment", Toast.LENGTH_SHORT).show()
+
+            }
+
+            else {
+
+                addInvestmentReq(
+                    TransactionModel(
+                        sharedPrefManager.getToken(),
+                        constants.TRANSACTION_TYPE_INVESTMENT,
+                        constants.TRANSACTION_STATUS_PENDING,
+                        binding.tvBalance.text.toString(),
+                        adminAccountID,
+                        sharedPrefManager.getInvestment().investmentBalance,
+                        accountID
+                    )
                 )
-            )
+            }
+
         }
 
     }
