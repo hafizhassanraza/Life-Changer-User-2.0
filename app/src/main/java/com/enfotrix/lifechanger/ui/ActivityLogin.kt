@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.enfotrix.lifechanger.Constants
 import com.enfotrix.lifechanger.Models.ModelBankAccount
+import com.enfotrix.lifechanger.Models.ModelFA
 import com.enfotrix.lifechanger.Models.ModelNominee
 import com.enfotrix.lifechanger.Models.NomineeViewModel
 import com.enfotrix.lifechanger.Models.UserViewModel
@@ -61,6 +62,7 @@ class ActivityLogin : AppCompatActivity() {
         mContext=this@ActivityLogin
         utils = Utils(mContext)
         constants= Constants()
+
 
         sharedPrefManager = SharedPrefManager(mContext)
 
