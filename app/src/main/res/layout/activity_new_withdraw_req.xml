@@ -88,6 +88,17 @@
 
     </androidx.cardview.widget.CardView>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/newAccount"
+        android:layout_gravity="end"
+        android:layout_marginRight="10dp"
+        android:textStyle="bold"
+        android:clickable="true"
+        android:onClick="addAccountDialog"
+        />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

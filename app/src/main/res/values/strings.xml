@@ -17,6 +17,8 @@
     <string name="fgPassword"><b><u>Forget Password?</u></b></string>
     <string name="clear"><b>Clear all</b></string>
     <string name="upload"><b><u>Select</u></b></string>
+    <string name="newAccount"> <u>Add a new account?</u></string>
+
 
 
     <string-array name="nomineeRelationSpiner">

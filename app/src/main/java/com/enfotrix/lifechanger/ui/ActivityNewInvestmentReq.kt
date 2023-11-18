@@ -5,9 +5,11 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.View
 import android.view.Window
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -39,6 +41,7 @@ class ActivityNewInvestmentReq : AppCompatActivity(), InvestorAccountsAdapter.On
     private lateinit var constants: Constants
     private lateinit var sharedPrefManager : SharedPrefManager
     private lateinit var dialog : BottomSheetDialog
+    private lateinit var dialogAddA : Dialog
 
     private var investorAccount:Boolean=true
 
@@ -106,6 +109,80 @@ class ActivityNewInvestmentReq : AppCompatActivity(), InvestorAccountsAdapter.On
         }
 
     }
+
+    fun addAccountDialog(view: View){
+
+        dialogAddA = Dialog (mContext)
+        dialogAddA.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialogAddA.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialogAddA.setContentView(R.layout.dialog_add_account)
+        val tvHeaderBank = dialogAddA.findViewById<TextView>(R.id.tvHeaderBank)
+        val tvHeaderBankDisc = dialogAddA.findViewById<TextView>(R.id.tvHeaderBankDisc)
+        val spBank = dialogAddA.findViewById<Spinner>(R.id.spBank)
+        val etAccountTittle = dialogAddA.findViewById<EditText>(R.id.etAccountTittle)
+        val etAccountNumber = dialogAddA.findViewById<EditText>(R.id.etAccountNumber)
+        val btnAddAccount = dialogAddA.findViewById<Button>(R.id.btnAddAccount)
+        btnAddAccount.setOnClickListener {
+            updateInvestorBankList(
+                ModelBankAccount(
+                    "",
+                    spBank.selectedItem.toString(),
+                    etAccountTittle.text.toString(),
+                    etAccountNumber.text.toString(),
+                    sharedPrefManager.getToken()
+                )
+            )
+        }
+        dialogAddA.show()
+
+
+    }
+
+    fun updateInvestorBankList(modelBankAccount: ModelBankAccount) {
+
+        utils.startLoadingAnimation()
+        lifecycleScope.launch {
+            userViewModel.addUserAccount(modelBankAccount)
+                .observe(this@ActivityNewInvestmentReq) {
+                    dialogAddA.dismiss()
+                    if (it == true) {
+
+                        lifecycleScope.launch{
+                            userViewModel.getUserAccounts(sharedPrefManager.getToken())
+                                .addOnCompleteListener{task ->
+                                    utils.endLoadingAnimation()
+                                    if (task.isSuccessful) {
+                                        val list = ArrayList<ModelBankAccount>()
+                                        if(task.result.size()>0){
+                                            for (document in task.result) list.add( document.toObject(ModelBankAccount::class.java))
+                                            sharedPrefManager.putInvestorBankList(list)
+                                            Toast.makeText(mContext, constants.ACCOPUNT_ADDED_MESSAGE, Toast.LENGTH_SHORT).show()
+                                        }
+                                    }
+                                    else Toast.makeText(mContext, constants.SOMETHING_WENT_WRONG_MESSAGE, Toast.LENGTH_SHORT).show()
+
+                                }
+                                .addOnFailureListener{
+                                    utils.endLoadingAnimation()
+                                    Toast.makeText(mContext, it.message+"", Toast.LENGTH_SHORT).show()
+
+                                }
+
+
+                        }
+
+                    }
+                    else {
+                        utils.endLoadingAnimation()
+                        Toast.makeText(mContext, constants.SOMETHING_WENT_WRONG_MESSAGE, Toast.LENGTH_SHORT).show()
+                    }
+
+                }
+
+        }
+
+    }
+
 
     fun addInvestmentReq(transactionModel: TransactionModel){
 
@@ -192,7 +269,7 @@ class ActivityNewInvestmentReq : AppCompatActivity(), InvestorAccountsAdapter.On
             binding.tvBankName.text=modelBankAccount.bank_name
             binding.tvAccountTittle.text=modelBankAccount.account_tittle
             accountID=modelBankAccount.docID
-            Toast.makeText(mContext, accountID+"", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(mContext, accountID+"", Toast.LENGTH_SHORT).show()
         }
         else {
 
