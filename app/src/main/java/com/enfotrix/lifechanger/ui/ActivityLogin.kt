@@ -32,6 +32,7 @@ import com.enfotrix.lifechanger.databinding.ActivityLoginBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
@@ -137,6 +138,24 @@ class ActivityLogin : AppCompatActivity() {
                 if(user.status.equals(constants.INVESTOR_STATUS_ACTIVE)||user.status.equals(constants.INVESTOR_STATUS_PENDING)){
                     utils.startLoadingAnimation()
                     lifecycleScope.launch {
+
+                        FirebaseMessaging.getInstance().token
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    // Get the device token
+                                    val token = task.result
+                                    user.userdevicetoken = token
+
+                                    lifecycleScope.launch {
+                                        userViewModel.updateUser(user)
+
+                                    }
+                                }
+                            }
+
+
+
+
                         nomineeViewModel.getNominee(token)
                             .addOnSuccessListener {
                                 utils.endLoadingAnimation()
@@ -353,7 +372,7 @@ class ActivityLogin : AppCompatActivity() {
                         if(task.result.size()>0){
                             for (document in task.result) list.add( document.toObject(ModelBankAccount::class.java))
                             sharedPrefManager.putAdminBankList(list)
-                            Toast.makeText(mContext, constants.ACCOPUNT_ADDED_MESSAGE, Toast.LENGTH_SHORT).show()
+                           // Toast.makeText(mContext, constants.ACCOPUNT_ADDED_MESSAGE, Toast.LENGTH_SHORT).show()
                         }
                     }
                     else Toast.makeText(mContext, constants.SOMETHING_WENT_WRONG_MESSAGE, Toast.LENGTH_SHORT).show()
@@ -380,7 +399,7 @@ class ActivityLogin : AppCompatActivity() {
                         if(task.result.size()>0){
                             for (document in task.result) list.add( document.toObject(ModelBankAccount::class.java))
                             sharedPrefManager.putInvestorBankList(list)
-                            Toast.makeText(mContext, constants.ACCOPUNT_ADDED_MESSAGE, Toast.LENGTH_SHORT).show()
+                           // Toast.makeText(mContext, constants.ACCOPUNT_ADDED_MESSAGE, Toast.LENGTH_SHORT).show()
                         }
                     }else Toast.makeText(
                         mContext,

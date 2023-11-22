@@ -136,25 +136,22 @@ class ActivityNewInvestmentReq : AppCompatActivity(), InvestorAccountsAdapter.On
 
         val tvSelect = dialogAddA.findViewById<TextView>(R.id.tvSelect)
         val btnUploadProfile = dialogAddA.findViewById<Button>(R.id.btnUplodProfile)
-        val image = dialogAddA.findViewById<ImageView>(R.id.imgReceiptPhoto)
+     val  image = dialogAddA.findViewById<ImageView>(R.id.imgReceiptPhoto)
 
         tvSelect?.setOnClickListener {
             userReceiptPhoto = true
             val pickImage = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(pickImage, IMAGE_PICKER_REQUEST_CODE)
+            image.setImageURI(imageURI)
+
+
+            dialogAddA.dismiss()
         }
 
-        btnUploadProfile?.setOnClickListener {
-            lifecycleScope.launch {
-                if (imageURI != null) {
-                    binding.imgRecieptTransaction.setImageURI(imageURI)
-                    image.setImageURI(imageURI)
-                    dialogAddA.dismiss()
-                } else {
-                    Toast.makeText(mContext, "Please Select Image", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
+
+
+
+
 
         dialogAddA.show()
     }
@@ -292,7 +289,7 @@ class ActivityNewInvestmentReq : AppCompatActivity(), InvestorAccountsAdapter.On
         if (requestCode == IMAGE_PICKER_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
             imageURI = data.data!!
 
-
+            binding.imgRecieptTransaction.setImageURI(imageURI)
 
             //imageView.setImageURI(imageURI)
         }
