@@ -197,6 +197,12 @@ class Repo(val context: Context) {
     }
 
 
+    suspend fun uploadTransactionReceipt(imageUri: Uri, type:String, transactionId:String): UploadTask {
+        return storageRef.child(    type+"/"+transactionId).putFile(imageUri)
+    }
+
+
+
 
 
     suspend fun getProfitTax(token: String  ): Task<QuerySnapshot> {
@@ -209,11 +215,31 @@ class Repo(val context: Context) {
     }
 
 
+
     suspend fun addTransactionReq(transactionModel: TransactionModel): LiveData<Boolean> {
         val result = MutableLiveData<Boolean>()
         TransactionsReqCollection.add(transactionModel)
             .addOnSuccessListener { documents ->
-            result.value =true
+                result.value = true
+            }.addOnFailureListener {
+                result.value = false
+            }
+        return result
+    }
+
+    suspend fun addTransactionReqWithImage(transactionModel: TransactionModel, imageUri: Uri, type:String): LiveData<Boolean> {
+        val result = MutableLiveData<Boolean>()
+        TransactionsReqCollection.add(transactionModel)
+            .addOnSuccessListener { documents ->
+
+                var id=documents.id
+                storageRef.child(type).child(id).putFile(imageUri).addOnSuccessListener {
+                    result.value =true
+
+                }
+                    .addOnFailureListener {e->
+                        Toast.makeText(context, ""+e.message, Toast.LENGTH_SHORT).show()
+                    }
         }.addOnFailureListener {
             result.value = false
         }

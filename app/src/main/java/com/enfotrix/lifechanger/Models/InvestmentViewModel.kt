@@ -1,6 +1,7 @@
 package com.enfotrix.lifechanger.Models
 
 import android.app.Application
+import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.enfotrix.lifechanger.Adapters.InvestorAccountsAdapter
@@ -36,6 +37,12 @@ class InvestmentViewModel(context: Application) : AndroidViewModel(context) {
     suspend fun addTransactionReq(transactionModel: TransactionModel): LiveData<Boolean> {
         return userRepo.addTransactionReq(transactionModel)
     }
+
+    suspend fun addTransactionReqWithImage(transactionModel: TransactionModel, imageUri: Uri, type:String): LiveData<Boolean> {
+        return userRepo.addTransactionReqWithImage(transactionModel, imageUri, type)
+
+    }
+
     fun getProfitAdapter( from:String): TransactionsAdapter {
         //return ProfitTaxAdapter(from,sharedPrefManager.getProfitTaxList().filter{ it.type.equals(constants.PROFIT_TYPE) }.sortedByDescending { it.createdAt })
         return TransactionsAdapter(from,sharedPrefManager.getProfitList().filter{ it.status.equals(constants.TRANSACTION_STATUS_APPROVED) }.sortedByDescending { it.createdAt })

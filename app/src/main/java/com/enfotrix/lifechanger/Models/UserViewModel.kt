@@ -13,6 +13,7 @@ import com.enfotrix.lifechanger.ui.ActivityLogin
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.Transaction
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 
@@ -89,9 +90,10 @@ class UserViewModel(context: Application) : AndroidViewModel(context) {
     suspend fun uploadPhoto(imageUri: Uri, type:String): UploadTask {
         return userRepo.uploadPhoto(imageUri,type)
     }
-    suspend fun uploadPhotoRefrence(imageUri:Uri,type:String): StorageReference {
-        return userRepo.uploadPhotoRefrence(imageUri,type)
+    suspend fun uploadTransactionReceipt(imageUri: Uri, type:String, transaction: String): UploadTask {
+        return userRepo.uploadTransactionReceipt(imageUri,type,transaction)
     }
+
 
     fun getInvestorAccountsAdapter(fromActivity:String, listener: InvestorAccountsAdapter.OnItemClickListener ): InvestorAccountsAdapter {
         return InvestorAccountsAdapter(fromActivity,sharedPrefManager.getInvestorBankList(), listener)

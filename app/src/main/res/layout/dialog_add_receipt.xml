@@ -33,7 +33,7 @@
                 android:id="@+id/tvHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Investor Profile Photo !"
+                android:text="Investment receipt !"
                 android:textColor="@color/black_m"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="20dp"
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/SecondaryVariant"
                 android:layout_marginHorizontal="20dp"
-                android:text="Upload your profile photo for better identification"/>
+                android:text="Upload your investment receipt here"/>
 
 
 
@@ -58,7 +58,7 @@
                 app:cardCornerRadius="12dp">
 
                 <ImageView
-                    android:id="@+id/imgReceiptPhoto"
+                    android:id="@+id/imgProfilePhoto"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
@@ -93,7 +93,7 @@
                 android:backgroundTint="@color/primary"
                 android:drawableRight="@drawable/baseline_keyboard_arrow_right_24"
                 android:drawableTint="@color/white"
-                android:text="Next" />
+                android:text="Upload" />
 
 
         </LinearLayout>

@@ -1,14 +1,18 @@
 package com.enfotrix.lifechanger.ui
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import android.view.Window
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
@@ -50,6 +54,14 @@ class ActivityNewInvestmentReq : AppCompatActivity(), InvestorAccountsAdapter.On
     private var accountID:String=""
     private var adminAccountID:String=""
 
+    private var imageURI: Uri? = null
+    private val IMAGE_PICKER_REQUEST_CODE = 200
+    private var userReceiptPhoto: Boolean = false
+
+
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +81,8 @@ class ActivityNewInvestmentReq : AppCompatActivity(), InvestorAccountsAdapter.On
 
         binding.layInvestorAccountSelect.setOnClickListener { getAccounts(constants.VALUE_DIALOG_FLOW_INVESTOR) }
         binding.layAdminAccountSelect.setOnClickListener { getAccounts(constants.VALUE_DIALOG_FLOW_ADMIN) }
+
+        binding.cvReceipt.setOnClickListener { showReceiptDialog() }
 
 
         binding.layBalance.setOnClickListener { showAddBalanceDialog() }
@@ -90,6 +104,7 @@ class ActivityNewInvestmentReq : AppCompatActivity(), InvestorAccountsAdapter.On
                 Toast.makeText(mContext, "Please Enter valid balance for investment", Toast.LENGTH_SHORT).show()
 
             }
+            else if (userReceiptPhoto!=true || imageURI == null) Toast.makeText(mContext, "Please select the transaction image", Toast.LENGTH_SHORT).show()
 
             else {
 
@@ -108,7 +123,42 @@ class ActivityNewInvestmentReq : AppCompatActivity(), InvestorAccountsAdapter.On
 
         }
 
+
     }
+
+    fun showReceiptDialog() {
+        userReceiptPhoto = false
+
+        dialogAddA = Dialog(mContext)
+        dialogAddA.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialogAddA.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialogAddA.setContentView(R.layout.dialog_profile_photo_upload)
+
+        val tvSelect = dialogAddA.findViewById<TextView>(R.id.tvSelect)
+        val btnUploadProfile = dialogAddA.findViewById<Button>(R.id.btnUplodProfile)
+        val image = dialogAddA.findViewById<ImageView>(R.id.imgReceiptPhoto)
+
+        tvSelect?.setOnClickListener {
+            userReceiptPhoto = true
+            val pickImage = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            startActivityForResult(pickImage, IMAGE_PICKER_REQUEST_CODE)
+        }
+
+        btnUploadProfile?.setOnClickListener {
+            lifecycleScope.launch {
+                if (imageURI != null) {
+                    binding.imgRecieptTransaction.setImageURI(imageURI)
+                    image.setImageURI(imageURI)
+                    dialogAddA.dismiss()
+                } else {
+                    Toast.makeText(mContext, "Please Select Image", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        dialogAddA.show()
+    }
+
 
     fun addAccountDialog(view: View){
 
@@ -183,20 +233,15 @@ class ActivityNewInvestmentReq : AppCompatActivity(), InvestorAccountsAdapter.On
 
     }
 
-
-    fun addInvestmentReq(transactionModel: TransactionModel){
-
-
-
-
+    fun addInvestmentReq(transactionModel: TransactionModel) {
         utils.startLoadingAnimation()
         lifecycleScope.launch {
-            investmentViewModel.addTransactionReq(transactionModel).observe(this@ActivityNewInvestmentReq){
+            investmentViewModel.addTransactionReqWithImage(transactionModel,imageURI!!,"userTransactionReceipt").observe(this@ActivityNewInvestmentReq){
                 utils.endLoadingAnimation()
 
                 if (it == true){
                     //dialog.dismiss()
-                    Toast.makeText(mContext, "Request Submited Successfully!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(mContext, "Request Submitted Successfully!", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(mContext,MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
                     finish()
                 }
@@ -208,6 +253,7 @@ class ActivityNewInvestmentReq : AppCompatActivity(), InvestorAccountsAdapter.On
             }
         }
     }
+
 
 
     fun showAddBalanceDialog() {
@@ -239,6 +285,17 @@ class ActivityNewInvestmentReq : AppCompatActivity(), InvestorAccountsAdapter.On
         }
 
         dialog.show()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == IMAGE_PICKER_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
+            imageURI = data.data!!
+
+
+
+            //imageView.setImageURI(imageURI)
+        }
     }
 
     fun getAccounts(from: String) {
@@ -277,7 +334,6 @@ class ActivityNewInvestmentReq : AppCompatActivity(), InvestorAccountsAdapter.On
             binding.tvAdminBankName.text=modelBankAccount.bank_name
             binding.tvAdminAccountTittle.text=modelBankAccount.account_tittle
             adminAccountID=modelBankAccount.docID
-
         }
 
     }
