@@ -132,11 +132,10 @@ class ActivityNewInvestmentReq : AppCompatActivity(), InvestorAccountsAdapter.On
         dialogAddA = Dialog(mContext)
         dialogAddA.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialogAddA.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialogAddA.setContentView(R.layout.dialog_profile_photo_upload)
+        dialogAddA.setContentView(R.layout.receiptdialog)
 
         val tvSelect = dialogAddA.findViewById<TextView>(R.id.tvSelect)
-        val btnUploadProfile = dialogAddA.findViewById<Button>(R.id.btnUplodProfile)
-     val  image = dialogAddA.findViewById<ImageView>(R.id.imgReceiptPhoto)
+     val  image = dialogAddA.findViewById<ImageView>(R.id.imgProfilePhoto)
 
         tvSelect?.setOnClickListener {
             userReceiptPhoto = true
@@ -170,15 +169,25 @@ class ActivityNewInvestmentReq : AppCompatActivity(), InvestorAccountsAdapter.On
         val etAccountNumber = dialogAddA.findViewById<EditText>(R.id.etAccountNumber)
         val btnAddAccount = dialogAddA.findViewById<Button>(R.id.btnAddAccount)
         btnAddAccount.setOnClickListener {
-            updateInvestorBankList(
-                ModelBankAccount(
-                    "",
-                    spBank.selectedItem.toString(),
-                    etAccountTittle.text.toString(),
-                    etAccountNumber.text.toString(),
-                    sharedPrefManager.getToken()
+            
+            
+            
+            if(etAccountTittle.text.isNotEmpty()||etAccountNumber.text.isNotEmpty()) {
+
+
+                updateInvestorBankList(
+                    ModelBankAccount(
+                        "",
+                        spBank.selectedItem.toString(),
+                        etAccountTittle.text.toString(),
+                        etAccountNumber.text.toString(),
+                        sharedPrefManager.getToken()
+                    )
                 )
-            )
+            }
+            else
+                Toast.makeText(mContext, "Please ,enter All fields!!", Toast.LENGTH_SHORT).show()
+            
         }
         dialogAddA.show()
 

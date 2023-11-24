@@ -84,7 +84,9 @@ class ActivityLogin : AppCompatActivity() {
 
         })
         binding.tvForgotPassword.setOnClickListener{
-             showForgetPasswordDialog()
+
+            Toast.makeText(mContext, "Sorry! Underworking..Available Soon!!", Toast.LENGTH_SHORT).show()
+            // showForgetPasswordDialog()
         }
 
 
@@ -147,7 +149,7 @@ class ActivityLogin : AppCompatActivity() {
                                     user.userdevicetoken = token
 
                                     lifecycleScope.launch {
-                                        userViewModel.updateUser(user)
+                                      //  userViewModel.updateUser(user)
 
                                     }
                                 }

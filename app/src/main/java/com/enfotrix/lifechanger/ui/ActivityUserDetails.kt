@@ -334,12 +334,15 @@ class ActivityUserDetails : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.top_logout -> {
-                Toast.makeText(applicationContext, "click on setting", Toast.LENGTH_LONG).show()
+/*
+                sharedPrefManager.clearWholeSharedPref()
+                startActivity(Intent(mContext,ActivityLogin::class.java))*/
+              Toast.makeText(applicationContext, "Available soon!!", Toast.LENGTH_LONG).show()
                 true
             }
 
             R.id.top_contactUs -> {
-                Toast.makeText(applicationContext, "click on share", Toast.LENGTH_LONG).show()
+               Toast.makeText(applicationContext, "click on share", Toast.LENGTH_LONG).show()
                 return true
             }
 
@@ -464,13 +467,7 @@ class ActivityUserDetails : AppCompatActivity() {
             if (type.equals(constants.VALUE_DIALOG_FLOW_NOMINEE_CNIC)) {
 
                 if (NomineeCnicFrontURI != null && NomineeCnicBackURI != null) {
-                    Toast.makeText(
-                        mContext,
-                        NomineeCnicFrontURI.toString() + "",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    Toast.makeText(mContext, NomineeCnicBackURI.toString() + "", Toast.LENGTH_SHORT)
-                        .show()
+
                     lifecycleScope.launch {
                         addUserCNIC(NomineeCnicFrontURI!!, NomineeCnicBackURI!!, type)
                     }
@@ -511,13 +508,20 @@ class ActivityUserDetails : AppCompatActivity() {
         }
 
         btnAddAccount.setOnClickListener {
+if(etAccountTittle.text.isNotEmpty() || etAccountNumber.text.isNotEmpty()  ) {
 
-            addUserBankAccount(
-                type,
-                spBank.selectedItem.toString(),
-                etAccountTittle.text.toString(),
-                etAccountNumber.text.toString()
-            )
+
+    addUserBankAccount(
+        type,
+        spBank.selectedItem.toString(),
+        etAccountTittle.text.toString(),
+        etAccountNumber.text.toString()
+    )
+}
+            else
+{
+    Toast.makeText(mContext, "Please enter all fields", Toast.LENGTH_SHORT).show()
+}
         }
 
         dialog.show()
@@ -539,7 +543,7 @@ class ActivityUserDetails : AppCompatActivity() {
 
         imgProfilePhoto = dialog.findViewById<ImageView>(R.id.imgProfilePhoto)
         val tvSelect = dialog.findViewById<TextView>(R.id.tvSelect)
-        val btnUplodProfile = dialog.findViewById<Button>(R.id.btnUplodProfile)
+        val btnUplodProfile = dialog.findViewById<Button>(R.id.btnUpload)
 
         tvSelect.setOnClickListener {
             UserProfilePhoto = true
@@ -841,11 +845,7 @@ class ActivityUserDetails : AppCompatActivity() {
                                 )
                             )
                             sharedPrefManager.putAdminBankList(list)
-                            Toast.makeText(
-                                mContext,
-                                constants.ACCOPUNT_ADDED_MESSAGE,
-                                Toast.LENGTH_SHORT
-                            ).show()
+
                         }
                     } else Toast.makeText(
                         mContext,

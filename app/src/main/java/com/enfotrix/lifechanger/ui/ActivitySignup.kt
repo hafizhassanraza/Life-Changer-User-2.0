@@ -23,6 +23,7 @@ import androidx.lifecycle.ViewModel
 import com.enfotrix.lifechanger.Constants
 import com.enfotrix.lifechanger.Models.UserViewModel
 import com.enfotrix.lifechanger.R
+import com.enfotrix.lifechanger.SharedPrefManager
 import com.enfotrix.lifechanger.Utils
 import com.enfotrix.lifechanger.databinding.ActivitySignupBinding
 import com.google.firebase.Timestamp
@@ -42,6 +43,7 @@ class ActivitySignup : AppCompatActivity() {
     private lateinit var mContext: Context
     private lateinit var constants: Constants
     private lateinit var binding : ActivitySignupBinding
+    private lateinit var sharedPrefManager: SharedPrefManager
     private lateinit var repo: Repo
     private lateinit var user: User
 
@@ -54,7 +56,7 @@ class ActivitySignup : AppCompatActivity() {
         repo= Repo(mContext)
         utils = Utils(mContext)
         constants= Constants()
-
+sharedPrefManager=SharedPrefManager(mContext)
         binding.imgBack.setOnClickListener{
             startActivity(Intent(mContext,ActivityLogin::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
             finish()
@@ -159,6 +161,8 @@ class ActivitySignup : AppCompatActivity() {
             userViewModel.addUser(user).observe(this@ActivitySignup) {
                 utils.endLoadingAnimation()
                 if (it == true) {
+
+                    sharedPrefManager.putToken(user.id)
                     Toast.makeText(mContext, constants.INVESTOR_SIGNUP_MESSAGE, Toast.LENGTH_SHORT).show()
 
 

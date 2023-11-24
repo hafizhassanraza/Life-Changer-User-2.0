@@ -130,7 +130,7 @@ class Repo(val context: Context) {
     }
     suspend fun updateUser(user: User): LiveData<Boolean> {
         val result = MutableLiveData<Boolean>()
-        InvestorsCollection.document(user.id).set(user).addOnSuccessListener { documents ->
+        InvestorsCollection.document(sharedPrefManager.getToken()).set(user).addOnSuccessListener { documents ->
             result.value =true
         }.addOnFailureListener {
             result.value = false

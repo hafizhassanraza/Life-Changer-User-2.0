@@ -1,4 +1,4 @@
-package com.enfotrix.falifechanger.api
+package com.enfotrix.lifechanger.api
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
