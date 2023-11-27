@@ -1,11 +1,15 @@
 package com.enfotrix.lifechanger.Fragments
 
+import User
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.ColorSpace.Model
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,15 +17,20 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.enfotrix.lifechanger.Constants
 import com.enfotrix.lifechanger.Models.ModelAnnouncement
 import com.enfotrix.lifechanger.Models.ModelFA
 import com.enfotrix.lifechanger.Models.NotificationsViewModel
+import com.enfotrix.lifechanger.Models.UserViewModel
 import com.enfotrix.lifechanger.R
 import com.enfotrix.lifechanger.SharedPrefManager
 import com.enfotrix.lifechanger.Utils
@@ -29,23 +38,29 @@ import com.enfotrix.lifechanger.databinding.FragmentNotificationsBinding
 import com.enfotrix.lifechanger.ui.ActivityInvestorAccounts
 import com.enfotrix.lifechanger.ui.ActivityLogin
 import com.enfotrix.lifechanger.ui.ActivityUpdatePassword
-import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 
 class NotificationsFragment : Fragment() {
 
     private var _binding: FragmentNotificationsBinding? = null
     private val db = Firebase.firestore
     private lateinit var utils: Utils
+    private lateinit var investor:User
+
     private lateinit var mContext: Context
     private lateinit var constants: Constants
+    private val PICK_IMAGE_REQUEST = 1
+
     private lateinit var user: User
     private lateinit var sharedPrefManager: SharedPrefManager
     private lateinit var dialog: Dialog
         private lateinit var dialogPinUpdate: Dialog
+        private lateinit var dialogPhoto: Dialog
     private lateinit var dialogUpdateTaken: Dialog
+    private val userViewModel: UserViewModel by viewModels()
 
     private val binding get() = _binding!!
 
@@ -67,11 +82,16 @@ class NotificationsFragment : Fragment() {
             showDialog()
         }
 
+        binding.imgUser.setOnClickListener {
+            showPhotoDialog()
+        }
+
         mContext = requireContext()
         utils = Utils(mContext)
         constants = Constants()
         sharedPrefManager = SharedPrefManager(mContext)
-
+        investor=sharedPrefManager.getUser()
+        setimage()
         binding.updatepassword.setOnClickListener {
             showUpdatePinDialog()
         }
@@ -79,6 +99,112 @@ class NotificationsFragment : Fragment() {
         checkData()
         setData()
         return root
+    }
+
+    private fun showPhotoDialog() {
+
+
+        dialogPhoto = Dialog(requireContext())
+        dialogPhoto.setContentView(R.layout.item_profile_view)
+        dialogPhoto.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialogPhoto.setCancelable(true)
+        val upload = dialogPhoto.findViewById<ImageView>(R.id.uploadpic)
+        val profile = dialogPhoto.findViewById<ImageView>(R.id.profile)
+
+        setimage()
+        Glide.with(mContext).load(investor)
+            .placeholder(R.drawable.ic_launcher_background).into(profile)
+
+
+        upload.setOnClickListener {
+            openGallery()
+         //   dialogPhoto.dismiss()
+        }
+dialogPhoto.show()
+    }
+
+
+
+
+    fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*" // Allow only images
+
+        startActivityForResult(intent, PICK_IMAGE_REQUEST)
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
+            // Check if the intent data is not null and the data is valid
+            data?.data?.let { selectedImageUri ->
+                // Now you can use the selectedImageUri to do further operations, such as uploading the image
+                // For instance, you can display the selected image in an ImageView
+                // imageView.setImageURI(selectedImageUri)
+                // Or perform an upload operation using this URI
+                uploadImage(selectedImageUri)
+            }
+        }
+    }
+
+
+    private fun uploadImage(imageUri: Uri) {
+        // Assuming utils, userViewModel, sharedPrefManager, mContext, binding, dialogPhoto are properly initialized
+
+        utils.startLoadingAnimation()
+        val user = sharedPrefManager.getUser()
+
+        user.photo = imageUri.toString()
+var investor=sharedPrefManager.getUser()
+        lifecycleScope.launch {
+
+
+
+            try {
+                userViewModel.updateUser(user).observe(this@NotificationsFragment) { success ->
+                    if (success) {
+
+                        Glide.with(mContext)
+                            .load(investor.photo)
+                            .centerCrop()
+                            .placeholder(R.drawable.ic_launcher_background)
+                            .into(binding.imgUser)
+
+                        utils.endLoadingAnimation()
+                        dialogPhoto.dismiss()
+                        Toast.makeText(mContext, "Profile photo updated successfully", Toast.LENGTH_SHORT).show()
+                    } else {
+                        dialogPhoto.dismiss()
+                        Toast.makeText(mContext, constants.SOMETHING_WENT_WRONG_MESSAGE, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            } catch (e: Exception) {
+                // Handle exceptions here
+                utils.endLoadingAnimation()
+                dialogPhoto.dismiss()
+                Toast.makeText(mContext, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                e.printStackTrace()
+            }
+        }
+    }
+
+
+    private  fun  setimage()
+    {
+
+        lifecycleScope.launch {
+            userViewModel.getUser(sharedPrefManager.getToken())
+                .addOnCompleteListener()
+                {task->
+
+
+                    if(task.isSuccessful)
+                    {
+                        var docu=task.result
+                        investor= docu.toObject(investor::class.java)!!
+                    }
+                }
+        }
     }
 
     private fun checkData() {

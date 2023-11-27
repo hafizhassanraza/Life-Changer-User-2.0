@@ -687,6 +687,7 @@ if(etAccountTittle.text.isNotEmpty() || etAccountNumber.text.isNotEmpty()  ) {
                             utils.endLoadingAnimation()
                             if (it == true) {
                                 sharedPrefManager.saveUser(user)
+                                sharedPrefManager.putProfile(imageUri.toString())
                                 sharedPrefManager.putUserPhoto(true)
                                 Toast.makeText(
                                     mContext,

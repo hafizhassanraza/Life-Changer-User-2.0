@@ -264,11 +264,18 @@ class SharedPrefManager(context: Context) {
         editor.putBoolean("IsUserBankAdded",IsUserBankAdded)
         editor.commit()
     }
-
+    fun putProfile(photo: String) {
+        editor.putString("investorphoto",photo)
+        editor.commit()
+    }
+    fun getProfile(): String {
+        return sharedPref.getString("investorphoto", "")!!
+    }
     fun putUserPhoto(IsUserBankAdded: Boolean) {
         editor.putBoolean("IsUserPhotoAdded",IsUserBankAdded)
         editor.commit()
     }
+
     fun putUserCnic(IsUserCnicAdded: Boolean) {
         editor.putBoolean("IsUserCnicAdded",IsUserCnicAdded)
         editor.commit()
