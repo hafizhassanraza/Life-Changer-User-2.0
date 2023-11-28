@@ -1,4 +1,5 @@
-package com.enfotrix.falifechanger.api
+package com.enfotrix.lifechanger.api
+
 
 import com.enfotrix.lifechanger.api.ApiInterface
 import retrofit2.Retrofit

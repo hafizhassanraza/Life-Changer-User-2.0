@@ -2,6 +2,7 @@ package com.enfotrix.lifechanger.Fragments
 
 import User
 import android.app.Dialog
+import android.app.Notification
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -26,10 +27,13 @@ import com.enfotrix.lifechanger.Models.HomeViewModel
 import com.enfotrix.lifechanger.Models.InvestmentModel
 import com.enfotrix.lifechanger.Models.ModelBankAccount
 import com.enfotrix.lifechanger.Models.ModelProfitTax
+import com.enfotrix.lifechanger.Models.Notificaion
+import com.enfotrix.lifechanger.Models.NotificationData
 import com.enfotrix.lifechanger.Models.UserViewModel
 import com.enfotrix.lifechanger.R
 import com.enfotrix.lifechanger.SharedPrefManager
 import com.enfotrix.lifechanger.Utils
+import com.enfotrix.lifechanger.api.ApiUtilities
 import com.enfotrix.lifechanger.ui.ActivityInvestment
 import com.enfotrix.lifechanger.ui.ActivityNewInvestmentReq
 import com.enfotrix.lifechanger.ui.ActivityNewWithdrawReq
@@ -40,7 +44,11 @@ import com.google.firebase.Timestamp
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class HomeFragment : Fragment() {
 
@@ -80,8 +88,34 @@ class HomeFragment : Fragment() {
 
         binding.btnInvest.setOnClickListener{
             if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
-            else startActivity(Intent(mContext, ActivityNewInvestmentReq::class.java))
+            else {/*
+                            val notification = Notificaion(user.userdevicetoken, NotificationData("Withdraw Request", "Body work title"))
+                            ApiUtilities.api.sendNotification(notification).enqueue(object :
+                                Callback<Notification> {
+                                override fun onResponse(call: Call<Notification>, response: Response<Notification>) {
+                                    if (response.isSuccessful) {
+                                        // Handle successful response here
+                                        // For example, log success message or perform actions on success
+                                        Toast.makeText(mContext, "Notification sent successfully!", Toast.LENGTH_SHORT).show()
+                                    } else {
+                                        // Handle unsuccessful response here
+                                        // For example, log failure message or handle errors
+                                        Toast.makeText(mContext, "Failed to send notification. Error: ${response.message()}", Toast.LENGTH_SHORT).show()
+                                    }
+                                }
 
+                                override fun onFailure(call: Call<Notification>, t: Throwable) {
+                                    // Handle failure (exception) here
+                                    // For example, log the exception or perform actions on failure
+                                    Toast.makeText(mContext, "Failed to send notification. Exception: ${t.message}", Toast.LENGTH_SHORT).show()
+                                }
+                            })
+
+                    }*/
+
+                startActivity(Intent(mContext, ActivityNewInvestmentReq::class.java))
+
+            }
         }
 
         binding.btnWithdraw.setOnClickListener{

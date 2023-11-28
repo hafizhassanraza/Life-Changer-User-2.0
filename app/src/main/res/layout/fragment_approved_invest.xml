@@ -55,9 +55,9 @@
                             android:layout_centerInParent="true"
                             android:layout_marginHorizontal="6dp"
                             android:gravity="center"
-                            android:text="Request Date"
+                            android:text="Deposit Request"
                             android:textColor="@color/SecondaryVariant"
-                            android:textSize="15sp"
+                            android:textSize="10sp"
                             android:textStyle="bold" />
                         <View
                             android:layout_width="1dp"
@@ -93,7 +93,7 @@
                             android:gravity="center"
                             android:text="OLD Balance"
                             android:textColor="@color/SecondaryVariant"
-                            android:textSize="15sp"
+                            android:textSize="10sp"
                             android:textStyle="bold" />
                         <View
                             android:layout_width="1dp"
@@ -119,10 +119,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="Request Balance"
                         android:gravity="center"
+                        android:text="Deposit Balance"
                         android:textColor="@color/SecondaryVariant"
-                        android:textSize="15sp"
+                        android:textSize="10sp"
                         android:textStyle="bold" />
 
 
@@ -152,13 +152,12 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:gravity="center"
-                            android:text="Clear
-                            Date"
                             android:layout_centerInParent="true"
+                            android:gravity="center"
+                            android:text="Approval
+                            Date"
                             android:textColor="@color/SecondaryVariant"
-                            android:textSize="15sp"
+                            android:textSize="10sp"
                             android:textStyle="bold" />
                         <View
                             android:layout_width="1dp"
@@ -186,7 +185,7 @@
                         android:gravity="center"
                         android:text="New Balance"
                         android:textColor="@color/SecondaryVariant"
-                        android:textSize="15sp"
+                        android:textSize="10sp"
                         android:textStyle="bold" />
 
 

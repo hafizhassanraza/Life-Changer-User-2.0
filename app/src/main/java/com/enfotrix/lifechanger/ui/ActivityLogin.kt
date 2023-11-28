@@ -139,21 +139,26 @@ class ActivityLogin : AppCompatActivity() {
             if(user.pin.equals(pin)){
                 if(user.status.equals(constants.INVESTOR_STATUS_ACTIVE)||user.status.equals(constants.INVESTOR_STATUS_PENDING)){
                     utils.startLoadingAnimation()
-                    lifecycleScope.launch {
+                    FirebaseMessaging.getInstance().token
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
 
-                        FirebaseMessaging.getInstance().token
-                            .addOnCompleteListener { task ->
-                                if (task.isSuccessful) {
-                                    // Get the device token
-                                    val token = task.result
-                                    user.userdevicetoken = token
+                                // Get the device token
+                                val token = task.result
 
-                                    lifecycleScope.launch {
-                                      //  userViewModel.updateUser(user)
+                                lifecycleScope.launch {
+                                    userViewModel.updatedevicetoken(user.id,token)
 
-                                    }
                                 }
                             }
+                            else
+                            {
+                                Toast.makeText(mContext, "Something went Wrong!!!", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    lifecycleScope.launch {
+
+
 
 
 
@@ -197,9 +202,35 @@ class ActivityLogin : AppCompatActivity() {
 
                 }
                 else{
-                    if(user!=null)userViewModel.saveLoginAuth(user, token, true)//usre +token+login_boolean
-                    startActivity(Intent(mContext,ActivityUserDetails::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
-                    finish()
+
+
+
+                    if(user!=null)
+                    {
+
+                        FirebaseMessaging.getInstance().token
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+
+                                    // Get the device token
+                                    val token = task.result
+
+                                    lifecycleScope.launch {
+                                        userViewModel.updatedevicetoken(user.id,token)
+
+                                    }
+                                }
+                                else
+                                {
+                                    Toast.makeText(mContext, "Something went Wrong!!!", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        userViewModel.saveLoginAuth(user, token, true)//usre +token+login_boolean
+                        startActivity(Intent(mContext,ActivityUserDetails::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
+                        finish()
+                    }
+
+
                 }
 
 

@@ -54,7 +54,7 @@
                             android:layout_centerInParent="true"
                             android:layout_marginHorizontal="6dp"
                             android:gravity="center"
-                            android:text="Request Date"
+                            android:text="Profit Date"
                             android:textColor="@color/secondary_m"
                             android:textSize="15sp"
                             android:textStyle="bold" />
@@ -115,7 +115,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:gravity="center"
-                        android:text="Profit*"
+                        android:text="New Profit"
                         android:textColor="@color/secondary_m"
                         android:textSize="15sp"
                         android:textStyle="bold" />
@@ -146,10 +146,9 @@
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
                             android:gravity="center"
-                            android:text="Clear
-                            Date"
+                            android:text="New Profit Date"
                             android:textColor="@color/secondary_m"
-                            android:textSize="15sp"
+                            android:textSize="13sp"
                             android:textStyle="bold" />
 
                         <View
@@ -176,7 +175,7 @@
                         android:layout_centerInParent="true"
                         android:layout_marginHorizontal="4dp"
                         android:gravity="center"
-                        android:text="New Profit "
+                        android:text="Total Profit "
                         android:textColor="@color/secondary_m"
                         android:textSize="15sp"
                         android:textStyle="bold" />

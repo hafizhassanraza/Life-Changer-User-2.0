@@ -74,6 +74,8 @@ class UserViewModel(context: Application) : AndroidViewModel(context) {
     }
     suspend fun addUserAccount(bankAccount: ModelBankAccount): LiveData<Boolean> {
         return userRepo.registerBankAccount(bankAccount)
+    }    suspend fun updatedevicetoken(docId:String,token:String): LiveData<Boolean> {
+        return userRepo.updateDeviceToken(docId,token)
     }
     suspend fun getUserAccounts(token: String): Task<QuerySnapshot> {
         return userRepo.userAccounts(token)

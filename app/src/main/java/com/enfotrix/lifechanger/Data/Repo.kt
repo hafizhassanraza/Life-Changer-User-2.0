@@ -13,6 +13,7 @@ import com.enfotrix.lifechanger.Models.InvestmentModel
 import com.enfotrix.lifechanger.Models.ModelBankAccount
 import com.enfotrix.lifechanger.Models.ModelNominee
 import com.enfotrix.lifechanger.Models.TransactionModel
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.FirebaseApp
 import com.google.firebase.firestore.DocumentReference
@@ -120,17 +121,59 @@ class Repo(val context: Context) {
 
     suspend fun registerUser(user: User): LiveData<Boolean> {
         val result = MutableLiveData<Boolean>()
-        user.status=constants.INVESTOR_STATUS_INCOMPLETE
-        InvestorsCollection.add(user).addOnSuccessListener { documents ->
-            result.value =true
-        }.addOnFailureListener {
-            result.value = false
-        }
+        user.status = constants.INVESTOR_STATUS_INCOMPLETE
+
+        InvestorsCollection.add(user)
+            .addOnSuccessListener { documentReference ->
+                val documentId = documentReference.id
+
+                // Update the user in Firestore with the document ID
+                val userWithId = user.copy(id = documentId)
+                InvestorsCollection.document(documentId)
+                    .set(userWithId)
+                    .addOnSuccessListener {
+                        result.value = true
+                    }
+                    .addOnFailureListener {
+                        result.value = false
+                    }
+            }
+            .addOnFailureListener {
+                result.value = false
+            }
+
         return result
     }
+
+
+
+
+
+
+    suspend fun updateDeviceToken(documentId: String, newDeviceToken: String): LiveData<Boolean> {
+        val result = MutableLiveData<Boolean>()
+
+        // Update the user's deviceToken in Firestore
+        InvestorsCollection.document(documentId)
+            .update("userdevicetoken", newDeviceToken)
+            .addOnSuccessListener {
+                result.value = true
+            }
+            .addOnFailureListener {
+                result.value = false
+            }
+
+        return result
+    }
+
+
+
+
+
+
     suspend fun updateUser(user: User): LiveData<Boolean> {
         val result = MutableLiveData<Boolean>()
-        InvestorsCollection.document(sharedPrefManager.getToken()).set(user).addOnSuccessListener { documents ->
+        InvestorsCollection.document(user.id).set(user).addOnSuccessListener { documents ->
             result.value =true
         }.addOnFailureListener {
             result.value = false
