@@ -89,6 +89,7 @@ class HomeFragment : Fragment() {
         binding.btnInvest.setOnClickListener{
             if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
             else {/*
+            //handle the code for notification
                             val notification = Notificaion(user.userdevicetoken, NotificationData("Withdraw Request", "Body work title"))
                             ApiUtilities.api.sendNotification(notification).enqueue(object :
                                 Callback<Notification> {
