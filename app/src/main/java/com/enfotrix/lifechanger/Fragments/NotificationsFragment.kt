@@ -42,6 +42,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 class NotificationsFragment : Fragment() {
 
@@ -83,7 +84,8 @@ class NotificationsFragment : Fragment() {
         }
 
         binding.imgUser.setOnClickListener {
-            showPhotoDialog()
+            Toast.makeText(mContext, "Available soon", Toast.LENGTH_SHORT).show()
+           // showPhotoDialog()
         }
 
         mContext = requireContext()
@@ -142,51 +144,96 @@ dialogPhoto.show()
                 // For instance, you can display the selected image in an ImageView
                 // imageView.setImageURI(selectedImageUri)
                 // Or perform an upload operation using this URI
-                uploadImage(selectedImageUri)
+                lifecycleScope.launch {
+                    uploadImage(selectedImageUri,"InvestorProfilePhoto")
+
+                }
             }
         }
     }
-
-
-    private fun uploadImage(imageUri: Uri) {
-        // Assuming utils, userViewModel, sharedPrefManager, mContext, binding, dialogPhoto are properly initialized
-
+    suspend fun uploadImage(imageUri: Uri, type: String) {
         utils.startLoadingAnimation()
-        val user = sharedPrefManager.getUser()
 
-        user.photo = imageUri.toString()
-var investor=sharedPrefManager.getUser()
-        lifecycleScope.launch {
+        try {
+            val taskSnapshot = userViewModel.uploadPhoto(imageUri, type).await()
 
+            taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
+                val modelFa: User = sharedPrefManager.getUser()
+                modelFa.photo = uri.toString()
 
+                lifecycleScope.launch {
+                    val updateResult = userViewModel.updateUser(modelFa)
 
-            try {
-                userViewModel.updateUser(user).observe(this@NotificationsFragment) { success ->
-                    if (success) {
-
-                        Glide.with(mContext)
-                            .load(investor.photo)
-                            .centerCrop()
-                            .placeholder(R.drawable.ic_launcher_background)
-                            .into(binding.imgUser)
-
+                    updateResult.observe(this@NotificationsFragment) { success ->
                         utils.endLoadingAnimation()
-                        dialogPhoto.dismiss()
-                        Toast.makeText(mContext, "Profile photo updated successfully", Toast.LENGTH_SHORT).show()
-                    } else {
-                        dialogPhoto.dismiss()
-                        Toast.makeText(mContext, constants.SOMETHING_WENT_WRONG_MESSAGE, Toast.LENGTH_SHORT).show()
+
+                        if (success) {
+                            sharedPrefManager.saveUser(modelFa)
+                            Toast.makeText(
+                                mContext,
+                                "Profile Photo Updated",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            dialogPhoto.dismiss()
+                        } else {
+                            Toast.makeText(
+                                mContext,
+                                constants.SOMETHING_WENT_WRONG_MESSAGE,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            dialogPhoto.dismiss()
+                        }
                     }
                 }
-            } catch (e: Exception) {
-                // Handle exceptions here
-                utils.endLoadingAnimation()
-                dialogPhoto.dismiss()
-                Toast.makeText(mContext, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
-                e.printStackTrace()
+            }.addOnFailureListener { exception ->
+                Toast.makeText(mContext, exception.message + "", Toast.LENGTH_SHORT).show()
             }
+        } catch (e: Exception) {
+            utils.endLoadingAnimation()
+            Toast.makeText(mContext, "Failed to upload profile pic", Toast.LENGTH_SHORT).show()
         }
     }
+
+
+//    private fun uploadImage(imageUri: Uri) {
+//        // Assuming utils, userViewModel, sharedPrefManager, mContext, binding, dialogPhoto are properly initialized
+//
+//        utils.startLoadingAnimation()
+//        val user = sharedPrefManager.getUser()
+//
+//        user.photo = imageUri.toString()
+//var investor=sharedPrefManager.getUser()
+//        lifecycleScope.launch {
+//
+//
+//
+//            try {
+//                userViewModel.updateUser(user).observe(this@NotificationsFragment) { success ->
+//                    if (success) {
+//
+//                        Glide.with(mContext)
+//                            .load(investor.photo)
+//                            .centerCrop()
+//                            .placeholder(R.drawable.ic_launcher_background)
+//                            .into(binding.imgUser)
+//
+//                        utils.endLoadingAnimation()
+//                        dialogPhoto.dismiss()
+//                        Toast.makeText(mContext, "Profile photo updated successfully", Toast.LENGTH_SHORT).show()
+//                    } else {
+//                        dialogPhoto.dismiss()
+//                        Toast.makeText(mContext, constants.SOMETHING_WENT_WRONG_MESSAGE, Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//            } catch (e: Exception) {
+//                // Handle exceptions here
+//                utils.endLoadingAnimation()
+//                dialogPhoto.dismiss()
+//                Toast.makeText(mContext, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+//                e.printStackTrace()
+//            }
+//        }
+//    }
 
 
     private  fun  setimage()
