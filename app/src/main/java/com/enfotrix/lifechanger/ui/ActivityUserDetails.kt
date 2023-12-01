@@ -1,6 +1,5 @@
 package com.enfotrix.lifechanger.ui
 
-import InvestorNomineeModel
 import User
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -10,11 +9,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
-import android.opengl.Visibility
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -26,7 +22,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.enfotrix.lifechanger.Constants
@@ -42,14 +38,8 @@ import com.enfotrix.lifechanger.Utils
 import com.enfotrix.lifechanger.databinding.ActivityUserDetailsBinding
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
-import com.google.firebase.FirebaseException
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.PhoneAuthCredential
-import com.google.firebase.auth.PhoneAuthOptions
-import com.google.firebase.auth.PhoneAuthProvider
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import java.util.concurrent.TimeUnit
 
 class ActivityUserDetails : AppCompatActivity() {
 

@@ -33,7 +33,6 @@ class ActivityInvestment : AppCompatActivity() {
     private lateinit var mContext: Context
     private lateinit var constants: Constants
     private lateinit var sharedPrefManager : SharedPrefManager
-    lateinit var fabButton: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,15 +44,11 @@ class ActivityInvestment : AppCompatActivity() {
         constants= Constants()
         sharedPrefManager = SharedPrefManager(mContext)
         setTitle("My Investments")
-        fabButton = findViewById(R.id.save_as_pdf)
 
         getData()
 
 
-       fabButton.setOnClickListener {
-           Toast.makeText(this, "hussain", Toast.LENGTH_SHORT).show()
-              generatePDF()
-       }
+
 
     }
 
@@ -120,60 +115,6 @@ class ActivityInvestment : AppCompatActivity() {
         } else {
             // Otherwise, select the previous step.
             viewPager.currentItem = viewPager.currentItem - 1
-        }
-    }
-
-
-    private fun generatePDF() {
-        val document = PdfDocument()
-         val pageWidth = 595 // Adjust this value as needed
-         val pageHeight = 842 // Adjust this value as needed
-
-
-        // Create a page info for the PDF document.
-        val pageInfo = PdfDocument.PageInfo.Builder(pageWidth, pageHeight, 1).create()
-
-        // Start a new page.
-        val page = document.startPage(pageInfo)
-
-        // Create a canvas for the page.
-        val canvas = page.canvas
-
-        // Set up paint for drawing text.
-        val paint = Paint()
-        paint.textSize = 12f
-
-        // Define the starting position for drawing text.
-        var yPosition = 50f
-
-        // Iterate through the list and draw each item on the PDF.
-        for (item in sharedPrefManager.getInvestmentReqList()) {
-            canvas.drawText(item.toString(), 50f, yPosition, paint)
-            yPosition += 20f // Increase the yPosition for the next item.
-        }
-
-        // Finish the page and add it to the document.
-        document.finishPage(page)
-
-        // Define the file path for the PDF.
-        val filePath = Environment.getExternalStorageDirectory().toString() + "/investment_req_list.pdf"
-
-        try {
-            // Create a file and write the document content to it.
-            val file = File(filePath)
-            val outputStream = FileOutputStream(file)
-            document.writeTo(outputStream)
-
-            // Close the document and file output stream.
-            document.close()
-            outputStream.close()
-
-            // Display a toast indicating the PDF is saved.
-            Toast.makeText(this, "PDF saved at $filePath", Toast.LENGTH_SHORT).show()
-        } catch (e: Exception) {
-            // Handle exceptions if any.
-            e.printStackTrace()
-            Toast.makeText(this, "Error saving PDF", Toast.LENGTH_SHORT).show()
         }
     }
 

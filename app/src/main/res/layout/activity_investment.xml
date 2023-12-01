@@ -8,16 +8,6 @@
 
     tools:context=".ui.ActivityInvestment">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/save_as_pdf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="25dp"
-        android:elevation="12dp"
-        android:backgroundTint="@color/primary"
-        android:src="@drawable/downloadpdficon"/>
 
     <RelativeLayout
         android:id="@+id/v1"
