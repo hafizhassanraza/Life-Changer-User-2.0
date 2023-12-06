@@ -54,6 +54,7 @@ class ActivityLogin : AppCompatActivity() {
     private lateinit var constants: Constants
     private lateinit var user: User
     private lateinit var investor: User
+    private lateinit var modelNominee: ModelNominee
     private lateinit var sharedPrefManager : SharedPrefManager
     private lateinit var dialog : Dialog
 
@@ -68,7 +69,7 @@ class ActivityLogin : AppCompatActivity() {
 investor=User()
         sharedPrefManager = SharedPrefManager(mContext)
 
-
+modelNominee= ModelNominee()
 
         binding.btnSignIn.setOnClickListener(View.OnClickListener {
 
@@ -336,7 +337,6 @@ investor=User()
 
 
     private fun checkCnicInFirebase(cnic: String) {
-        Toast.makeText(mContext, cnic, Toast.LENGTH_SHORT).show()
         utils.startLoadingAnimation()
         lifecycleScope.launch {
             userViewModel.isInvestorExist(cnic)
@@ -357,7 +357,7 @@ investor=User()
                                 user?.status.equals(constants.INVESTOR_STATUS_PENDING) ||
                                 user?.status.equals(constants.INVESTOR_STATUS_INCOMPLETE)
                             ) {
-                                showChangePasswordDialog()
+                                checkNomineeCnic()
                               /*  val intent = Intent(mContext, ActivityPhoneOtp::class.java)
                                 intent.putExtra("cnic", cnic)
                                 startActivity(intent)*/
@@ -369,6 +369,77 @@ investor=User()
                         } else {
                             Toast.makeText(mContext, "Investor CNIC does Not exist 2", Toast.LENGTH_SHORT).show()
                         }
+                    }
+                }
+                .addOnFailureListener {
+                    utils.endLoadingAnimation()
+                    Toast.makeText(mContext, it.message + "", Toast.LENGTH_SHORT).show()
+                }
+        }
+    }
+    private fun checkNomineeCnic() {
+
+            dialog1 = Dialog(this) // Use 'this' or 'requireContext()' depending on your context
+
+            dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog1.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog1.setCancelable(true)
+            dialog1.setContentView(R.layout.dialog_forget_password)
+
+            val cnicTextInputLayout = dialog1.findViewById<TextInputLayout>(R.id.etcnic)
+            val cnicEditText = cnicTextInputLayout.editText // Find the EditText within the TextInputLayout
+
+            val btn = dialog1.findViewById<MaterialButton>(R.id.btnEnter)
+            val title = dialog1.findViewById<TextView>(R.id.title)
+        title.text="Enter your Nominee CNIC"
+            btn.setOnClickListener {
+                var cnic = cnicEditText?.text.toString() // Retrieve the text from the EditText
+                checkNomineeCNIC(cnic)
+                dialog1.dismiss()
+            }
+
+            dialog1.show()
+
+    }
+
+
+
+    fun checkNomineeCNIC(cnic:String)
+    {
+        utils.startLoadingAnimation()
+        lifecycleScope.launch {
+            userViewModel.checkNomineeCNIC(cnic)
+                .addOnCompleteListener { task ->
+
+                    utils.endLoadingAnimation()
+                    if (task.isSuccessful) {
+
+
+                        if (task.result.size() > 0) {
+                            var token: String = ""
+                            val documents = task.result
+                            var nominee: ModelNominee? = null
+                            for (document in documents) {
+                                nominee = document.toObject(ModelNominee::class.java)
+
+                            }
+                            modelNominee=nominee!!
+                            if (modelNominee.docID==investor.id)
+                             {
+                                showChangePasswordDialog()
+                                /*  val intent = Intent(mContext, ActivityPhoneOtp::class.java)
+                                  intent.putExtra("cnic", cnic)
+                                  startActivity(intent)*/
+                            }  else if (documents.size() == 0) {
+                                Toast.makeText(mContext, "Nominee CNIC does Not exist  ", Toast.LENGTH_SHORT).show()
+                            }
+                        } else {
+                            Toast.makeText(mContext, "Nominee CNIC does Not exist  ", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    else
+                    {
+                        Toast.makeText(mContext, constants.SOMETHING_WENT_WRONG_MESSAGE, Toast.LENGTH_SHORT).show()
                     }
                 }
                 .addOnFailureListener {
@@ -430,13 +501,13 @@ investor=User()
                 if (it == true) {
 
                     sharedPrefManager.putToken(user.id)
-                    Toast.makeText(mContext, constants.INVESTOR_SIGNUP_MESSAGE, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(mContext, "Password Update Successfully", Toast.LENGTH_SHORT).show()
 
 
                     startActivity(Intent(mContext,ActivityLogin::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
                     finish()
                 }
-                else Toast.makeText(mContext, constants.INVESTOR_SIGNUP_FAILURE_MESSAGE, Toast.LENGTH_SHORT).show()
+                else Toast.makeText(mContext, "Failed to Update Password", Toast.LENGTH_SHORT).show()
 
             }
         }

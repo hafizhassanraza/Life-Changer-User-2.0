@@ -62,6 +62,8 @@ class UserViewModel(context: Application) : AndroidViewModel(context) {
         }*/
     suspend fun isInvestorExist(CNIC: String): Task<QuerySnapshot> {
             return userRepo.isInvestorExist(CNIC)
+    }  suspend fun checkNomineeCNIC(CNIC: String): Task<QuerySnapshot> {
+            return userRepo.checkNomineeCNIC(CNIC)
     }
     suspend fun addUser(user: User): LiveData<Boolean> {
         return userRepo.registerUser(user)

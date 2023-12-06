@@ -106,6 +106,9 @@ class Repo(val context: Context) {
     suspend fun isInvestorExist(CNIC: String): Task<QuerySnapshot> {
         return InvestorsCollection.whereEqualTo(constants.INVESTOR_CNIC, CNIC).get()
     }
+    suspend fun checkNomineeCNIC(CNIC: String): Task<QuerySnapshot> {
+        return NomineesCollection.whereEqualTo(constants.INVESTOR_CNIC, CNIC).get()
+    }
     suspend fun loginUser(CNIC: String, PIN: String): Task<QuerySnapshot> {
         return InvestorsCollection.whereEqualTo(constants.INVESTOR_CNIC, CNIC).whereEqualTo(constants.INVESTOR_PIN,PIN).get()
     }
