@@ -38,7 +38,7 @@ class PdfTransaction(var List: List<TransactionModel>) {
             val headers = arrayOf(
                 Paragraph("Request Date", titleFont),
                 Paragraph("Old Balance", titleFont),
-                Paragraph("Request Balance", titleFont),
+                Paragraph("$type", titleFont),
                 Paragraph("New Balance", titleFont),
                 Paragraph("Clear Date", titleFont)
             )
