@@ -61,34 +61,34 @@ class ActivityInvestment : AppCompatActivity() {
 
         selectedCalendar = Calendar.getInstance()
 
-        binding.llStartDate.setOnClickListener {
-            showDateTimePicker(true)
-        }
-
-        binding.llEndDate.setOnClickListener {
-            showDateTimePicker(false)
-        }
-
-        binding.getInvestment.setOnClickListener {
-
-            if (startFormattedDate != null && endFormattedDate != null) {
-
-                val dateFormat = SimpleDateFormat("MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z", Locale.getDefault())
-                val startDate = dateFormat.parse(startFormattedDate)
-                val endDate = dateFormat.parse(endFormattedDate)
-
-
-                if (startDate != null && endDate != null && startDate.before(endDate)) {
-
-
-                    getDataByDate(startFormattedDate!!, endFormattedDate!!)
-                } else {
-                    Toast.makeText(this, "Invalid date range", Toast.LENGTH_SHORT).show()
-                }
-            } else {
-                Toast.makeText(this, "Select start and end dates", Toast.LENGTH_SHORT).show()
-            }
-        }
+//        binding.llStartDate.setOnClickListener {
+//            showDateTimePicker(true)
+//        }
+//
+//        binding.llEndDate.setOnClickListener {
+//            showDateTimePicker(false)
+//        }
+//
+//        binding.getInvestment.setOnClickListener {
+//
+//            if (startFormattedDate != null && endFormattedDate != null) {
+//
+//                val dateFormat = SimpleDateFormat("MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z", Locale.getDefault())
+//                val startDate = dateFormat.parse(startFormattedDate)
+//                val endDate = dateFormat.parse(endFormattedDate)
+//
+//
+//                if (startDate != null && endDate != null && startDate.before(endDate)) {
+//
+//
+//                    getDataByDate(startFormattedDate!!, endFormattedDate!!)
+//                } else {
+//                    Toast.makeText(this, "Invalid date range", Toast.LENGTH_SHORT).show()
+//                }
+//            } else {
+//                Toast.makeText(this, "Select start and end dates", Toast.LENGTH_SHORT).show()
+//            }
+//        }
 
 
     }

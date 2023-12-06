@@ -104,12 +104,19 @@ class ActivityUserDetails : AppCompatActivity() {
                 "Phone already added",
                 Toast.LENGTH_SHORT
             ).show()
-            else startActivity(
-                Intent(
-                    mContext,
-                    ActivityPhoneNumber::class.java
-                ).putExtra(constants.KEY_ACTIVITY_FLOW, constants.VALUE_ACTIVITY_FLOW_USER_DETAILS)
-            )
+            else {
+                startActivity(
+                    Intent(
+                        mContext,
+                        ActivityPhoneNumber::class.java
+                    ).putExtra(
+                        constants.KEY_ACTIVITY_FLOW,
+                        constants.VALUE_ACTIVITY_FLOW_USER_DETAILS
+                    )
+                )
+
+                finish()
+            }
         }
 
 
@@ -324,10 +331,10 @@ class ActivityUserDetails : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.top_logout -> {
-/*
+
                 sharedPrefManager.clearWholeSharedPref()
-                startActivity(Intent(mContext,ActivityLogin::class.java))*/
-              Toast.makeText(applicationContext, "Available soon!!", Toast.LENGTH_LONG).show()
+                startActivity(Intent(mContext,ActivityLogin::class.java))
+              //Toast.makeText(applicationContext, "Available soon!!", Toast.LENGTH_LONG).show()
                 true
             }
 

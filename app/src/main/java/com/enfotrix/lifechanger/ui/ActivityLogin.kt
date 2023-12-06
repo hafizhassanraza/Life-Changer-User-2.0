@@ -588,6 +588,10 @@ modelNominee= ModelNominee()
 
 
     }
+
+    override fun onBackPressed() {
+        finishAffinity()
+    }
 }
 
 
