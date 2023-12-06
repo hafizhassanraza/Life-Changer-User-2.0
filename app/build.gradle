@@ -99,21 +99,21 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.2'
 
     // Navigation Component
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.5'
 
     // Room components
-    implementation "androidx.room:room-runtime:2.5.1"
-    implementation "androidx.room:room-ktx:2.5.1"
-    androidTestImplementation "androidx.room:room-testing:2.5.1"
+    implementation "androidx.room:room-runtime:2.6.0"
+    implementation "androidx.room:room-ktx:2.6.0"
+    androidTestImplementation "androidx.room:room-testing:2.6.0"
 
     // Lifecycle components
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-common-java8:2.6.1"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.6.2"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2"
 
     // Kotlin components
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
 
@@ -128,13 +128,13 @@ dependencies {
     implementation 'com.itextpdf:itextpdf:5.5.13.2'
 
     //lottie animation
-    implementation 'com.airbnb.android:lottie:4.2.0'
+    implementation 'com.airbnb.android:lottie:4.2.2'
 
     //splash api
     implementation("androidx.core:core-splashscreen:1.0.1")
 
     //lottie animation
-    implementation "com.airbnb.android:lottie:3.4.0"
+    implementation "com.airbnb.android:lottie:4.2.2"
     //country code picker
     implementation 'com.hbb20:ccp:2.6.1'
 
@@ -143,7 +143,7 @@ dependencies {
 
     //to download pdf file
 
-    implementation 'com.itextpdf:itext7-core:7.1.16'
+    implementation 'com.itextpdf:itext7-core:7.2.1'
 
 
 

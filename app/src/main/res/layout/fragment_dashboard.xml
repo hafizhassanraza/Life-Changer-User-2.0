@@ -208,6 +208,7 @@
 
 
             <LinearLayout
+                android:id="@+id/llAboutUs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
@@ -258,6 +259,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/llServices"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
@@ -284,82 +286,11 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/llInvestmentPlans"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_column="3"
                 app:layout_row="0"
-                app:layout_columnWeight="1"
-                app:layout_rowWeight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:tint="@color/primary"
-                    android:src="@drawable/company"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/primary"
-                    android:text="Company"/>
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                app:layout_column="0"
-                app:layout_row="1"
-                app:layout_columnWeight="1"
-                app:layout_rowWeight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:tint="@color/primary"
-                    android:src="@drawable/feedback"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/primary"
-                    android:text="Feedback"/>
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                app:layout_column="1"
-                app:layout_row="1"
-                app:layout_columnWeight="1"
-                app:layout_rowWeight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:tint="@color/primary"
-                    android:src="@drawable/share"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/primary"
-                    android:text="Share"/>
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                app:layout_column="2"
-                app:layout_row="1"
                 app:layout_columnWeight="1"
                 app:layout_rowWeight="1"
                 android:gravity="center_horizontal"
@@ -378,6 +309,7 @@
 
 
             </LinearLayout>
+
 
 
 
