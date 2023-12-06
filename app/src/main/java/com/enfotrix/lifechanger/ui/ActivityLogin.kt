@@ -53,6 +53,7 @@ class ActivityLogin : AppCompatActivity() {
 
     private lateinit var constants: Constants
     private lateinit var user: User
+    private lateinit var investor: User
     private lateinit var sharedPrefManager : SharedPrefManager
     private lateinit var dialog : Dialog
 
@@ -64,7 +65,7 @@ class ActivityLogin : AppCompatActivity() {
         utils = Utils(mContext)
         constants= Constants()
 
-
+investor=User()
         sharedPrefManager = SharedPrefManager(mContext)
 
 
@@ -85,8 +86,8 @@ class ActivityLogin : AppCompatActivity() {
         })
         binding.tvForgotPassword.setOnClickListener{
 
-            Toast.makeText(mContext, "Sorry! Underworking..Available Soon!!", Toast.LENGTH_SHORT).show()
-            // showForgetPasswordDialog()
+
+            showForgetPasswordDialog()
         }
 
 
@@ -351,20 +352,22 @@ class ActivityLogin : AppCompatActivity() {
                                 user = document.toObject(User::class.java)
                                 token = document.id
                             }
+                            investor=user!!
                             if (user?.status.equals(constants.INVESTOR_STATUS_ACTIVE) ||
                                 user?.status.equals(constants.INVESTOR_STATUS_PENDING) ||
                                 user?.status.equals(constants.INVESTOR_STATUS_INCOMPLETE)
                             ) {
-                                val intent = Intent(mContext, ActivityPhoneOtp::class.java)
+                                showChangePasswordDialog()
+                              /*  val intent = Intent(mContext, ActivityPhoneOtp::class.java)
                                 intent.putExtra("cnic", cnic)
-                                startActivity(intent)
+                                startActivity(intent)*/
                             } else if (user?.status.equals(constants.INVESTOR_STATUS_BLOCKED)) {
                                 Toast.makeText(mContext, "Investor CNIC blocked", Toast.LENGTH_SHORT).show()
                             } else if (documents.size() == 0) {
-                                    Toast.makeText(mContext, "Investor CNIC does Not exist", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(mContext, "Investor CNIC does Not exist 1", Toast.LENGTH_SHORT).show()
                             }
                         } else {
-                            Toast.makeText(mContext, "Investor CNIC does Not exist", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mContext, "Investor CNIC does Not exist 2", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -372,6 +375,70 @@ class ActivityLogin : AppCompatActivity() {
                     utils.endLoadingAnimation()
                     Toast.makeText(mContext, it.message + "", Toast.LENGTH_SHORT).show()
                 }
+        }
+    }
+
+
+
+    fun showChangePasswordDialog() {
+
+        val dialog = Dialog (mContext)
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setContentView(R.layout.dialog_update_taken_pin)
+        val etPin1 = dialog.findViewById<EditText>(R.id.etPin1)
+        val etPin2 = dialog.findViewById<EditText>(R.id.etPin2)
+        val etPin3 = dialog.findViewById<EditText>(R.id.etPin3)
+        val etPin4 = dialog.findViewById<EditText>(R.id.etPin4)
+        val etPin5 = dialog.findViewById<EditText>(R.id.etPin5)
+        val etPin6 = dialog.findViewById<EditText>(R.id.etPin6)
+        val tvClearAll = dialog.findViewById<TextView>(R.id.tvClearAll)
+        val btnSetPin = dialog.findViewById<Button>(R.id.btnSetpin)
+
+        etPin1.requestFocus();
+        utils.moveFocus( listOf(etPin1, etPin2, etPin3, etPin4, etPin5, etPin6))
+
+        tvClearAll.setOnClickListener{
+            utils.clearAll( listOf(etPin1, etPin2, etPin3, etPin4, etPin5, etPin6))
+            etPin1.requestFocus();
+
+        }
+        btnSetPin.setOnClickListener {
+            //
+            if(!utils.checkEmpty( listOf(etPin1, etPin2, etPin3, etPin4, etPin5, etPin6))){
+
+                investor.pin= etPin1.text.toString()+ etPin2.text.toString()+ etPin3.text.toString()+ etPin4.text.toString()+ etPin5.text.toString()+ etPin6.text.toString()
+                saveUser(investor)
+
+            }
+            else Toast.makeText(mContext, "Please enter 6 Digits Pin!", Toast.LENGTH_SHORT).show()
+        }
+
+        dialog.show()
+    }
+
+
+
+    fun saveUser(user:User){
+
+
+        utils.startLoadingAnimation()
+        lifecycleScope.launch {
+            userViewModel.updateUser(user).observe(this@ActivityLogin) {
+                utils.endLoadingAnimation()
+                if (it == true) {
+
+                    sharedPrefManager.putToken(user.id)
+                    Toast.makeText(mContext, constants.INVESTOR_SIGNUP_MESSAGE, Toast.LENGTH_SHORT).show()
+
+
+                    startActivity(Intent(mContext,ActivityLogin::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
+                    finish()
+                }
+                else Toast.makeText(mContext, constants.INVESTOR_SIGNUP_FAILURE_MESSAGE, Toast.LENGTH_SHORT).show()
+
+            }
         }
     }
 
