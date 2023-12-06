@@ -450,6 +450,10 @@ class ActivityLogin : AppCompatActivity() {
 
 
     }
+
+    override fun onBackPressed() {
+        finishAffinity()
+    }
 }
 
 
