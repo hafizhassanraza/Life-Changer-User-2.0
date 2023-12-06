@@ -257,6 +257,16 @@ class Repo(val context: Context) {
         return TransactionsReqCollection.whereEqualTo(constants.INVESTOR_ID, token).whereEqualTo(constants.TRANSACTION_TYPE,type).get()
     }
 
+    suspend fun getTransactionReqByDates(token: String , type:String, startDate:String, endDate:String ): Task<QuerySnapshot> {
+        return TransactionsReqCollection.whereEqualTo(constants.INVESTOR_ID, token)
+            .whereEqualTo(constants.TRANSACTION_TYPE,type)
+            .whereGreaterThanOrEqualTo("transactionAt", startDate)
+            .whereLessThanOrEqualTo("transactionAt", endDate)
+            .get()
+    }
+
+
+
 
 
     suspend fun addTransactionReq(transactionModel: TransactionModel): LiveData<Boolean> {
@@ -276,8 +286,11 @@ class Repo(val context: Context) {
             .addOnSuccessListener { documents ->
 
                 var id=documents.id
+                transactionModel.id=id
                 storageRef.child(type).child(id).putFile(imageUri).addOnSuccessListener {
                     result.value =true
+
+                    TransactionsReqCollection.document(id).set(transactionModel)
 
                 }
                     .addOnFailureListener {e->

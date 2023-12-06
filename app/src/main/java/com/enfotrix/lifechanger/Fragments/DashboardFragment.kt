@@ -32,6 +32,8 @@ import com.enfotrix.lifechanger.Models.ModelFA
 import com.enfotrix.lifechanger.R
 import com.enfotrix.lifechanger.SharedPrefManager
 import com.enfotrix.lifechanger.Utils
+import com.enfotrix.lifechanger.ui.ActivityAboutUs
+import com.enfotrix.lifechanger.ui.ActivityInvestmentPlans
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -158,6 +160,18 @@ class DashboardFragment : Fragment() {
 
         }
 
+        binding.llServices.setOnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://enfotrix.com/"))
+            startActivity(browserIntent)
+        }
+
+        binding.llAboutUs.setOnClickListener {
+            startActivity(Intent(mContext,ActivityAboutUs::class.java))
+        }
+
+        binding.llInvestmentPlans.setOnClickListener {
+            startActivity(Intent(mContext,ActivityInvestmentPlans::class.java))
+        }
 
         checkData()
         setData()

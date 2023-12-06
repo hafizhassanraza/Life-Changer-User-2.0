@@ -34,6 +34,13 @@ class InvestmentViewModel(context: Application) : AndroidViewModel(context) {
     suspend fun getInvestmentReq(token: String): Task<QuerySnapshot> {
         return userRepo.getTransactionReq(token,constants.TRANSACTION_TYPE_INVESTMENT)
     }
+
+    suspend fun getInvestmentReqByDates(token: String, startDate:String, endDate:String): Task<QuerySnapshot> {
+        return userRepo.getTransactionReqByDates(token,constants.TRANSACTION_TYPE_INVESTMENT, startDate, endDate)
+    }
+
+
+
     suspend fun addTransactionReq(transactionModel: TransactionModel): LiveData<Boolean> {
         return userRepo.addTransactionReq(transactionModel)
     }

@@ -20,7 +20,6 @@
     <string name="newAccount"> <u>Add a new account?</u></string>
 
 
-
     <string-array name="nomineeRelationSpiner">
         <item>Father</item>
         <item>Mother</item>
