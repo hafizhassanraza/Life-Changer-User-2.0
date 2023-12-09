@@ -11,6 +11,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
+import android.widget.DatePicker
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
@@ -27,6 +28,7 @@ import com.enfotrix.lifechanger.databinding.ActivityInvestmentBinding
 import com.enfotrix.lifechanger.databinding.ActivityWithdrawBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.Timestamp
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
@@ -42,8 +44,17 @@ class ActivityInvestment : AppCompatActivity() {
     private lateinit var sharedPrefManager : SharedPrefManager
 
     private lateinit var selectedCalendar: Calendar
-    private var startFormattedDate: String? = null
-    private var endFormattedDate: String? = null
+    private var startFormattedDate = ""
+    private var endFormattedDate= ""
+    @RequiresApi(Build.VERSION_CODES.N)
+    val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+
+
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private val startCalendar = Calendar.getInstance()
+    @RequiresApi(Build.VERSION_CODES.N)
+    private val endCalendar = Calendar.getInstance()
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,49 +72,49 @@ class ActivityInvestment : AppCompatActivity() {
 
         selectedCalendar = Calendar.getInstance()
 
-//        binding.llStartDate.setOnClickListener {
-//            showDateTimePicker(true)
-//        }
-//
-//        binding.llEndDate.setOnClickListener {
-//            showDateTimePicker(false)
-//        }
-//
-//        binding.getInvestment.setOnClickListener {
-//
-//            if (startFormattedDate != null && endFormattedDate != null) {
-//
-//                val dateFormat = SimpleDateFormat("MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z", Locale.getDefault())
-//                val startDate = dateFormat.parse(startFormattedDate)
-//                val endDate = dateFormat.parse(endFormattedDate)
-//
-//
-//                if (startDate != null && endDate != null && startDate.before(endDate)) {
-//
-//
-//                    getDataByDate(startFormattedDate!!, endFormattedDate!!)
-//                } else {
-//                    Toast.makeText(this, "Invalid date range", Toast.LENGTH_SHORT).show()
-//                }
-//            } else {
-//                Toast.makeText(this, "Select start and end dates", Toast.LENGTH_SHORT).show()
-//            }
-//        }
+        binding.llStartDate.setOnClickListener {
+            showDatePickerDialog(true)
+        }
+
+        binding.llEndDate.setOnClickListener {
+            showDatePickerDialog(false)
+        }
+
+        binding.getInvestment.setOnClickListener {
+
+            if (startFormattedDate != null && endFormattedDate != null) {
+
+                val date1 = dateFormat.parse(startFormattedDate)
+                val startDate = Timestamp(date1)
+
+                 val date2 = dateFormat.parse(endFormattedDate)
+                val endDate = Timestamp(date2)
+
+
+
+                getDataByDate(startDate!!, endDate!!)
+
+
+            } else {
+                Toast.makeText(this, "Select start and end dates", Toast.LENGTH_SHORT).show()
+            }
+        }
 
 
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    private fun showDateTimePicker(isStartDate: Boolean) {
-        val currentYear = selectedCalendar.get(Calendar.YEAR)
-        val currentMonth = selectedCalendar.get(Calendar.MONTH)
-        val currentDay = selectedCalendar.get(Calendar.DAY_OF_MONTH)
+    private fun showDatePickerDialog(isStartDate: Boolean) {
+        val calendar = if (isStartDate) startCalendar else endCalendar
+        val currentYear = calendar.get(Calendar.YEAR)
+        val currentMonth = calendar.get(Calendar.MONTH)
+        val currentDay = calendar.get(Calendar.DAY_OF_MONTH)
 
         DatePickerDialog(
             this,
-            { _, year, month, day ->
-                selectedCalendar.set(year, month, day)
-                showTimePicker(isStartDate)
+            { _: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
+                calendar.set(year, monthOfYear, dayOfMonth)
+                updateButtonText(isStartDate)
             },
             currentYear,
             currentMonth,
@@ -112,43 +123,19 @@ class ActivityInvestment : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    private fun showTimePicker(isStartDate: Boolean) {
-        val currentHour = selectedCalendar.get(Calendar.HOUR_OF_DAY)
-        val currentMinute = selectedCalendar.get(Calendar.MINUTE)
+    private fun updateButtonText(isStartDate: Boolean) {
+        val calendar = if (isStartDate) startCalendar else endCalendar
+        val selectedDate = dateFormat.format(calendar.time)
 
-        TimePickerDialog(
-            this,
-            { _, hour, minute ->
-                selectedCalendar.set(Calendar.HOUR_OF_DAY, hour)
-                selectedCalendar.set(Calendar.MINUTE, minute)
-
-                val dateFormat = SimpleDateFormat("MM/dd/yy", Locale.getDefault())
-                val selectedDate = dateFormat.format(selectedCalendar.time)
-
-                // Format the selected date in "MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z"
-                val fullDateFormat = SimpleDateFormat("MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z", Locale.getDefault())
-                val formattedDate = fullDateFormat.format(selectedCalendar.time)
-
-                if (isStartDate) {
-                    // Handle logic for the selected start date
-                    startFormattedDate = formattedDate
-                    binding.startDate.text = selectedDate
-                } else {
-                    // Handle logic for the selected end date
-                    endFormattedDate = formattedDate
-                    binding.endDate.text = selectedDate
-                }
-
-                //Toast.makeText(this, "Selected Date-Time: $formattedDate", Toast.LENGTH_SHORT).show()
-                //Toast.makeText(this, "Selected Date: $selectedDate", Toast.LENGTH_SHORT).show()
-            },
-            currentHour,
-            currentMinute,
-            false
-        ).show()
+        if (isStartDate) {
+            binding.startDate.text = selectedDate
+            startFormattedDate = selectedDate
+        } else {
+            binding.endDate.text = selectedDate
+            endFormattedDate = selectedDate
+        }
+        Toast.makeText(mContext, ""+startCalendar, Toast.LENGTH_SHORT).show()
     }
-
-
 
     private fun setupTabLayout() {
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
@@ -162,11 +149,10 @@ class ActivityInvestment : AppCompatActivity() {
         binding.viewPager.adapter = adapter
     }
 
-                              //
-    private fun getDataByDate(startTimestamp:String, endTimestamp:String){
+    private fun getDataByDate(startTimestamp:Timestamp, endTimestamp:Timestamp){
 
-                                  //Toast.makeText(mContext, ""+startTimestamp, Toast.LENGTH_SHORT).show()
-                                  //Toast.makeText(mContext, ""+endTimestamp, Toast.LENGTH_SHORT).show()
+                                  Toast.makeText(mContext, ""+startTimestamp, Toast.LENGTH_SHORT).show()
+                                  Toast.makeText(mContext, ""+endTimestamp, Toast.LENGTH_SHORT).show()
 
         utils.startLoadingAnimation()
         lifecycleScope.launch{

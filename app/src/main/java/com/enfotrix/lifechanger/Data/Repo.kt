@@ -16,6 +16,7 @@ import com.enfotrix.lifechanger.Models.TransactionModel
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.FirebaseApp
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
@@ -260,7 +261,7 @@ class Repo(val context: Context) {
         return TransactionsReqCollection.whereEqualTo(constants.INVESTOR_ID, token).whereEqualTo(constants.TRANSACTION_TYPE,type).get()
     }
 
-    suspend fun getTransactionReqByDates(token: String , type:String, startDate:String, endDate:String ): Task<QuerySnapshot> {
+    suspend fun getTransactionReqByDates(token: String , type:String, startDate:Timestamp, endDate: Timestamp): Task<QuerySnapshot> {
         return TransactionsReqCollection.whereEqualTo(constants.INVESTOR_ID, token)
             .whereEqualTo(constants.TRANSACTION_TYPE,type)
             .whereGreaterThanOrEqualTo("transactionAt", startDate)

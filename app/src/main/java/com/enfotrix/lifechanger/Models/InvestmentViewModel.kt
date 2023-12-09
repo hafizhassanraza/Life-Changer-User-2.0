@@ -11,6 +11,7 @@ import com.enfotrix.lifechanger.Constants
 import com.enfotrix.lifechanger.Data.Repo
 import com.enfotrix.lifechanger.SharedPrefManager
 import com.google.android.gms.tasks.Task
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.QuerySnapshot
 
 class InvestmentViewModel(context: Application) : AndroidViewModel(context) {
@@ -35,7 +36,7 @@ class InvestmentViewModel(context: Application) : AndroidViewModel(context) {
         return userRepo.getTransactionReq(token,constants.TRANSACTION_TYPE_INVESTMENT)
     }
 
-    suspend fun getInvestmentReqByDates(token: String, startDate:String, endDate:String): Task<QuerySnapshot> {
+    suspend fun getInvestmentReqByDates(token: String, startDate:Timestamp, endDate: Timestamp): Task<QuerySnapshot> {
         return userRepo.getTransactionReqByDates(token,constants.TRANSACTION_TYPE_INVESTMENT, startDate, endDate)
     }
 
