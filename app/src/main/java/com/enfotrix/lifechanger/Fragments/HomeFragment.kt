@@ -7,7 +7,9 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -75,7 +77,6 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
 
 
         mContext=requireContext()
@@ -220,6 +221,7 @@ class HomeFragment : Fragment() {
 
 
         binding.tvUserName.text= sharedPrefManager.getUser().firstName
+        binding.uName.text= sharedPrefManager.getUser().firstName
         binding.tvBalance.text= sharedPrefManager.getInvestment().investmentBalance
 
         if(sharedPrefManager.getInvestment().lastProfit.isEmpty())

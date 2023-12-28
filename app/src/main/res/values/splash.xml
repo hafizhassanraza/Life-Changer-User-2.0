@@ -5,7 +5,7 @@
 
 
         <item name="windowSplashScreenAnimatedIcon">@drawable/logo</item>
-        <item name="postSplashScreenTheme">@style/Theme.MaterialComponents.DayNight.DarkActionBar</item>
+        <item name="postSplashScreenTheme">@style/Theme.MaterialComponents.DayNight.NoActionBar</item>
 
     </style>
 

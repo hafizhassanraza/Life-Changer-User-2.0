@@ -21,36 +21,35 @@
             android:src="@drawable/logo" />
 
 
-        <TextView
-            android:id="@+id/tv1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="7dp"
-            android:text="Bank of the future"
-            android:layout_gravity="center_horizontal"
-            android:textColor="#CFCECE"
-            android:textStyle="bold"
-            android:textSize="18dp"
-            />
+<!--        <TextView-->
+<!--            android:id="@+id/tv1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:gravity="center_horizontal"-->
+<!--            android:layout_marginTop="7dp"-->
+<!--            android:text="Bank of the future"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:textColor="#CFCECE"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textSize="18dp"-->
+<!--            />-->
 
     </LinearLayout>
 
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginHorizontal="85dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="40dp"
-        android:gravity="center_horizontal"
-        android:text="www.lifechangerpk.com"
-        android:textColor="@color/statusbarcolor"
-        android:textStyle="bold" />
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:layout_marginHorizontal="85dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginBottom="40dp"-->
+<!--        android:gravity="center_horizontal"-->
+<!--        android:text="www.lifechangerpk.com"-->
+<!--        android:textColor="@color/statusbarcolor"-->
+<!--        android:textStyle="bold" />-->
 
 
 </RelativeLayout>

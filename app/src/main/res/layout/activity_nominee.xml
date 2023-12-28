@@ -11,8 +11,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="15dp"
-        android:layout_marginHorizontal="20dp"
+        android:paddingVertical="15dp"
+        android:paddingHorizontal="20dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/baseline_arrow_back_ios_24"/>
+            android:src="@drawable/baseline_arrow_back_24"/>
         <TextView
             android:id="@+id/tvHeader"
             android:layout_width="wrap_content"
@@ -33,6 +33,13 @@
             android:textSize="20dp"/>
 
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -41,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingHorizontal="20dp"
+            android:padding="20dp"
             >
 
 
@@ -55,7 +62,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/SecondaryVariant"
+                android:textColor="@color/gray"
                 android:text="Please provide the following details of your nominee for your secure future"/>
 
 
@@ -113,7 +120,6 @@
                 app:boxCornerRadiusTopEnd="8dp"
                 android:hint="Full Name"
                 android:inputType="textPersonName"
-                app:startIconDrawable="@drawable/baseline_person_24"
 
                 android:textSize="14sp" >
 
@@ -141,7 +147,6 @@
                 app:boxCornerRadiusTopEnd="8dp"
                 android:hint="Father Name"
                 android:inputType="textPersonName"
-                app:startIconDrawable="@drawable/baseline_person_24"
 
                 android:textSize="14sp" >
 
@@ -172,7 +177,6 @@
                 app:boxCornerRadiusBottomEnd="8dp"
                 app:boxCornerRadiusTopEnd="8dp"
                 android:hint="Mobile (030012XXXXX)"
-                app:startIconDrawable="@drawable/baseline_phone_android_24"
 
                 android:inputType="number"
                 android:textSize="14sp" >
@@ -196,7 +200,6 @@
                 app:boxCornerRadiusBottomStart="8dp"
                 app:boxCornerRadiusBottomEnd="8dp"
                 app:boxCornerRadiusTopEnd="8dp"
-                app:startIconDrawable="@drawable/baseline_cnic_mail_24"
                 app:endIconMode="clear_text"
                 android:hint="C.N.I.C (384033XXXXXXX)"
                 android:inputType="number"
@@ -253,7 +256,7 @@
                     android:id="@+id/cbTermCondition"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:buttonTint="@color/SecondaryVariant"
+                    android:buttonTint="@color/gray"
                     android:text="Agree with"
 
                     android:textSize="12sp" />
@@ -264,7 +267,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/term_condition"
                     android:textSize="13dp"
-                    android:textColor="@color/SecondaryVariant"
+                    android:textColor="@color/black"
                     android:padding="5dp"/>
             </LinearLayout>
 

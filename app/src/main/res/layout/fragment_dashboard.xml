@@ -10,53 +10,78 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/lightGray"
+        android:layout_marginBottom="15dp"
         android:orientation="vertical">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="255dp">
-            <TextView
-                android:id="@+id/tvHeaderAnnoun"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_alignParentTop="true"
-                android:textColor="@color/gray"
-                android:textStyle="bold"
-                android:elevation="10dp"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center_horizontal"
-                android:text="Announcement !" />
-
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            >
             <ImageView
+                android:id="@+id/announcementBell"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:elevation="3dp"
+                android:src="@drawable/announcement_bell"
+                android:layout_centerHorizontal="true"
+                />
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:src="@drawable/bg_announcement_"/>
+                android:layout_marginTop="25dp"
+                android:layout_marginHorizontal="15dp"
+                android:elevation="15dp"
+                app:cardCornerRadius="15dp"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:background="@drawable/gradient_background_main"
+                    >
+
+                    <TextView
+                        android:id="@+id/tvHeaderAnnoun"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="29dp"
+                        android:textColor="@color/yellow"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:elevation="10dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_horizontal"
+                        android:text="PUBLIC ANNOUNCEMENT" />
+
+                    <!--            <ImageView-->
+                    <!--                android:layout_width="match_parent"-->
+                    <!--                android:layout_height="wrap_content"-->
+                    <!--                android:scaleType="centerCrop"-->
+                    <!--                android:src="@drawable/bg_announcement_"/>-->
 
 
 
 
-            <TextView
-                android:id="@+id/tvAnnouncement"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/tvHeaderAnnoun"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="85dp"
-                android:layout_marginBottom="30dp"
-                android:textSize="12dp"
-                android:layout_marginTop="3dp"
-                android:textColor="@color/red_m"
-                android:text="No announcement "
+                    <TextView
+                        android:id="@+id/tvAnnouncement"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/tvHeaderAnnoun"
+                        android:padding="15dp"
+                        android:textSize="12dp"
+                        android:textColor="@color/white"
+                        android:text="No announcement "
 
-                />
+                        />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
 
         </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:background="@drawable/bg_grad_fade" />
+
 
 
 
@@ -76,12 +101,12 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="5dp"
-            android:layout_marginTop="10dp"
-            app:cardBackgroundColor="@color/secondary_m"
-            android:layout_marginBottom="10dp"
-            android:layout_marginHorizontal="25dp"
+            android:visibility="gone"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="10dp"
+            android:layout_marginHorizontal="15dp"
+            app:cardBackgroundColor="@color/white"
+            android:layout_marginBottom="15dp"
             android:layout_below="@+id/v1">
 
 
@@ -89,8 +114,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-
+                android:padding="5dp"
+                android:layout_marginLeft="5dp"
                 android:id="@+id/myFinancialAdvisor"
                 >
                 <ImageView
@@ -98,30 +123,29 @@
                     android:layout_height="wrap_content"
                     android:alpha=".18"
                     android:scaleType="fitXY"
-                    android:src="@drawable/cardbg"/>
+                    />
                 <TextView
                     android:id="@+id/tvHeader1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_alignParentTop="true"
-                    android:textColor="@color/primary"
-                    android:textStyle="bold"
+                    android:textColor="@color/gray"
                     android:layout_marginLeft="15dp"
-                    android:textSize="14dp"
+                    android:textSize="16dp"
                     android:layout_gravity="center_horizontal"
-                    android:text="My Financial Advisor"/>
+                    android:text="Discuss Your Investment Plans!"/>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:src="@drawable/baseline_keyboard_arrow_right_24"
-                    android:tint="@color/primary" />
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:layout_marginStart="8dp"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:layout_marginEnd="8dp"-->
+<!--                    android:layout_marginBottom="8dp"-->
+<!--                    android:src="@drawable/baseline_keyboard_arrow_right_24"-->
+<!--                    android:tint="@color/primary" />-->
 
 
                 <LinearLayout
@@ -131,18 +155,19 @@
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
                     <androidx.cardview.widget.CardView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        app:cardCornerRadius="10dp"
-                        android:layout_gravity="center_vertical"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        app:cardCornerRadius="40dp"
                         android:layout_margin="10dp"
                         app:cardElevation="4dp">
                         <ImageView
                             android:id="@+id/imgFA"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="fitCenter"
-                            android:src="@mipmap/ic_launcher"/>
+                            android:src="@drawable/baseline_person"
+                            android:layout_gravity="center"
+                            android:background="@color/PrimaryVariant"
+                            />
                     </androidx.cardview.widget.CardView>
 
 
@@ -152,14 +177,21 @@
                         android:layout_margin="10dp"
                         android:orientation="vertical"
                         android:layout_gravity="center_vertical">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="My Financial Advisor"
+                            android:textColor="@color/gray"
+                            android:textSize="11dp"
+                            />
                         <TextView
                             android:id="@+id/tvFAName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Mr. Ramzan"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentLeft="true"
-                            android:textColor="@color/gray"
+                            android:textColor="@color/black"
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
@@ -170,9 +202,9 @@
                             android:text="Senior Manager"
                             android:layout_below="@+id/tvUserName"
                             android:layout_alignParentLeft="true"
-                            android:textColor="@color/SecondaryVariant"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
+                            android:textColor="@color/gray"
+                            android:textSize="12dp"
+                            />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -184,147 +216,197 @@
 
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Connected With Us!"
-            android:layout_marginLeft="20dp"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="4dp"
-            android:textSize="16dp"
-            android:textColor="@color/secondary"/>
-
-
-
-        <androidx.gridlayout.widget.GridLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:layout_marginBottom="60dp"
-            android:layout_marginHorizontal="15dp"
-            app:columnCount="4"
-            app:rowCount="2">
+            android:layout_margin="15dp"
+            app:cardCornerRadius="15dp"
+            >
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-
+            >
             <LinearLayout
-                android:id="@+id/llAboutUs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp"
+                >
 
-                app:layout_column="0"
-                app:layout_row="0"
-                app:layout_columnWeight="1"
-                app:layout_rowWeight="1"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Stay Connected With Us!"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginBottom="4dp"
+                        android:textSize="16dp"
+                        android:textColor="@color/gray"/>
 
-                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:tint="@color/primary"
-                    android:src="@drawable/about_us"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/primary"
-                    android:text="About Us"/>
+                    <LinearLayout
+                        android:id="@+id/llAboutUs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_column="0"
+                        app:layout_row="0"
+                        app:layout_columnWeight="1"
+                        app:layout_rowWeight="1"
+
+                        android:orientation="horizontal">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            app:cardCornerRadius="40dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="10dp"
+                            app:cardElevation="0dp">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/outline_info"
+                                android:padding="5dp"
+                                android:background="@color/skyblueShade"
+                                />
+                        </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:layout_marginLeft="10dp"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            android:layout_gravity="center_vertical"
+                            android:text="About Us"/>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/contactLinear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_column="1"
+                        app:layout_row="0"
+                        app:layout_columnWeight="1"
+                        app:layout_rowWeight="1"
+
+                        android:orientation="horizontal">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            app:cardCornerRadius="40dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="10dp"
+                            app:cardElevation="0dp">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/round_message"
+                                android:padding="9dp"
+                                android:background="@color/skyblueShade"
+                                />
+                        </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:layout_marginLeft="10dp"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            android:layout_gravity="center_vertical"
+                            android:text="Contact Us"/>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/llServices"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        app:layout_column="2"
+                        app:layout_row="0"
+                        app:layout_columnWeight="1"
+                        app:layout_rowWeight="1"
+
+                        android:orientation="horizontal">
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            app:cardCornerRadius="40dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="10dp"
+                            app:cardElevation="0dp">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/round_settings_suggest"
+                                android:padding="7dp"
+                                android:background="@color/skyblueShade"
+                                />
+                        </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:layout_marginLeft="10dp"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            android:layout_gravity="center_vertical"
+                            android:text="Services"/>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llInvestmentPlans"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_column="3"
+                        app:layout_row="0"
+                        app:layout_columnWeight="1"
+                        app:layout_rowWeight="1"
+                        android:orientation="horizontal">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            app:cardCornerRadius="40dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="10dp"
+                            app:cardElevation="0dp">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/round_attach_money"
+                                android:padding="7dp"
+                                android:background="@color/skyblueShade"
+                                />
+                        </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:layout_marginLeft="10dp"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            android:layout_gravity="center_vertical"
+                            android:text="Investment Plans"/>
+
+
+                    </LinearLayout>
+
 
 
             </LinearLayout>
-            <LinearLayout
-                android:id="@+id/contactLinear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                app:layout_column="1"
-                app:layout_row="0"
-                app:layout_columnWeight="1"
-                app:layout_rowWeight="1"
 
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:tint="@color/primary"
-                    android:src="@drawable/contact_us_"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/primary"
-                    android:text="Contact Us"/>
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/llServices"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-
-                app:layout_column="2"
-                app:layout_row="0"
-                app:layout_columnWeight="1"
-                app:layout_rowWeight="1"
-
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:tint="@color/primary"
-                    android:src="@drawable/services"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/primary"
-                    android:text="Services"/>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/llInvestmentPlans"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_column="3"
-                app:layout_row="0"
-                app:layout_columnWeight="1"
-                app:layout_rowWeight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:tint="@color/primary"
-                    android:src="@drawable/investment_planss"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/primary"
-                    android:text="Invest Plans"/>
-
-
-            </LinearLayout>
-
-
-
-
-
-        </androidx.gridlayout.widget.GridLayout>
-
-
-        <View
-            android:layout_width="100dp"
-            android:layout_height="2dp"
-            android:background="@color/secondary"
-            android:layout_marginBottom="100dp"
-            android:layout_marginTop="35dp"
-            android:layout_gravity="center_horizontal"/>
-
+        </ScrollView>
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 

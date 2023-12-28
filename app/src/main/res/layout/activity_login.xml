@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="@color/white"
     android:orientation="vertical"
     android:background="@color/secondary_m"
     tools:context=".ui.ActivityLogin">
@@ -42,11 +43,11 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cd1"
             android:layout_width="match_parent"
-            android:layout_height="210dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="1dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="22dp"
+            app:cardElevation="0dp"
             android:layout_marginBottom="60dp"
-            android:layout_marginHorizontal="20dp">
+            >
 
             <LinearLayout
                 android:id="@+id/linearLayout"
@@ -65,28 +66,35 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Welcome to Login"
-                    android:textSize="20dp"
+                    android:textSize="22dp"
                     android:textStyle="bold"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginVertical="20dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Enter CNIC here"
+                    android:textColor="@color/textGrey"
+                    />
 
                     <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/etCNIC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     app:boxCornerRadiusTopStart="8dp"
                     app:boxCornerRadiusBottomStart="8dp"
                     app:boxCornerRadiusBottomEnd="8dp"
                     app:boxCornerRadiusTopEnd="8dp"
-                    app:startIconDrawable="@drawable/baseline_cnic_mail_24"
                     app:endIconMode="clear_text"
-                    android:hint="C.N.I.C (384033XXXXXXX)"
                     android:inputType="number"
+                        android:hint="C.N.I.C (384033XXXXXXX)"
                     android:textSize="14sp" >
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@color/white"
+                        android:textColor="@color/black"
                         android:maxLines="1"
                         android:lines="1"
                         android:inputType="number"
@@ -95,6 +103,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
                     android:orientation="horizontal">
 
                     <CheckBox
@@ -103,7 +112,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Remember Me"
-                        android:buttonTint="@color/SecondaryVariant"
+                        android:textColor="@color/black"
+                        android:buttonTint="@color/textGrey"
                         android:textSize="12sp" />
 
                     <TextView
@@ -115,7 +125,7 @@
                         android:gravity="right"
                         android:padding="5dp"
                         android:text="@string/fgPassword"
-                        android:textColor="@color/SecondaryVariant"
+                        android:textColor="@color/gray"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -131,16 +141,16 @@
 
         <Button
             android:id="@+id/btnSignIn"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/lay2"
+            android:layout_marginTop="20dp"
             android:elevation="20dp"
-            android:paddingHorizontal="40dp"
-            android:drawableRight="@drawable/baseline_keyboard_arrow_right_24"
             android:drawableTint="@color/white"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="40dp"
+            android:layout_marginHorizontal="20dp"
             android:background="@drawable/bg_button"
+            android:textStyle="bold"
             android:text="Login" />
 
 
@@ -163,8 +173,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
-
+                android:textStyle="bold"
+                android:textColor="@color/gray"
                 android:text="Don't have an account?" />
 
             <TextView
@@ -172,9 +182,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:textSize="16dp"
                 android:text="@string/signUp"
-                android:textColor="@color/SecondaryVariant" />
+                android:textColor="@color/black" />
 
 
         </LinearLayout>

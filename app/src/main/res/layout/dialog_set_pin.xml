@@ -22,7 +22,7 @@
                 android:layout_height="2dp"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@color/SecondaryVariant"/>
+                android:background="@color/primary"/>
 
             <TextView
                 android:id="@+id/tvHeader"
@@ -40,7 +40,7 @@
                 android:id="@+id/tvDisc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/SecondaryVariant"
+                android:textColor="@color/gray"
                 android:layout_marginHorizontal="20dp"
                 android:text="Set 6-digit code for your account and transactions. So, you can login and access all the feature"></TextView>
 
