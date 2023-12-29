@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/secondary_m"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".ui.ActivityPhoneNumber">
 
@@ -33,6 +33,11 @@
             android:textSize="20dp"/>
 
     </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -54,7 +59,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/SecondaryVariant"
+                android:textColor="@color/textGrey"
                 android:text="Please provide your phone number then verify the number by sending the otp. make sure your provided number is available for SMS alerts!"/>
 
 
@@ -132,7 +137,7 @@
                     android:id="@+id/cbTermCondition"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:buttonTint="@color/SecondaryVariant"
+                    android:buttonTint="@color/black"
                     android:text="Agree with"
 
                     android:textSize="12sp" />
@@ -143,7 +148,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/term_condition"
                     android:textSize="13dp"
-                    android:textColor="@color/SecondaryVariant"
+                    android:textColor="@color/black"
                     android:padding="5dp"/>
             </LinearLayout>
 
@@ -176,7 +181,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="@string/timer"
-                    android:textColor="@color/SecondaryVariant" />
+                    android:textColor="@color/black" />
 
 
             </LinearLayout>
