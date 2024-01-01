@@ -71,12 +71,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginVertical="20dp"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Enter CNIC here"
-                    android:textColor="@color/textGrey"
-                    />
+
 
                     <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/etCNIC"
@@ -143,6 +138,7 @@
             android:id="@+id/btnSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="5dp"
             android:layout_below="@+id/lay2"
             android:layout_marginTop="20dp"
             android:elevation="20dp"
@@ -150,6 +146,8 @@
             android:layout_alignParentRight="true"
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/bg_button"
+            android:gravity="center_horizontal"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:text="Login" />
 
