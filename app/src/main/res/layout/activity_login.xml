@@ -1,192 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/white"
     android:orientation="vertical"
-    android:background="@color/secondary_m"
+    android:background="@color/primary"
     tools:context=".ui.ActivityLogin">
 
 
-    <RelativeLayout
-        android:id="@+id/v1"
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="30dp"
+        android:src="@drawable/logo"></ImageView>
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:elevation="20dp">
+        android:layout_height="match_parent"
+        app:shapeAppearanceOverlay="@style/LoginCardShape.CardView">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@drawable/logo"></ImageView>
-
-    </RelativeLayout>
-
-    <View
-        android:id="@+id/v2"
-        android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:background="@color/primary"/>
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_below="@+id/v1">
-        <RelativeLayout
-            android:id="@+id/lay2"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="190dp"/>
+            android:layout_height="match_parent"
+            android:paddingHorizontal="20dp"
+            android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cd1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="22dp"
-            app:cardElevation="0dp"
-            android:layout_marginBottom="60dp"
-            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Welcome to Login"
+                android:textSize="22dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:textStyle="bold"
+                android:layout_marginVertical="30dp"
+                android:layout_gravity="center_horizontal" />
 
-            <LinearLayout
-                android:id="@+id/linearLayout"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etCNIC"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingHorizontal="20dp"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView"
-                app:layout_constraintVertical_bias="0.212">
+                android:layout_height="wrap_content"
+                app:endIconMode="clear_text"
+                android:inputType="number"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
+                android:hint="C.N.I.C (384033XXXXXXX)"
+                android:textSize="14sp" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:textColor="@color/black"
+                    android:maxLines="1"
+                    android:lines="1"
+                    android:inputType="number"
+                    android:maxLength="13"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <TextView
+
+            <Button
+                android:id="@+id/btnSignIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_button"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="Login" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Welcome to Login"
-                    android:textSize="22dp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginVertical="20dp"/>
-
-
-
-                    <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/etCNIC"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:boxCornerRadiusTopStart="8dp"
-                    app:boxCornerRadiusBottomStart="8dp"
-                    app:boxCornerRadiusBottomEnd="8dp"
-                    app:boxCornerRadiusTopEnd="8dp"
-                    app:endIconMode="clear_text"
-                    android:inputType="number"
-                        android:hint="C.N.I.C (384033XXXXXXX)"
-                    android:textSize="14sp" >
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:textColor="@color/black"
-                        android:maxLines="1"
-                        android:lines="1"
-                        android:inputType="number"
-                        android:maxLength="13"/>
-                </com.google.android.material.textfield.TextInputLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="10dp"
+                    android:layout_centerInParent="true"
                     android:orientation="horizontal">
-
-                    <CheckBox
-                        android:id="@+id/cbRememberMe"
-                        android:layout_width="0dp"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Remember Me"
-                        android:textColor="@color/black"
-                        android:buttonTint="@color/textGrey"
-                        android:textSize="12sp" />
+                        android:textStyle="bold"
+                        android:textColor="@color/gray"
+                        android:text="Don't have an account?" />
 
                     <TextView
-                        android:id="@+id/tvForgotPassword"
-                        android:layout_width="0dp"
+                        android:id="@+id/tvRegister"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:gravity="right"
-                        android:padding="5dp"
-                        android:text="@string/fgPassword"
-                        android:textColor="@color/gray"
-                        android:textStyle="bold" />
-
+                        android:padding="10dp"
+                        android:text="@string/signUp"
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
 
 
-
-
-            </LinearLayout>
-
-
-        </androidx.cardview.widget.CardView>
-
-        <Button
-            android:id="@+id/btnSignIn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:layout_below="@+id/lay2"
-            android:layout_marginTop="20dp"
-            android:elevation="20dp"
-            android:drawableTint="@color/white"
-            android:layout_alignParentRight="true"
-            android:layout_marginHorizontal="20dp"
-            android:background="@drawable/bg_button"
-            android:gravity="center_horizontal"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:text="Login" />
-
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal"
-            android:layout_below="@+id/btnSignIn"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="60dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="0.266">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="@color/gray"
-                android:text="Don't have an account?" />
-
-            <TextView
-                android:id="@+id/tvRegister"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="@string/signUp"
-                android:textColor="@color/black" />
+            </RelativeLayout>
 
 
         </LinearLayout>
 
-    </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 
 
@@ -196,7 +111,13 @@
 
 
 
-</RelativeLayout>
+
+
+
+
+
+
+</LinearLayout>
 
 
 

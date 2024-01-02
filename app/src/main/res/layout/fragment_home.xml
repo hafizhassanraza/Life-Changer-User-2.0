@@ -4,21 +4,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:scrollbars="none"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <RelativeLayout
 
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="15dp"
-        tools:context=".Fragments.HomeFragment">
-
-
+        android:orientation="vertical">
         <androidx.cardview.widget.CardView
             android:id="@+id/cd1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="15dp"
             android:layout_marginHorizontal="15dp"
             android:elevation="15dp"
             app:cardCornerRadius="8dp"
@@ -30,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingHorizontal="15dp"
-                android:paddingTop="15dp"
+                android:paddingTop="5dp"
                 android:background="@drawable/gradient_background_main"
                 android:paddingBottom="8dp"
                 android:orientation="vertical">
@@ -162,13 +160,25 @@
 
         </androidx.cardview.widget.CardView>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter"
+            android:text="Add Requests"
+            android:alpha="0.6"
+            android:layout_gravity=""
+            android:textColor="@color/textGrey"
+            android:layout_marginBottom="7dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:textSize="16dp"
+            android:textStyle="bold" />
         <LinearLayout
             android:id="@+id/layBtn"
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:orientation="horizontal"
-            android:layout_below="@+id/cd1"
-            android:layout_marginVertical="8dp"
+            android:layout_marginBottom="10dp"
             >
             <Button
                 android:id="@+id/btnInvest"
@@ -180,7 +190,7 @@
                 android:text="Invest"
                 android:drawableLeft="@drawable/baseline_signal_cellular_4_bar_24"
                 android:layout_marginEnd="8dp"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="14dp"
                 android:textColor="@color/white"
                 />
 
@@ -193,7 +203,7 @@
                 android:layout_marginStart="8dp"
                 android:backgroundTint="#535B89"
                 app:cornerRadius="15dp"
-                android:layout_marginEnd="15dp"
+                android:layout_marginEnd="14dp"
                 android:drawableLeft="@drawable/round_arrow_downward"
                 android:drawableTint="@color/white"
                 android:textColor="@color/white"
@@ -201,13 +211,24 @@
 
         </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter"
+            android:text="Pending Amounts"
+            android:textColor="@color/textGrey"
+            android:layout_marginBottom="7dp"
+            android:layout_marginLeft="15dp"
+            android:alpha="0.6"
+
+            android:textSize="16dp"
+            android:textStyle="bold" />
 
 
         <androidx.cardview.widget.CardView
             android:id="@+id/newCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/layBtn"
             android:layout_marginHorizontal="15dp"
             app:cardCornerRadius="8dp"
             >
@@ -230,24 +251,10 @@
                         android:id="@+id/h11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
                         android:fontFamily="@font/inter"
                         android:text="Available Profit"
                         android:textColor="@color/gray"
                         android:textSize="14dp"
-                        android:layout_marginLeft="3dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/uName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/h11"
-                        android:fontFamily="@font/inter"
-                        android:text="User Name"
-                        android:textColor="@color/black"
-                        android:textSize="14dp"
-                        android:layout_marginLeft="3dp"
                         android:textStyle="bold" />
 
 
@@ -257,8 +264,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toLeftOf="@id/availableProfit"
-                        android:layout_below="@id/uName"
-                        android:layout_marginTop="-10dp"
                         android:text="Rs."
                         android:textColor="@color/black"
                         android:textSize="14dp" />
@@ -267,9 +272,7 @@
                         android:id="@+id/availableProfit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/uName"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginTop="-10dp"
                         android:text="00"
                         android:textColor="@color/black"
                         android:textSize="15sp"
@@ -287,34 +290,18 @@
                         android:id="@+id/h1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
                         android:fontFamily="@font/inter"
                         android:text="In-Active Investment"
                         android:textColor="@color/gray"
                         android:textSize="14dp"
-                        android:layout_marginLeft="3dp"
                         android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/h12"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/h1"
-                        android:fontFamily="@font/inter"
-                        android:text="Pending"
-                        android:textColor="@color/black"
-                        android:textSize="14dp"
-                        android:layout_marginLeft="3dp"
-                        android:textStyle="bold" />
-
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toLeftOf="@id/tvInActiveInvestment"
-                        android:layout_below="@id/h12"
-                        android:layout_marginTop="-10dp"
+
                         android:text="Rs."
                         android:textColor="@color/yellow"
                         android:textSize="14dp" />
@@ -324,11 +311,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_below="@id/h12"
-                        android:layout_marginTop="-10dp"
                         android:text="00"
                         android:textColor="@color/yellow"
-                        android:textSize="14dp"
+                        android:textSize="15sp"
                         android:textStyle="bold"/>
 
 
@@ -339,13 +324,23 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter"
+            android:text="History"
+            android:textColor="@color/textGrey"
+            android:layout_marginLeft="15dp"
+            android:textSize="16dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginTop="15dp"
+            android:alpha="0.6"
+            android:textStyle="bold" />
         <HorizontalScrollView
             android:id="@+id/hsv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/newCard"
             android:scrollbars="none"
-            android:layout_marginTop="15dp"
             android:layout_marginStart="1dp"
             android:layout_marginEnd="1dp"
             android:foregroundGravity="center_vertical">
@@ -980,5 +975,8 @@
             </LinearLayout>
         </HorizontalScrollView>
 
-    </RelativeLayout>
+    </LinearLayout>
+
+
+
 </ScrollView>

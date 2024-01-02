@@ -221,7 +221,7 @@ class HomeFragment : Fragment() {
 
 
         binding.tvUserName.text= sharedPrefManager.getUser().firstName
-        binding.uName.text= sharedPrefManager.getUser().firstName
+        //binding.uName.text= sharedPrefManager.getUser().firstName
         binding.tvBalance.text= sharedPrefManager.getInvestment().investmentBalance
 
         if(sharedPrefManager.getInvestment().lastProfit.isEmpty())

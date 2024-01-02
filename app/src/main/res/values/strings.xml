@@ -14,7 +14,7 @@
     <string name="login"><b><u>Login</u></b></string>
     <string name="timer"><b><u>00 sec</u></b></string>
     <string name="signUp"><b>SIGN UP</b></string>
-    <string name="fgPassword"><b>Forgot Password?</b></string>
+    <string name="fgPassword"><b>Forgot PIN?</b></string>
     <string name="clear"><b>Clear all</b></string>
     <string name="upload"><b><u>Select</u></b></string>
     <string name="newAccount"> <u>Add a new account?</u></string>
@@ -73,9 +73,9 @@
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
 
-    <string name="instDet">Investment \nDetails</string>
-    <string name="profDet">Profit \nDetails</string>
-    <string name="withDrawDet">WithDraw \nDetails</string>
-    <string name="taxDet">Tax \nDetails</string>
+    <string name="instDet">Investment \nHistory</string>
+    <string name="profDet">Profit \nHistory</string>
+    <string name="withDrawDet">WithDraw \nHistory</string>
+    <string name="taxDet">Tax \nHistory</string>
 </resources>
 

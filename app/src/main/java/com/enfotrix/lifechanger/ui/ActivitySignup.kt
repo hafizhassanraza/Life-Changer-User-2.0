@@ -56,7 +56,7 @@ class ActivitySignup : AppCompatActivity() {
         repo= Repo(mContext)
         utils = Utils(mContext)
         constants= Constants()
-sharedPrefManager=SharedPrefManager(mContext)
+        sharedPrefManager=SharedPrefManager(mContext)
         binding.imgBack.setOnClickListener{
             startActivity(Intent(mContext,ActivityLogin::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
             finish()

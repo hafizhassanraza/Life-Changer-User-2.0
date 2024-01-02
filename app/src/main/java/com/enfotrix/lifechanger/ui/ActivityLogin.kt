@@ -67,10 +67,10 @@ class ActivityLogin : AppCompatActivity() {
         utils = Utils(mContext)
         constants= Constants()
 
-investor=User()
+        investor=User()
         sharedPrefManager = SharedPrefManager(mContext)
 
-modelNominee= ModelNominee()
+        modelNominee= ModelNominee()
 
         binding.btnSignIn.setOnClickListener(View.OnClickListener {
 
@@ -86,11 +86,7 @@ modelNominee= ModelNominee()
             startActivity(Intent(mContext, ActivitySignup::class.java))
 
         })
-        binding.tvForgotPassword.setOnClickListener{
 
-
-            showForgetPasswordDialog()
-        }
 
 
     }
@@ -121,6 +117,8 @@ modelNominee= ModelNominee()
         val tvNine = dialog.findViewById<TextView>(R.id.tvNine)
         val tvZero = dialog.findViewById<TextView>(R.id.tvZero)
 
+        val tvForgotPassword = dialog.findViewById<TextView>(R.id.tvForgotPassword)
+
 
         val tvInput1 = dialog.findViewById<TextView>(R.id.tvInput1)
         val tvInput2 = dialog.findViewById<TextView>(R.id.tvInput2)
@@ -145,7 +143,14 @@ modelNominee= ModelNominee()
                     if (counter <= inputTextViews.size) {
                         inputTextViews[counter - 1].text = (index + 1).toString()
                     }
-                    if (counter == 6) Toast.makeText(mContext, "checking...", Toast.LENGTH_SHORT).show()
+                    if (counter == 6) {
+
+                        //Toast.makeText(mContext, "checking...", Toast.LENGTH_SHORT).show()
+
+                        val pin=""+tvInput1+tvInput2+tvInput3+tvInput4+tvInput5+tvInput6
+                        loginUser(user,pin,token)
+
+                    }
                 }
             }
         }
@@ -158,69 +163,12 @@ modelNominee= ModelNominee()
                 counter--
             }
         }
-        /*tvOne.setOnClickListener {
-            counter++
-            if(counter==1) tvInput1.text="1"
-            if(counter==2) tvInput2.text="1"
-            if(counter==3) tvInput3.text="1"
-            if(counter==4) tvInput4.text="1"
-            if(counter==5) tvInput5.text="1"
-            if(counter==6) tvInput6.text="1"
-
-        }
-        tvTwo.setOnClickListener {
-            counter++
-            if(counter==1) tvInput1.text="2"
-            if(counter==2) tvInput2.text="2"
-            if(counter==3) tvInput3.text="2"
-            if(counter==4) tvInput4.text="2"
-            if(counter==5) tvInput5.text="2"
-            if(counter==6) tvInput6.text="2"
-
-        }
-        tvThree.setOnClickListener {
-            counter++
-            if(counter==1) tvInput1.text="3"
-            if(counter==2) tvInput2.text="3"
-            if(counter==3) tvInput3.text="3"
-            if(counter==4) tvInput4.text="3"
-            if(counter==5) tvInput5.text="3"
-            if(counter==6) tvInput6.text="3"
-
-        }
-*/
 
 
-        /*     val etPin1 = dialog.findViewById<EditText>(R.id.etPin1)
-             val etPin2 = dialog.findViewById<EditText>(R.id.etPin2)
-             val etPin3 = dialog.findViewById<EditText>(R.id.etPin3)
-             val etPin4 = dialog.findViewById<EditText>(R.id.etPin4)
-             val etPin5 = dialog.findViewById<EditText>(R.id.etPin5)
-             val etPin6 = dialog.findViewById<EditText>(R.id.etPin6)
-             val tvClearAll = dialog.findViewById<TextView>(R.id.tvClearAll)
-             val tvHeader = dialog.findViewById<TextView>(R.id.tvHeader)
-             val btnSetPin = dialog.findViewById<Button>(R.id.btnSetPin)
-     */
-       /* tvHeader.setText("Set your Pin for Login !")
-        btnSetPin.setText("Login")
-        etPin1.requestFocus();
-        utils.moveFocus( listOf(etPin1, etPin2, etPin3, etPin4, etPin5, etPin6))
-
-        tvClearAll.setOnClickListener{
-            utils.clearAll( listOf(etPin1, etPin2, etPin3, etPin4, etPin5, etPin6))
-            etPin1.requestFocus();
-
-        }
-        btnSetPin.setOnClickListener {
-            if(!utils.checkEmpty( listOf(etPin1, etPin2, etPin3, etPin4, etPin5, etPin6))){
-                var pin : String =  utils.getPIN( listOf(etPin1, etPin2, etPin3, etPin4, etPin5, etPin6))
-                loginUser(user,pin,token)
-            }
-            else Toast.makeText(mContext, "Please enter 6 Digits Pin!", Toast.LENGTH_SHORT).show()
-        }*/
-
-
-
+         tvForgotPassword.setOnClickListener{
+             dialog.dismiss()
+             showForgetPasswordDialog()
+         }
 
 
 
@@ -349,6 +297,7 @@ modelNominee= ModelNominee()
 
         }
         else {
+            vibrate(mContext, 200)
             Toast.makeText(mContext, "Incorrect Pin", Toast.LENGTH_SHORT).show()
         }
     }
