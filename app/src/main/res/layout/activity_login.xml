@@ -16,6 +16,7 @@
         android:layout_marginVertical="30dp"
         android:src="@drawable/logo"></ImageView>
 
+
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

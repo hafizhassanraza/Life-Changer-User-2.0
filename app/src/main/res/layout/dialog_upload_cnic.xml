@@ -25,9 +25,9 @@
             <View
                 android:layout_width="100dp"
                 android:layout_height="2dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@color/SecondaryVariant"/>
+                android:background="@color/gray"/>
 
             <TextView
                 android:id="@+id/tvHeader"
@@ -45,7 +45,7 @@
                 android:id="@+id/tvHeaderDesc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/SecondaryVariant"
+                android:textColor="@color/textGrey"
                 android:layout_marginHorizontal="20dp"
                 android:text="Upload both (Front and Back) side photo of your CNIC" />
 
@@ -66,7 +66,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/SecondaryVariant"
+                        android:textColor="@color/textGrey"
                         android:layout_gravity="center_horizontal"
                         android:text="Front Side"/>
 
@@ -78,6 +78,36 @@
                         android:layout_gravity="center_horizontal"
                         android:src="@drawable/check_dark"/>
 
+
+
+<!--                    <RelativeLayout-->
+<!--                        android:layout_width="120dp"-->
+<!--                        android:layout_height="90dp"-->
+<!--                        >-->
+<!--                        <ImageView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:src="@drawable/cnic_cover"-->
+<!--                            />-->
+
+<!--                        <androidx.cardview.widget.CardView-->
+<!--                            android:id="@+id/cvFrontCNIC"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_margin="10dp"-->
+<!--                            android:visibility="gone"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            app:cardCornerRadius="12dp">-->
+
+<!--                            <ImageView-->
+<!--                                android:id="@+id/imgSelectCnicFront"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:scaleType="centerCrop"-->
+<!--                                android:src="@mipmap/ic_launcher"/>-->
+
+<!--                        </androidx.cardview.widget.CardView>-->
+<!--                    </RelativeLayout>-->
 
 
                     <TextView
@@ -106,9 +136,37 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:textColor="@color/SecondaryVariant"
+                        android:textColor="@color/textGrey"
                         android:layout_gravity="center_horizontal"
                         android:text="Back Side "/>
+
+<!--                    <RelativeLayout-->
+<!--                        android:layout_width="120dp"-->
+<!--                        android:layout_height="90dp"-->
+<!--                        >-->
+<!--                        <ImageView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:src="@drawable/cnic_cover"-->
+<!--                            />-->
+
+<!--                        <androidx.cardview.widget.CardView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:visibility="gone"-->
+<!--                            android:layout_margin="10dp"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            app:cardCornerRadius="12dp">-->
+
+<!--                            <ImageView-->
+<!--                                android:id="@+id/imgSelectCnicBack"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:scaleType="centerCrop"-->
+<!--                                android:src="@mipmap/ic_launcher"/>-->
+
+<!--                        </androidx.cardview.widget.CardView>-->
+<!--                    </RelativeLayout>-->
 
                     <ImageView
                         android:id="@+id/imgSelectCnicBack"
@@ -133,18 +191,19 @@
             </LinearLayout>
 
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnUploadCNIC"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="20dp"
-                android:background="@drawable/bg_button"
                 android:layout_marginBottom="20dp"
-                android:backgroundTint="@color/primary"
-                android:drawableRight="@drawable/baseline_keyboard_arrow_right_24"
-                android:drawableTint="@color/white"
-                android:text="Upload" />
+                android:paddingVertical="13dp"
+                android:backgroundTint="@color/PrimaryVariantDark"
+                android:text="Upload"
+                android:textStyle="bold"
+                app:cornerRadius="12dp"
+                />
 
 
         </LinearLayout>

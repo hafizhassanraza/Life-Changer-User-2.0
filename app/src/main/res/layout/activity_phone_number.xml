@@ -8,190 +8,180 @@
     android:orientation="vertical"
     tools:context=".ui.ActivityPhoneNumber">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="15dp"
-        android:layout_marginHorizontal="20dp"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:background="@color/secondary_m"
+        >
+        <ImageView
+            android:id="@+id/backImage"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/baseline_arrow_back_ios_24"
+            android:padding="5dp"
+            />
 
         <ImageView
-            android:id="@+id/imgBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/baseline_arrow_back_ios_24"/>
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/otp_image"
+            />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Number Varification!"
-            android:layout_marginLeft="10dp"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/black_m"
+            android:text="Mobile Number"
+            android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="20dp"/>
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            />
 
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/gray"
-        />
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="We need to send your OTP to authentication your number"
+            android:layout_marginHorizontal="10dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:textColor="@color/textGrey"
+            android:layout_marginTop="7dp"
+            />
+    </LinearLayout>
 
-        <LinearLayout
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:shapeAppearanceOverlay="@style/LoginCardShape.CardView"
+        android:backgroundTint="@color/white"
+        android:layout_marginBottom="-12dp"
+        >
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="20dp">
-
-
-
-
-
-
-
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/textGrey"
-                android:text="Please provide your phone number then verify the number by sending the otp. make sure your provided number is available for SMS alerts!"/>
-
-
-
-
-
-
+            android:layout_marginTop="15dp"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp">
 
-
-                <com.hbb20.CountryCodePicker
-                    android:id="@+id/ccp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:background="@drawable/bg_button_hollow_dark"
-                    app:ccp_autoDetectCountry="true"
-                    android:paddingVertical="8dp"
-                    android:layout_marginTop="6dp"
-                    app:ccp_rememberLastSelection="true"
-                    android:layout_marginRight="5dp"
-                    app:ccp_countryPreference="PK,US,GB,SA"  />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/etMobileNumber"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:boxCornerRadiusBottomStart="8dp"
-                    app:boxCornerRadiusBottomEnd="8dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    app:boxCornerRadiusTopStart="8dp"
-                    app:boxCornerRadiusTopEnd="8dp"
-                    android:hint="Mobile (030012XXXXX)"
-                    app:startIconDrawable="@drawable/baseline_phone_android_24"
-                    android:inputType="number"
-                    android:textSize="14sp" >
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
 
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.hbb20.CountryCodePicker
+                        android:id="@+id/ccp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/bg_button_hollow_dark"
+                        app:ccp_autoDetectCountry="true"
+                        android:paddingVertical="8dp"
+                        android:layout_marginTop="6dp"
+                        app:ccp_rememberLastSelection="true"
+                        android:layout_marginRight="5dp"
+                        app:ccp_countryPreference="PK,US,GB,SA"  />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/etMobileNumber"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:maxLines="1"
-                        android:lines="1"
-
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:boxCornerRadiusBottomStart="8dp"
+                        app:boxCornerRadiusBottomEnd="8dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxCornerRadiusTopStart="8dp"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        android:hint="Mobile (030012XXXXX)"
+                        app:startIconDrawable="@drawable/baseline_phone_android_24"
                         android:inputType="number"
-                        android:maxLength="11"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:textSize="14sp" >
 
 
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:maxLines="1"
+                            android:lines="1"
+                            android:inputType="number"
+                            android:maxLength="11"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/cbTermCondition"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/black"
+                        android:text="Agree with"
+
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvTermsCondition"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/term_condition"
+                        android:textSize="13dp"
+                        android:textColor="@color/black"
+                        android:padding="5dp"/>
+                </LinearLayout>
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSendOtp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="15dp"
+                    android:textStyle="bold"
+                    app:cornerRadius="12dp"
+                    android:backgroundTint="@color/PrimaryVariantDark"
+                    android:text="Send OTP" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="20dp"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="OTP sending failed? " />
+
+                    <TextView
+                        android:id="@+id/tvLogin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="@string/timer"
+                        android:textColor="@color/black" />
+
+
+                </LinearLayout>
 
             </LinearLayout>
 
 
+        </ScrollView>
 
-
-
-
-
-
-
-
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <CheckBox
-                    android:id="@+id/cbTermCondition"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:buttonTint="@color/black"
-                    android:text="Agree with"
-
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/tvTermsCondition"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/term_condition"
-                    android:textSize="13dp"
-                    android:textColor="@color/black"
-                    android:padding="5dp"/>
-            </LinearLayout>
-
-
-            <Button
-                android:id="@+id/btnSendOtp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/bg_button"
-                android:drawableRight="@drawable/baseline_keyboard_arrow_right_24"
-                android:drawableTint="@color/white"
-                android:text="Send OTP" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="20dp"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:text="OTP sending failed? " />
-
-                <TextView
-                    android:id="@+id/tvLogin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="@string/timer"
-                    android:textColor="@color/black" />
-
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-    </ScrollView>
-
-
-
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>

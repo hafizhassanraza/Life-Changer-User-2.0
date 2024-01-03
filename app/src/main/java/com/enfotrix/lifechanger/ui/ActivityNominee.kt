@@ -50,7 +50,7 @@ class ActivityNominee : AppCompatActivity() {
 
 
 
-        binding.imgBack.setOnClickListener{
+        binding.backImage.setOnClickListener{
 
             if(intent.getStringExtra(constants.KEY_ACTIVITY_FLOW).equals(constants.VALUE_ACTIVITY_FLOW_USER_DETAILS)){
                 startActivity(Intent(mContext,ActivityUserDetails::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))

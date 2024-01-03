@@ -65,7 +65,7 @@ class ActivityPhoneNumber : AppCompatActivity() {
 
         sharedPrefManager = SharedPrefManager(mContext)
 
-        binding.imgBack.setOnClickListener{
+        binding.backImage.setOnClickListener{
             startActivity(Intent(mContext,ActivityUserDetails::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
             finish()
         }

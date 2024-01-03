@@ -25,9 +25,9 @@
             <View
                 android:layout_width="100dp"
                 android:layout_height="2dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@color/SecondaryVariant"/>
+                android:background="@color/gray"/>
 
             <TextView
                 android:id="@+id/tvHeader"
@@ -44,7 +44,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/SecondaryVariant"
+                android:textColor="@color/textGrey"
                 android:layout_marginHorizontal="20dp"
                 android:text="Upload your profile photo for clear identification "/>
 
@@ -62,7 +62,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:src="@drawable/baseline_person"
+
+                    />
 
             </androidx.cardview.widget.CardView>
 
@@ -76,18 +78,19 @@
                 android:text="@string/upload"
                 android:padding="10dp"
                 android:layout_gravity="center_horizontal"
-
                 android:layout_alignParentRight="true" />
 
-
-
-<Button
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginVertical="10dp"
-    android:layout_marginHorizontal="40dp"
-    android:text="Upload"
-    android:id="@+id/btnUpload"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="40dp"
+                android:backgroundTint="@color/PrimaryVariantDark"
+                android:paddingVertical="12dp"
+                android:text="Upload"
+                android:textStyle="bold"
+                app:cornerRadius="12dp"
+                android:id="@+id/btnUpload"/>
 
 
 

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/primary"
+    android:backgroundTint="#D4D9EF"
     android:background="@color/secondary_m"
 
     android:orientation="vertical"
@@ -19,6 +19,14 @@
         android:layout_marginHorizontal="20dp"
         android:orientation="horizontal">
 
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="220dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_user_details"
+            android:layout_centerHorizontal="true"
+            />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/imgBack"
             android:layout_width="40dp"
@@ -26,7 +34,7 @@
             app:cardCornerRadius="25dp"
             app:cardElevation="0dp"
             android:layout_alignParentRight="true"
-            android:backgroundTint="@color/red"
+            android:backgroundTint="@color/PrimaryVariantDark"
             >
             <ImageView
                 android:layout_width="wrap_content"
@@ -39,40 +47,41 @@
         </androidx.cardview.widget.CardView>
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="User Details"
-            android:layout_marginLeft="10dp"
-            android:layout_centerVertical="true"
-            android:textColor="@color/black_m"
-            android:textStyle="bold"
-            android:textSize="20dp"/>
 
     </RelativeLayout>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
-        android:textColor="@color/lightGray"
-        android:gravity="center_horizontal"
-        android:layout_marginVertical="15dp"
-
-        android:text="Please provide following information to continue the services of Life Changer (Pvt.) Ltd."/>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="-65dp"
         app:shapeAppearanceOverlay="@style/LoginCardShape.CardView">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User Details"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/black_m"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
 
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:textColor="@color/textGrey"
+                android:gravity="center_horizontal"
+                android:layout_marginVertical="15dp"
+
+                android:text="Please provide following information to continue the services of Life Changer (Pvt.) Ltd."/>
 
 
             <TextView
@@ -106,7 +115,7 @@
                     app:layout_row="0"
                     app:layout_column="0"
                     app:layout_rowWeight="1"
-                    android:background="@color/textGrey"/>
+                    android:background="@color/lightGray"/>
 
 
                 <View
@@ -119,7 +128,7 @@
                     app:layout_row="0"
                     android:layout_marginLeft="3dp"
                     app:layout_column="1"
-                    android:background="@color/textGrey"/>
+                    android:background="@color/lightGray"/>
 
                 <View
                     android:id="@+id/v3"
@@ -131,7 +140,7 @@
                     app:layout_row="0"
                     android:layout_marginLeft="3dp"
                     app:layout_column="2"
-                    android:background="@color/textGrey"/>
+                    android:background="@color/lightGray"/>
                 <View
                     android:id="@+id/v4"
                     android:layout_width="0dp"
@@ -141,7 +150,7 @@
                     app:layout_row="0"
                     android:layout_marginLeft="3dp"
                     app:layout_column="3"
-                    android:background="@color/textGrey"/>
+                    android:background="@color/lightGray"/>
                 <View
                     android:id="@+id/v5"
                     android:layout_width="0dp"
@@ -151,7 +160,7 @@
                     app:layout_row="0"
                     android:layout_marginLeft="3dp"
                     app:layout_column="4"
-                    android:background="@color/textGrey"/>
+                    android:background="@color/lightGray"/>
                 <View
                     android:id="@+id/v6"
                     android:layout_width="0dp"
@@ -161,7 +170,7 @@
                     app:layout_row="0"
                     android:layout_marginLeft="3dp"
                     app:layout_column="5"
-                    android:background="@color/textGrey"/>
+                    android:background="@color/lightGray"/>
                 <View
                     android:id="@+id/v7"
                     android:layout_width="0dp"
@@ -171,7 +180,7 @@
                     app:layout_row="0"
                     android:layout_marginLeft="3dp"
                     app:layout_column="6"
-                    android:background="@color/textGrey"/>
+                    android:background="@color/lightGray"/>
 
             </androidx.gridlayout.widget.GridLayout>
 
@@ -193,7 +202,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="15dp"
-                        app:cardElevation="6dp"
+                        app:cardElevation="3dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="3dp"
                         app:cardCornerRadius="8dp">
@@ -207,11 +216,20 @@
                             android:background="@color/secondary_m">
 
 
+                            <ImageView
+                                android:id="@+id/cvImg"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="10dp"
+                                android:backgroundTint="#535B88"
+                                android:background="@drawable/round_call_24" />
+
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_toRightOf="@+id/cvImg"
                                 android:layout_centerVertical="true"
-                                android:layout_marginLeft="10dp"
                                 android:orientation="vertical">
                                 <LinearLayout
                                     android:layout_width="wrap_content"
@@ -220,25 +238,25 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textColor="@color/primary"
+                                        android:textColor="@color/black"
                                         android:textStyle="bold"
                                         android:layout_gravity="center_horizontal"
                                         android:text="Add Phone Number"/>
 
 
-                                    <ImageView
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
-                                        android:src="@drawable/baseline_keyboard_arrow_right_24"
-                                        android:tint="@color/primary" />
+<!--                                    <ImageView-->
+<!--                                        android:layout_width="20dp"-->
+<!--                                        android:layout_height="20dp"-->
+<!--                                        android:src="@drawable/baseline_keyboard_arrow_right_24"-->
+<!--                                        android:tint="@color/primary" />-->
                                 </LinearLayout>
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Add and verify your phone number for alerts!"
+                                    android:text="@string/user_add_num."
                                     android:textSize="12dp"
                                     android:layout_marginTop="2dp"
-                                    android:textColor="#7C7B7B" />
+                                    android:textColor="@color/textGrey" />
 
                                 <TextView
                                     android:id="@+id/tvHeaderUserPhoneNumber"
@@ -246,7 +264,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
                                     android:text="Required*"
-                                    android:textColor="@color/red"
+                                    android:textColor="@color/yellow"
                                     android:textSize="10sp"
                                     android:textStyle="bold" />
 
@@ -271,7 +289,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="15dp"
-                        app:cardElevation="6dp"
+                        app:cardElevation="3dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="3dp"
                         app:cardCornerRadius="8dp">
@@ -283,12 +301,20 @@
                             android:layout_height="wrap_content"
                             android:background="@color/secondary_m">
 
+                            <ImageView
+                                android:id="@+id/cvImg2"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="10dp"
+                                android:backgroundTint="#535B88"
+                                android:background="@drawable/round_account_balance" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_toRightOf="@+id/cvImg2"
                                 android:layout_centerVertical="true"
-                                android:layout_marginLeft="10dp"
                                 android:orientation="vertical">
                                 <LinearLayout
                                     android:layout_width="wrap_content"
@@ -297,25 +323,25 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textColor="@color/primary"
+                                        android:textColor="@color/black"
                                         android:textStyle="bold"
                                         android:layout_gravity="center_horizontal"
                                         android:text="Bank Account Details"/>
 
 
-                                    <ImageView
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
-                                        android:src="@drawable/baseline_keyboard_arrow_right_24"
-                                        android:tint="@color/primary" />
+<!--                                    <ImageView-->
+<!--                                        android:layout_width="20dp"-->
+<!--                                        android:layout_height="20dp"-->
+<!--                                        android:src="@drawable/baseline_keyboard_arrow_right_24"-->
+<!--                                        android:tint="@color/primary" />-->
                                 </LinearLayout>
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Add your bank account for funds transfer"
+                                    android:text="@string/user_bankDetails"
                                     android:textSize="12dp"
                                     android:layout_marginTop="2dp"
-                                    android:textColor="#7C7B7B" />
+                                    android:textColor="@color/textGrey" />
 
                                 <TextView
                                     android:id="@+id/tvHeaderUserBank"
@@ -323,7 +349,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
                                     android:text="Required*"
-                                    android:textColor="@color/red"
+                                    android:textColor="@color/yellow"
                                     android:textSize="10sp"
                                     android:textStyle="bold" />
 
@@ -348,7 +374,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="15dp"
-                        app:cardElevation="6dp"
+                        app:cardElevation="3dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="3dp"
                         app:cardCornerRadius="8dp">
@@ -360,12 +386,20 @@
                             android:layout_height="wrap_content"
                             android:background="@color/secondary_m">
 
+                            <ImageView
+                                android:id="@+id/cvImg3"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="10dp"
+                                android:backgroundTint="#535B88"
+                                android:background="@drawable/baseline_person" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_toRightOf="@id/cvImg3"
                                 android:layout_centerVertical="true"
-                                android:layout_marginLeft="10dp"
                                 android:orientation="vertical">
                                 <LinearLayout
                                     android:layout_width="wrap_content"
@@ -374,25 +408,25 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textColor="@color/primary"
+                                        android:textColor="@color/black"
                                         android:textStyle="bold"
                                         android:layout_gravity="center_horizontal"
                                         android:text="Profile Photo"/>
 
 
-                                    <ImageView
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
-                                        android:src="@drawable/baseline_keyboard_arrow_right_24"
-                                        android:tint="@color/primary" />
+<!--                                    <ImageView-->
+<!--                                        android:layout_width="20dp"-->
+<!--                                        android:layout_height="20dp"-->
+<!--                                        android:src="@drawable/baseline_keyboard_arrow_right_24"-->
+<!--                                        android:tint="@color/primary" />-->
                                 </LinearLayout>
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Upload your profile photo for clear identity"
+                                    android:text="@string/user_uploadDP"
                                     android:textSize="12dp"
                                     android:layout_marginTop="2dp"
-                                    android:textColor="#7C7B7B" />
+                                    android:textColor="@color/textGrey" />
 
                                 <TextView
                                     android:id="@+id/tvHeaderUserPhoto"
@@ -400,7 +434,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
                                     android:text="Required*"
-                                    android:textColor="@color/red"
+                                    android:textColor="@color/yellow"
                                     android:textSize="10sp"
                                     android:textStyle="bold" />
 
@@ -424,7 +458,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="15dp"
-                        app:cardElevation="6dp"
+                        app:cardElevation="3dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="3dp"
                         app:cardCornerRadius="8dp">
@@ -436,12 +470,20 @@
                             android:layout_height="wrap_content"
                             android:background="@color/secondary_m">
 
+                            <ImageView
+                                android:id="@+id/cvImg4"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="10dp"
+                                android:backgroundTint="#535B88"
+                                android:background="@drawable/round_credit_card" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_toRightOf="@id/cvImg4"
                                 android:layout_centerVertical="true"
-                                android:layout_marginLeft="10dp"
                                 android:orientation="vertical">
                                 <LinearLayout
                                     android:layout_width="wrap_content"
@@ -450,25 +492,25 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textColor="@color/primary"
+                                        android:textColor="@color/black"
                                         android:textStyle="bold"
                                         android:layout_gravity="center_horizontal"
                                         android:text="Add CNIC"/>
 
 
-                                    <ImageView
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
-                                        android:src="@drawable/baseline_keyboard_arrow_right_24"
-                                        android:tint="@color/primary" />
+<!--                                    <ImageView-->
+<!--                                        android:layout_width="20dp"-->
+<!--                                        android:layout_height="20dp"-->
+<!--                                        android:src="@drawable/baseline_keyboard_arrow_right_24"-->
+<!--                                        android:tint="@color/primary" />-->
                                 </LinearLayout>
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Upload both side photo of your CNIC"
+                                    android:text="@string/user_CNIC"
                                     android:textSize="12dp"
                                     android:layout_marginTop="2dp"
-                                    android:textColor="#7C7B7B" />
+                                    android:textColor="@color/textGrey" />
 
                                 <TextView
                                     android:id="@+id/tvHeaderUserCnic"
@@ -476,7 +518,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
                                     android:text="Required*"
-                                    android:textColor="@color/red"
+                                    android:textColor="@color/yellow"
                                     android:textSize="10sp"
                                     android:textStyle="bold" />
 
@@ -500,7 +542,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="15dp"
-                        app:cardElevation="6dp"
+                        app:cardElevation="3dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="3dp"
                         app:cardCornerRadius="8dp">
@@ -511,13 +553,20 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@color/secondary_m">
-
+                            <ImageView
+                                android:id="@+id/cvImg6"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="10dp"
+                                android:backgroundTint="#535B88"
+                                android:background="@drawable/round_person_add" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_toRightOf="@id/cvImg6"
                                 android:layout_centerVertical="true"
-                                android:layout_marginLeft="10dp"
                                 android:orientation="vertical">
                                 <LinearLayout
                                     android:layout_width="wrap_content"
@@ -526,25 +575,25 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textColor="@color/primary"
+                                        android:textColor="@color/black"
                                         android:textStyle="bold"
                                         android:layout_gravity="center_horizontal"
                                         android:text="Add Nominee"/>
 
 
-                                    <ImageView
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
-                                        android:src="@drawable/baseline_keyboard_arrow_right_24"
-                                        android:tint="@color/primary" />
+<!--                                    <ImageView-->
+<!--                                        android:layout_width="20dp"-->
+<!--                                        android:layout_height="20dp"-->
+<!--                                        android:src="@drawable/baseline_keyboard_arrow_right_24"-->
+<!--                                        android:tint="@color/primary" />-->
                                 </LinearLayout>
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Effortlessly nominate deserving individuals"
+                                    android:text="@string/user_nominee_add"
                                     android:textSize="12dp"
                                     android:layout_marginTop="2dp"
-                                    android:textColor="#7C7B7B" />
+                                    android:textColor="@color/textGrey" />
 
                                 <TextView
                                     android:id="@+id/tvHeaderNominee"
@@ -552,7 +601,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
                                     android:text="Required*"
-                                    android:textColor="@color/red"
+                                    android:textColor="@color/yellow"
                                     android:textSize="10sp"
                                     android:textStyle="bold" />
 
@@ -576,7 +625,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="15dp"
-                        app:cardElevation="6dp"
+                        app:cardElevation="3dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="3dp"
                         app:cardCornerRadius="8dp">
@@ -589,12 +638,19 @@
                             android:layout_height="wrap_content"
                             android:background="@color/secondary_m">
 
-
+                            <ImageView
+                                android:id="@+id/cvImg7"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="10dp"
+                                android:background="@drawable/round_account_balance"
+                                android:backgroundTint="#535B88" />
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_toRightOf="@+id/cvImg7"
                                 android:layout_centerVertical="true"
-                                android:layout_marginLeft="10dp"
                                 android:orientation="vertical">
                                 <LinearLayout
                                     android:layout_width="wrap_content"
@@ -603,25 +659,25 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textColor="@color/primary"
+                                        android:textColor="@color/black"
                                         android:textStyle="bold"
                                         android:layout_gravity="center_horizontal"
                                         android:text="Nominee Bank Account"/>
 
 
-                                    <ImageView
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
-                                        android:src="@drawable/baseline_keyboard_arrow_right_24"
-                                        android:tint="@color/primary" />
+<!--                                    <ImageView-->
+<!--                                        android:layout_width="20dp"-->
+<!--                                        android:layout_height="20dp"-->
+<!--                                        android:src="@drawable/baseline_keyboard_arrow_right_24"-->
+<!--                                        android:tint="@color/primary" />-->
                                 </LinearLayout>
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Add your nominee bank account for funds claim"
+                                    android:text="@string/user_nominee"
                                     android:textSize="12dp"
                                     android:layout_marginTop="2dp"
-                                    android:textColor="#7C7B7B" />
+                                    android:textColor="@color/textGrey" />
 
                                 <TextView
                                     android:id="@+id/tvHeaderNomineeBank"
@@ -629,7 +685,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
                                     android:text="Required*"
-                                    android:textColor="@color/red"
+                                    android:textColor="@color/yellow"
                                     android:textSize="10sp"
                                     android:textStyle="bold" />
 
@@ -654,7 +710,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="15dp"
-                        app:cardElevation="6dp"
+                        app:cardElevation="3dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="10dp"
                         app:cardCornerRadius="8dp">
@@ -665,13 +721,20 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@color/secondary_m">
-
+                            <ImageView
+                                android:id="@+id/cvImg8"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="10dp"
+                                android:background="@drawable/round_credit_card"
+                                android:backgroundTint="#535B88" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_toRightOf="@id/cvImg8"
                                 android:layout_centerVertical="true"
-                                android:layout_marginLeft="10dp"
                                 android:orientation="vertical">
                                 <LinearLayout
                                     android:layout_width="wrap_content"
@@ -680,25 +743,25 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textColor="@color/primary"
+                                        android:textColor="@color/black"
                                         android:textStyle="bold"
                                         android:layout_gravity="center_horizontal"
                                         android:text="Add Nominee CNIC"/>
 
 
-                                    <ImageView
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
-                                        android:src="@drawable/baseline_keyboard_arrow_right_24"
-                                        android:tint="@color/primary" />
+<!--                                    <ImageView-->
+<!--                                        android:layout_width="20dp"-->
+<!--                                        android:layout_height="20dp"-->
+<!--                                        android:src="@drawable/baseline_keyboard_arrow_right_24"-->
+<!--                                        android:tint="@color/primary" />-->
                                 </LinearLayout>
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Upload both side photo of your nominee CNIC"
+                                    android:text="@string/user_nomineeCNIC"
                                     android:textSize="12dp"
                                     android:layout_marginTop="2dp"
-                                    android:textColor="#7C7B7B" />
+                                    android:textColor="@color/textGrey" />
 
                                 <TextView
                                     android:id="@+id/tvHeaderNomineeCnic"
@@ -706,7 +769,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
                                     android:text="Required*"
-                                    android:textColor="@color/red"
+                                    android:textColor="@color/yellow"
                                     android:textSize="10sp"
                                     android:textStyle="bold" />
 
@@ -727,18 +790,19 @@
 
                     </androidx.cardview.widget.CardView>
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnStart"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
+                        android:paddingVertical="13dp"
                         android:layout_marginHorizontal="20dp"
-                        android:background="@drawable/bg_button"
                         android:layout_marginBottom="20dp"
-                        android:backgroundTint="@color/primary"
-                        android:drawableRight="@drawable/baseline_keyboard_arrow_right_24"
-                        android:drawableTint="@color/white"
-                        android:text="Get Started" />
+                        android:backgroundTint="@color/PrimaryVariantDark"
+                        android:text="Get Started"
+                        android:textStyle="bold"
+                        app:cornerRadius="10dp"
+                        />
 
 
                 </LinearLayout>
