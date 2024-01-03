@@ -3,8 +3,10 @@ package com.enfotrix.lifechanger.ui
 import User
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -40,6 +42,8 @@ import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import org.bouncycastle.crypto.params.Blake3Parameters.context
+
 
 class ActivityUserDetails : AppCompatActivity() {
 
@@ -195,6 +199,32 @@ class ActivityUserDetails : AppCompatActivity() {
             startApp()
         }
 
+
+        binding.layLogout.setOnClickListener{
+
+
+            val builder1: AlertDialog.Builder = AlertDialog.Builder(mContext)
+            builder1.setMessage("Are you sure you want to logout?")
+            builder1.setCancelable(true)
+
+            builder1.setPositiveButton(
+                "Yes",
+                DialogInterface.OnClickListener { dialog, id ->
+                    dialog.cancel()
+                    sharedPrefManager.clearWholeSharedPref()
+                    startActivity(Intent(mContext,ActivityLogin::class.java))
+                })
+
+            builder1.setNegativeButton(
+                "No",
+                DialogInterface.OnClickListener { dialog, id -> dialog.cancel() })
+
+            val alert11: AlertDialog = builder1.create()
+            alert11.show()
+
+
+
+        }
     }
 
     fun startApp() {
@@ -395,6 +425,15 @@ class ActivityUserDetails : AppCompatActivity() {
             binding.imgCheckUserPhoneNumber.setImageResource(R.drawable.check_small)
         }
 
+
+
+        if(checkCounter==1) binding.v1.setBackgroundColor(resources.getColor(R.color.primary))
+        if(checkCounter==2) binding.v2.setBackgroundColor(resources.getColor(R.color.primary))
+        if(checkCounter==3) binding.v3.setBackgroundColor(resources.getColor(R.color.primary))
+        if(checkCounter==4) binding.v4.setBackgroundColor(resources.getColor(R.color.primary))
+        if(checkCounter==5) binding.v5.setBackgroundColor(resources.getColor(R.color.primary))
+        if(checkCounter==6) binding.v6.setBackgroundColor(resources.getColor(R.color.primary))
+        if(checkCounter==7) binding.v7.setBackgroundColor(resources.getColor(R.color.primary))
 
         if (checkCounter == 7) {
             binding.btnStart.visibility = View.VISIBLE

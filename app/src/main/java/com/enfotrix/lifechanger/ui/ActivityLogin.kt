@@ -143,14 +143,16 @@ class ActivityLogin : AppCompatActivity() {
                     if (counter <= inputTextViews.size) {
                         inputTextViews[counter - 1].text = (index + 1).toString()
                     }
-                    if (counter == 6) {
 
-                        //Toast.makeText(mContext, "checking...", Toast.LENGTH_SHORT).show()
+                }
+                if (counter == 6) {
 
-                        val pin=""+tvInput1+tvInput2+tvInput3+tvInput4+tvInput5+tvInput6
-                        loginUser(user,pin,token)
 
-                    }
+                    Toast.makeText(mContext, "Checking...", Toast.LENGTH_SHORT).show()
+
+                    val pin=""+tvInput1.text+tvInput2.text+tvInput3.text+tvInput4.text+tvInput5.text+tvInput6.text
+                    loginUser(user,pin,token)
+
                 }
             }
         }
@@ -191,10 +193,18 @@ class ActivityLogin : AppCompatActivity() {
 
     private fun loginUser(user:User?,pin:String,token: String){
 
-        //pending, active, incomplete
+        //status
+        //pending= profile complete and admin approval pending  -> Main
+        //active = profile complete and admin approved (All Positive cases) -> Main
+        //incomplete = profile not complete and admin approval pending -> User Registration
+
+
 
         if (user != null) {
+            // Checking Pin
             if(user.pin.equals(pin)){
+
+                // active || pending
                 if(user.status.equals(constants.INVESTOR_STATUS_ACTIVE)||user.status.equals(constants.INVESTOR_STATUS_PENDING)){
                     utils.startLoadingAnimation()
                     FirebaseMessaging.getInstance().token
@@ -259,47 +269,44 @@ class ActivityLogin : AppCompatActivity() {
                     }
 
                 }
-                else{
+                // Incomplete
+                else if (user.status.equals(constants.INVESTOR_STATUS_INCOMPLETE)){
+                    utils.startLoadingAnimation()
+                    FirebaseMessaging.getInstance().token
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+
+                                // Get the device token
+                                val token = task.result
+                                lifecycleScope.launch {
+                                    userViewModel.updatedevicetoken(user.id,token)
 
 
 
-                    if(user!=null)
-                    {
-
-                        FirebaseMessaging.getInstance().token
-                            .addOnCompleteListener { task ->
-                                if (task.isSuccessful) {
-
-                                    // Get the device token
-                                    val token = task.result
-
-                                    lifecycleScope.launch {
-                                        userViewModel.updatedevicetoken(user.id,token)
-
-                                    }
-                                }
-                                else
-                                {
-                                    Toast.makeText(mContext, "Something went Wrong!!!", Toast.LENGTH_SHORT).show()
+                                    utils.endLoadingAnimation()
+                                    userViewModel.saveLoginAuth(user, user.id, true)//usre +token+login_boolean
+                                    startActivity(Intent(mContext,ActivityUserDetails::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
+                                    finish()
                                 }
                             }
-                        userViewModel.saveLoginAuth(user, token, true)//usre +token+login_boolean
-                        startActivity(Intent(mContext,ActivityUserDetails::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
-                        finish()
-                    }
+                            else
+                            {
+                                Toast.makeText(mContext, "Something went Wrong!!!", Toast.LENGTH_SHORT).show()
+                            }
+                        }
 
 
                 }
 
 
             }
-
-
+            // Incorrect PIN
+            else {
+                vibrate(mContext, 200)
+                Toast.makeText(mContext, "Incorrect Pin", Toast.LENGTH_SHORT).show()
+            }
         }
-        else {
-            vibrate(mContext, 200)
-            Toast.makeText(mContext, "Incorrect Pin", Toast.LENGTH_SHORT).show()
-        }
+
     }
 
 
@@ -326,13 +333,25 @@ class ActivityLogin : AppCompatActivity() {
                                 token= document.id
                             }
                             if(user?.status.equals(constants.INVESTOR_STATUS_ACTIVE) || user?.status.equals(constants.INVESTOR_STATUS_PENDING) || user?.status.equals(constants.INVESTOR_STATUS_INCOMPLETE) )
+                            {
                                 showDialogPin(user,token)
-                            else if(user?.status.equals(constants.INVESTOR_STATUS_BLOCKED))
+                            }
+                            else if(user?.status.equals(constants.INVESTOR_STATUS_BLOCKED)){
                                 binding.etCNIC.editText?.error =constants.INVESTOR_CNIC_BLOCKED
+                                Toast.makeText(mContext, constants.INVESTOR_CNIC_BLOCKED, Toast.LENGTH_SHORT).show()
+
+                            }
                             else if(documents.size()==0)
+                            {
                                 binding.etCNIC.editText?.error =constants.INVESTOR_CNIC_NOT_EXIST
+                                Toast.makeText(mContext, constants.INVESTOR_CNIC_NOT_EXIST, Toast.LENGTH_SHORT).show()
+                            }
                         }
-                        else binding.etCNIC.editText?.error =constants.INVESTOR_CNIC_NOT_EXIST
+                        else {
+                            binding.etCNIC.editText?.error =constants.INVESTOR_CNIC_NOT_EXIST
+                            Toast.makeText(mContext, constants.INVESTOR_CNIC_NOT_EXIST, Toast.LENGTH_SHORT).show()
+
+                        }
                     }
 
                 }

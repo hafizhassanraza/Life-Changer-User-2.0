@@ -6,10 +6,15 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
+import android.view.View
 import android.view.Window
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -46,6 +51,7 @@ class ActivitySignup : AppCompatActivity() {
     private lateinit var sharedPrefManager: SharedPrefManager
     private lateinit var repo: Repo
     private lateinit var user: User
+    private lateinit var dialog : Dialog
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -115,6 +121,106 @@ class ActivitySignup : AppCompatActivity() {
 
     fun showDialogPin() {
 
+
+
+        var counter= 0
+        dialog = Dialog (mContext,android.R.style.Theme_Black_NoTitleBar_Fullscreen)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+
+
+
+
+        //dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setContentView(R.layout.dialog_pin_new)
+
+        val tvOne = dialog.findViewById<TextView>(R.id.tvOne)
+        val tvTwo = dialog.findViewById<TextView>(R.id.tvTwo)
+        val tvThree = dialog.findViewById<TextView>(R.id.tvThree)
+        val tvFour = dialog.findViewById<TextView>(R.id.tvFour)
+        val tvFive = dialog.findViewById<TextView>(R.id.tvFive)
+        val tvSix = dialog.findViewById<TextView>(R.id.tvSix)
+        val tvSeven = dialog.findViewById<TextView>(R.id.tvSeven)
+        val tvEight = dialog.findViewById<TextView>(R.id.tvEight)
+        val tvNine = dialog.findViewById<TextView>(R.id.tvNine)
+        val tvZero = dialog.findViewById<TextView>(R.id.tvZero)
+
+        val tvForgotPassword = dialog.findViewById<TextView>(R.id.tvForgotPassword)
+
+        tvForgotPassword.visibility = View.GONE
+
+        val tvInput1 = dialog.findViewById<TextView>(R.id.tvInput1)
+        val tvInput2 = dialog.findViewById<TextView>(R.id.tvInput2)
+        val tvInput3 = dialog.findViewById<TextView>(R.id.tvInput3)
+        val tvInput4 = dialog.findViewById<TextView>(R.id.tvInput4)
+        val tvInput5 = dialog.findViewById<TextView>(R.id.tvInput5)
+        val tvInput6 = dialog.findViewById<TextView>(R.id.tvInput6)
+        val imgBack = dialog.findViewById<ImageView>(R.id.imgBack)
+        val imgBackSpace = dialog.findViewById<ImageView>(R.id.imgBackSpace)
+
+
+        val numberButtons = arrayOf(tvOne, tvTwo, tvThree, tvFour, tvFive, tvSix, tvSeven, tvEight, tvNine, tvZero)
+        val inputTextViews = arrayOf(tvInput1, tvInput2, tvInput3, tvInput4, tvInput5, tvInput6)
+        val backSpaceViews = arrayOf(tvOne, tvTwo, tvThree, tvFour, tvFive, tvSix)
+
+        numberButtons.forEachIndexed { index, button ->
+            button.setOnClickListener {
+                if (counter < 6) {
+                    vibrate(mContext, 50)
+
+                    counter++
+                    if (counter <= inputTextViews.size) {
+                        inputTextViews[counter - 1].text = (index + 1).toString()
+                    }
+
+                }
+                if (counter == 6) {
+
+
+                    if (user != null) {
+                        user.pin=""+tvInput1.text+tvInput2.text+tvInput3.text+tvInput4.text+tvInput5.text+tvInput6.text
+                        saveUser(user)
+
+                    }
+
+
+
+
+                }
+            }
+        }
+
+        imgBack.setOnClickListener { dialog.dismiss() }
+        imgBackSpace.setOnClickListener {
+            if (counter > 0) {
+                vibrate(mContext, 50)
+                inputTextViews[counter - 1].text = "_"
+                counter--
+            }
+        }
+
+
+
+
+
+
+        dialog.show()
+    }
+
+    fun vibrate(context: Context, duration: Long) {
+        val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // For Android 8.0 (API level 26) and above
+            vibrator.vibrate(VibrationEffect.createOneShot(duration, VibrationEffect.DEFAULT_AMPLITUDE))
+        } else {
+            // For devices below Android 8.0
+            @Suppress("DEPRECATION")
+            vibrator.vibrate(duration)
+        }
+    }
+
+ /*   fun showDialogPin() {
+
         val dialog = Dialog (mContext)
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -149,7 +255,7 @@ class ActivitySignup : AppCompatActivity() {
         }
 
         dialog.show()
-    }
+    }*/
 
 
 

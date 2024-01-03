@@ -245,8 +245,6 @@ class HomeFragment : Fragment() {
         else
         {
             binding.tvInActiveInvestment.text=sharedPrefManager.getInvestment().lastInvestment
-
-
         }
     }
 
@@ -267,56 +265,8 @@ class HomeFragment : Fragment() {
         dialog.setCancelable(true)
         dialog.show()
 
-
-
     }
 
-    /*fun profitTax(){
 
-        utils.startLoadingAnimation()
-        lifecycleScope.launch {
-            investmentViewModel.getProfitTax(sharedPrefManager.getToken())
-                .addOnCompleteListener{task ->
-                    utils.endLoadingAnimation()
-                    if (task.isSuccessful) {
-                        val list = ArrayList<ModelProfitTax>()
-                        if(task.result.size()>0){
-                            for (document in task.result) list.add( document.toObject(ModelProfitTax::class.java))
-                            sharedPrefManager.putProfitTaxList(list)
-
-                        }
-                    }
-                    else Toast.makeText(mContext, constants.SOMETHING_WENT_WRONG_MESSAGE, Toast.LENGTH_SHORT).show()
-
-                }
-                .addOnFailureListener{
-                    utils.endLoadingAnimation()
-                    Toast.makeText(mContext, it.message+"", Toast.LENGTH_SHORT).show()
-
-                }
-        }
-    }*/
-
-//    lifecycleScope.launch {
-//               userViewModel.getUserAccounts(constants.ADMIN)
-//                   .addOnCompleteListener{task ->
-//                       utils.endLoadingAnimation()
-//                       if (task.isSuccessful) {
-//                           val list = ArrayList<ModelBankAccount>()
-//                           if(task.result.size()>0){\
-//                               for (document in task.result) list.add( document.toObject(ModelBankAccount::class.java))
-//                               sharedPrefManager.putAdminBankList(list)
-//                               Toast.makeText(mContext, constants.ACCOPUNT_ADDED_MESSAGE, Toast.LENGTH_SHORT).show()
-//                           }
-//                       }
-//                       else Toast.makeText(mContext, constants.SOMETHING_WENT_WRONG_MESSAGE, Toast.LENGTH_SHORT).show()
-//
-//                   }
-//                   .addOnFailureListener{
-//                       utils.endLoadingAnimation()
-//                       Toast.makeText(mContext, it.message+"", Toast.LENGTH_SHORT).show()
-//
-//                   }
-//           }
 
 }
