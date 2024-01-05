@@ -27,6 +27,7 @@ import com.enfotrix.lifechanger.Constants
 import com.enfotrix.lifechanger.databinding.FragmentHomeBinding
 import com.enfotrix.lifechanger.Models.HomeViewModel
 import com.enfotrix.lifechanger.Models.InvestmentModel
+import com.enfotrix.lifechanger.Models.ModelAnnouncement
 import com.enfotrix.lifechanger.Models.ModelBankAccount
 import com.enfotrix.lifechanger.Models.ModelProfitTax
 import com.enfotrix.lifechanger.Models.Notificaion
@@ -37,6 +38,7 @@ import com.enfotrix.lifechanger.SharedPrefManager
 import com.enfotrix.lifechanger.Utils
 import com.enfotrix.lifechanger.api.ApiUtilities
 import com.enfotrix.lifechanger.ui.ActivityInvestment
+import com.enfotrix.lifechanger.ui.ActivityNavDrawer
 import com.enfotrix.lifechanger.ui.ActivityNewInvestmentReq
 import com.enfotrix.lifechanger.ui.ActivityNewWithdrawReq
 import com.enfotrix.lifechanger.ui.ActivityProfitTax
@@ -120,6 +122,13 @@ class HomeFragment : Fragment() {
             }
         }
 
+
+        binding.imgDrawer.setOnClickListener{
+            if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
+            else startActivity(Intent(mContext, ActivityNavDrawer::class.java))
+
+        }
+
         binding.btnWithdraw.setOnClickListener{
             if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
             else startActivity(Intent(mContext, ActivityNewWithdrawReq::class.java))
@@ -157,6 +166,25 @@ class HomeFragment : Fragment() {
     }
 
     private fun checkData() {
+
+
+
+        db.collection(constants.ANNOUNCEMENT_COLLECTION).document("Rx3xDtgwOH7hMdWxkf94")
+            .addSnapshotListener { snapshot, firebaseFirestoreException ->
+                firebaseFirestoreException?.let {
+                    Toast.makeText( mContext, it.message.toString(), Toast.LENGTH_SHORT).show()
+                    return@addSnapshotListener
+                }
+
+                snapshot?.let { document ->
+                    val announcement = document.toObject<ModelAnnouncement>()
+                    if (announcement != null) {
+                        sharedPrefManager.putAnnouncement(announcement)
+                        setData()
+                    }
+                }
+            }
+
 
         db.collection(constants.INVESTOR_COLLECTION).document(sharedPrefManager.getToken())
             .addSnapshotListener { snapshot, firebaseFirestoreException ->
@@ -219,6 +247,7 @@ class HomeFragment : Fragment() {
 
     private fun setData() {
 
+        binding.tvAnnouncement.text=sharedPrefManager.getAnnouncement().announcement
 
         binding.tvUserName.text= sharedPrefManager.getUser().firstName
         //binding.uName.text= sharedPrefManager.getUser().firstName

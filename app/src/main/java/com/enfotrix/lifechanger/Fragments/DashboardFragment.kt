@@ -83,7 +83,8 @@ class DashboardFragment : Fragment() {
         dialog = Dialog(requireContext())
         dialog.setContentView(R.layout.dialog_for_contact_us)
         dialogFA=Dialog(requireContext())
-            dialogFA.setContentView(R.layout.dialog_for_financial_advisor)
+
+        dialogFA.setContentView(R.layout.dialog_for_financial_advisor)
 
         sharedPrefManager = SharedPrefManager(mContext)
 

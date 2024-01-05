@@ -12,6 +12,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/img_drawer"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_centerVertical="true"
+                android:tint="@color/primary"
+                android:src="@drawable/ic_nav_drawer"/>
+
+
+        </RelativeLayout>
+
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cd1"
             android:layout_width="match_parent"
@@ -54,23 +71,16 @@
 
                     <TextView
                         android:id="@+id/tvUserName"
-                        android:layout_width="wrap_content"
+                        android:layout_width="280dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter"
-                        android:text="Hassan Raza"
+                        android:text="Malik Muhaammad Mujahid Khokhar"
                         android:layout_marginTop="5dp"
                         android:textColor="@color/white"
-                        android:textSize="22dp"
+                        android:textSize="18dp"
                         android:textStyle="bold" />
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Investor"
-                        android:textColor="@color/white"
-                        android:layout_marginTop="-5dp"
-                        android:textSize="7sp" />
 
                     <ImageView
                         android:layout_width="40dp"
@@ -123,7 +133,7 @@
                             android:id="@+id/tvBalance"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="20,0000000"
+                            android:text="20,00000000000"
                             android:textColor="@color/white"
                             android:textSize="25dp"
                             android:textStyle="bold" />
@@ -324,16 +334,79 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+
+
+
+
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter"
-            android:text="History"
+            android:text="Pending Amounts"
+            android:textColor="@color/textGrey"
+            android:layout_marginVertical="10dp"
+            android:layout_marginLeft="15dp"
+            android:alpha="0.6"
+
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:elevation="15dp"
+            android:layout_marginBottom="5dp"
+            app:cardCornerRadius="15dp"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+                <ImageView
+                    android:id="@+id/img_announcement"
+                    android:layout_width="90dp"
+                    android:layout_height="100dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginVertical="30dp"
+                    android:src="@drawable/ic_announcement"/>
+
+
+                <TextView
+                    android:id="@+id/tvAnnouncement"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@+id/img_announcement"
+                    android:textSize="12dp"
+                    android:paddingRight="10dp"
+                    android:layout_marginVertical="30dp"
+                    android:fontFamily="@font/inter"
+                    android:textStyle=""
+                    android:text="No announcement"
+
+                    />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter"
+            android:text="Investment Portfolio"
             android:textColor="@color/textGrey"
             android:layout_marginLeft="15dp"
             android:textSize="16dp"
-            android:layout_marginBottom="7dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginVertical="10dp"
             android:alpha="0.6"
             android:textStyle="bold" />
         <HorizontalScrollView
@@ -343,6 +416,7 @@
             android:scrollbars="none"
             android:layout_marginStart="1dp"
             android:layout_marginEnd="1dp"
+            android:layout_marginBottom="20dp"
             android:foregroundGravity="center_vertical">
 
             <!-- child view -->
@@ -975,6 +1049,14 @@
             </LinearLayout>
         </HorizontalScrollView>
 
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginVertical="20dp"
+            android:alpha="0.5"
+            android:src="@drawable/enfotrix_logo"/>
     </LinearLayout>
 
 
