@@ -187,7 +187,7 @@ class SharedPrefManager(context: Context) {
     }
     fun getProfitList(): List<TransactionModel>{
 
-        val json = sharedPref.getString("Profit", "") ?: ""
+        val json = sharedPref.getString("ListProfit", "") ?: ""
         val type: Type = object : TypeToken<List<TransactionModel?>?>() {}.getType()
         //return Gson().fromJson(json, type)
 
@@ -199,7 +199,7 @@ class SharedPrefManager(context: Context) {
     }
     fun getTaxList(): List<TransactionModel>{
 
-        val json = sharedPref.getString("Tax", "") ?: ""
+        val json = sharedPref.getString("ListTax", "") ?: ""
         val type: Type = object : TypeToken<List<TransactionModel?>?>() {}.getType()
         //return Gson().fromJson(json, type)
 
@@ -246,6 +246,14 @@ class SharedPrefManager(context: Context) {
     }
     fun putWithdrawReqList(list: List<TransactionModel>) {
         editor.putString("ListWithdrawReq", Gson().toJson(list))
+        editor.commit()
+    }
+    fun putProfitList(list: List<TransactionModel>) {
+        editor.putString("ListProfit", Gson().toJson(list))
+        editor.commit()
+    }
+    fun putTaxList(list: List<TransactionModel>) {
+        editor.putString("ListTax", Gson().toJson(list))
         editor.commit()
     }
     fun putInvestmentReqList(list: List<TransactionModel>) {

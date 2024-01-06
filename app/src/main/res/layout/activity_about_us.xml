@@ -24,7 +24,7 @@
         app:cardCornerRadius="20dp"
         app:cardElevation="10dp"
         >
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -40,7 +40,20 @@
                 android:fontFamily="@font/montserrate_semi_bold"
                 android:textSize="17dp"
                 />
-        </RelativeLayout>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textSize="17dp"
+                    android:text="Welcome to Life Changer! We're a company that's been making a difference since 2019. Our mission is simple yet powerful: to help people secure a lifetime of profits through smart investments. Founded by Muhammad Mujahid, who also serves as the CEO of Enfotrix and Sorric, both acclaimed Software and IT Companies, Life Changer is a golden opportunity for anyone seeking sustainable financial growth. At Life Changer, we prioritize the financial well-being of our investors. We believe in providing opportunities that pave the way for lifelong profits. Whether you're new to investing or an experienced player, Life Changer offers a safe and promising platform to achieve your financial goals. With two convenient office locations in Sargodha and Islamabad, we aim to connect with and serve individuals seeking a secure investment option. Our team is dedicated to ensuring transparency, reliability, and success for all our investors. Join us on this journey towards financial empowerment. Discover the potential for a brighter, more prosperous future with Life Changer!"
+                    />
+            </ScrollView>
+
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 </LinearLayout>

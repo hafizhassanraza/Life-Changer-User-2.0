@@ -1,6 +1,9 @@
 package com.enfotrix.lifechanger.ui
 
 import android.content.Context
+import android.icu.text.SimpleDateFormat
+import android.icu.util.Calendar
+import android.os.Build
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -9,9 +12,14 @@ import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.enfotrix.lifechanger.Adapters.WithdrawViewPagerAdapter
 import com.enfotrix.lifechanger.Constants
 import com.enfotrix.lifechanger.Models.InvestmentViewModel
@@ -21,11 +29,21 @@ import com.enfotrix.lifechanger.Models.UserViewModel
 import com.enfotrix.lifechanger.R
 import com.enfotrix.lifechanger.SharedPrefManager
 import com.enfotrix.lifechanger.Utils
+import com.enfotrix.lifechanger.databinding.ActivityInvestmentBinding
 import com.enfotrix.lifechanger.databinding.ActivityWithdrawBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 class ActivityWithdraw : AppCompatActivity() {
+
+
+
+    private lateinit var selectedCalendar: Calendar
+    private var startFormattedDate = ""
+    private var endFormattedDate= ""
+    @RequiresApi(Build.VERSION_CODES.N)
+    val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
 
     private lateinit var binding: ActivityWithdrawBinding
     private val investmentViewModel: InvestmentViewModel by viewModels()
@@ -46,14 +64,55 @@ class ActivityWithdraw : AppCompatActivity() {
         utils = Utils(mContext)
         constants= Constants()
         sharedPrefManager = SharedPrefManager(mContext)
-        setTitle("My Withdraws")
 
 
 
-        getData()
+
+        binding.imgBack.setOnClickListener{finish()}
+
+        val spinner = binding.spWithdraws
+
+        val adapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.withdraw_options, // Replace with your array of items
+            R.layout.item_investment_selection_spiner // Use the custom layout
+        )
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        spinner.adapter = adapter
+        binding.rvWithdraws.layoutManager = LinearLayoutManager(mContext)
+
+        binding.spWithdraws.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
+                // Show a Toast message when an item is selected
+                //val selectedItem = parentView?.getItemAtPosition(position).toString()
+
+                // Check the index and show a different message for 1st and 2nd index
+                when (position) {
+                    0 -> {
+                        binding.rvWithdraws.adapter= investmentViewModel.getApprovedWithdrawReqAdapter(constants.FROM_APPROVED_WITHDRAW_REQ)
+                    }
+                    1 -> {
+                        binding.rvWithdraws.adapter= investmentViewModel.getPendingWithdrawReqAdapter(constants.FROM_PENDING_WITHDRAW_REQ)
+                    }
+                }
+
+
+            }
+
+            override fun onNothingSelected(parentView: AdapterView<*>?) {
+                // Do nothing if nothing is selected
+            }
+        }
+
+
+
+        //withdraw_options
+
     }
 
-    private fun setupTabLayout() {
+ /*   private fun setupTabLayout() {
         TabLayoutMediator(
             binding.tabLayout, binding.viewPager
         ) { tab,
@@ -113,6 +172,6 @@ class ActivityWithdraw : AppCompatActivity() {
             // Otherwise, select the previous step.
             viewPager.currentItem = viewPager.currentItem - 1
         }
-    }
+    }*/
 
 }

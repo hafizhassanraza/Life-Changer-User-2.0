@@ -27,11 +27,13 @@ import com.enfotrix.lifechanger.Constants
 import com.enfotrix.lifechanger.databinding.FragmentHomeBinding
 import com.enfotrix.lifechanger.Models.HomeViewModel
 import com.enfotrix.lifechanger.Models.InvestmentModel
+import com.enfotrix.lifechanger.Models.InvestmentViewModel
 import com.enfotrix.lifechanger.Models.ModelAnnouncement
 import com.enfotrix.lifechanger.Models.ModelBankAccount
 import com.enfotrix.lifechanger.Models.ModelProfitTax
 import com.enfotrix.lifechanger.Models.Notificaion
 import com.enfotrix.lifechanger.Models.NotificationData
+import com.enfotrix.lifechanger.Models.TransactionModel
 import com.enfotrix.lifechanger.Models.UserViewModel
 import com.enfotrix.lifechanger.R
 import com.enfotrix.lifechanger.SharedPrefManager
@@ -61,6 +63,7 @@ class HomeFragment : Fragment() {
     private val userViewModel: UserViewModel by viewModels()
     private val db = Firebase.firestore
 
+    private val investmentViewModel: InvestmentViewModel by viewModels()
 
 
 
@@ -160,10 +163,37 @@ class HomeFragment : Fragment() {
 
 
         checkData()
-       setData()
+        setData()
+        getData()
 
         return root
     }
+
+    private fun getData(){
+
+        utils.startLoadingAnimation()
+        db.collection(constants.TRANSACTION_REQ_COLLECTION)
+            .whereEqualTo(constants.INVESTOR_ID, sharedPrefManager.getToken())
+            .addSnapshotListener { snapshot, firebaseFirestoreException ->
+                utils.endLoadingAnimation()
+                firebaseFirestoreException?.let {
+                    Toast.makeText(mContext, it.message.toString(), Toast.LENGTH_SHORT).show()
+                    return@addSnapshotListener
+                }
+                snapshot?.let { task ->
+
+                    val transactionList = task.documents.mapNotNull { document -> document.toObject(TransactionModel::class.java) }
+                    sharedPrefManager.putInvestmentReqList(transactionList.filter { it.type == constants.TRANSACTION_TYPE_INVESTMENT })
+                    sharedPrefManager.putWithdrawReqList(transactionList.filter { it.type == constants.TRANSACTION_TYPE_WITHDRAW })
+                    sharedPrefManager.putProfitList(transactionList.filter { it.type == constants.TRANSACTION_TYPE_PROFIT })
+                    sharedPrefManager.putTaxList(transactionList.filter { it.type == constants.TRANSACTION_TYPE_TAX })
+
+                }
+
+            }
+
+    }
+
 
     private fun checkData() {
 

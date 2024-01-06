@@ -17,11 +17,15 @@ import com.enfotrix.lifechanger.Models.UserViewModel
 import com.enfotrix.lifechanger.Pdf.PdfTransaction
 import com.enfotrix.lifechanger.SharedPrefManager
 import com.enfotrix.lifechanger.Utils
+import com.enfotrix.lifechanger.databinding.ActivityInvestmentBinding
 import com.enfotrix.lifechanger.databinding.ActivityProfitTaxBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class ActivityProfitTax : AppCompatActivity() {
+
+
+
 
     private val db = Firebase.firestore
 
@@ -48,20 +52,19 @@ class ActivityProfitTax : AppCompatActivity() {
         constants= Constants()
         sharedPrefManager = SharedPrefManager(mContext)
 
-        binding.rvProfitTax.layoutManager = LinearLayoutManager(mContext)
-
-       /* binding.rvProfitTax.adapter=
-            TransactionsAdapter(constants.FROM_PROFIT,sharedPrefManager.getProfitList().filter{ it.status.equals(constants.TRANSACTION_STATUS_APPROVED) }.sortedByDescending { it.createdAt })
-*/
-        setTitle("Profit Details")
-
-        getData()
 
 
 
-        binding.pdfProfit.setOnClickListener {
+
+        binding.rvProfit.layoutManager = LinearLayoutManager(mContext)
+        binding.rvProfit.adapter= investmentViewModel.getProfitAdapter(constants.FROM_PROFIT)
+
+
+
+        /*binding.pdfProfit.setOnClickListener {
             generatePDF()
-        }
+        }*/
+        binding.imgBack.setOnClickListener{finish()}
 
 
     }
@@ -99,7 +102,14 @@ class ActivityProfitTax : AppCompatActivity() {
     }
 
 
-    fun getData(){
+
+
+
+
+
+
+
+    /*fun getData(){
 
 
 
@@ -117,14 +127,13 @@ class ActivityProfitTax : AppCompatActivity() {
 
                         for(document in task.result)listTransaction.add( document.toObject(TransactionModel::class.java))
 
-                        binding.rvProfitTax.adapter=
-                            TransactionsAdapter(constants.FROM_PROFIT,listTransaction.sortedByDescending { it.createdAt })
+                        binding.rvProfitTax.adapter= TransactionsAdapter(constants.FROM_PROFIT,listTransaction.sortedByDescending { it.createdAt })
 
 
 
                     }
                 }
             }
-    }
+    }*/
 
 }

@@ -10,6 +10,8 @@
     <string name="tvCreateAccount">Don\'t have an account?</string>
 
 
+
+
     <string name="term_condition"><b><u>Term and Conditions</u></b></string>
     <string name="login"><b><u>Login</u></b></string>
     <string name="timer"><b>00 sec</b></string>
@@ -18,6 +20,15 @@
     <string name="clear"><b>Clear all</b></string>
     <string name="upload"><b><u>Select</u></b></string>
     <string name="newAccount"> <u>Add a new account?</u></string>
+
+    <string-array name="investment_options">
+        <item>Approved Investments</item>
+        <item>Pending Investments</item>
+    </string-array>
+    <string-array name="withdraw_options">
+        <item>Approved Withdraws</item>
+        <item>Pending Withdraws</item>
+    </string-array>
 
 
     <string-array name="nomineeRelationSpiner">

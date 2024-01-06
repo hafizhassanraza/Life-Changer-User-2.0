@@ -26,6 +26,10 @@ import com.google.firebase.ktx.Firebase
 class ActivityTax : AppCompatActivity() {
 
 
+
+
+
+
     private val db = Firebase.firestore
 
     private val investmentViewModel: InvestmentViewModel by viewModels()
@@ -52,18 +56,16 @@ class ActivityTax : AppCompatActivity() {
         constants= Constants()
         sharedPrefManager = SharedPrefManager(mContext)
 
-        binding.rvProfitTax.layoutManager = LinearLayoutManager(mContext)
 
-        /* binding.rvProfitTax.adapter=
-             TransactionsAdapter(constants.FROM_PROFIT,sharedPrefManager.getProfitList().filter{ it.status.equals(constants.TRANSACTION_STATUS_APPROVED) }.sortedByDescending { it.createdAt })
- */
-        setTitle("Tax Details")
+        binding.rvTax.layoutManager = LinearLayoutManager(mContext)
+        binding.rvTax.adapter= investmentViewModel.getTaxAdapter(constants.FROM_TAX)
 
-        getData()
 
-        binding.pdfTax.setOnClickListener {
+
+        /*binding.pdfProfit.setOnClickListener {
             generatePDF()
-        }
+        }*/
+        binding.imgBack.setOnClickListener{finish()}
 
 
     }
@@ -102,7 +104,7 @@ class ActivityTax : AppCompatActivity() {
     }
 
 
-    fun getData(){
+  /*  fun getData(){
 
 
 
@@ -128,5 +130,5 @@ class ActivityTax : AppCompatActivity() {
                     }
                 }
             }
-    }
+    }*/
 }

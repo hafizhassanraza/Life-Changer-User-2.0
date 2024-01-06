@@ -57,7 +57,7 @@ class InvestmentViewModel(context: Application) : AndroidViewModel(context) {
     }
     fun getTaxAdapter( from:String): TransactionsAdapter {
         //return ProfitTaxAdapter(from,sharedPrefManager.getProfitTaxList().filter{ it.type.equals(constants.TAX_TYPE) }.sortedByDescending { it.createdAt })
-        return TransactionsAdapter(from,sharedPrefManager.getProfitList().filter{ it.status.equals(constants.TRANSACTION_STATUS_APPROVED) }.sortedByDescending { it.createdAt })
+        return TransactionsAdapter(from,sharedPrefManager.getTaxList().filter{ it.status.equals(constants.TRANSACTION_STATUS_APPROVED) }.sortedByDescending { it.createdAt })
 
     }
     fun getPendingWithdrawReqAdapter( from:String): TransactionsAdapter {
