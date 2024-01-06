@@ -79,6 +79,11 @@ class ActivityNavDrawer : AppCompatActivity() {
         sharedPrefManager=SharedPrefManager(mContext)
 
 
+
+        //dialog intilization.
+        dialog = Dialog(mContext)
+        dialog.setContentView(R.layout.dialog_for_contact_us)
+
         binding.layInvestorAccount.setOnClickListener {
             startActivity(Intent(mContext, ActivityInvestorAccounts::class.java))
         }
@@ -116,6 +121,7 @@ class ActivityNavDrawer : AppCompatActivity() {
         binding.layAboutUs.setOnClickListener {
             startActivity(Intent(mContext,ActivityAboutUs::class.java))
         }
+
 
 
 

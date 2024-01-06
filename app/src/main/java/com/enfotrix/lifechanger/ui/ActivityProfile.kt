@@ -87,7 +87,7 @@ class ActivityProfile : AppCompatActivity() {
         sharedPrefManager = SharedPrefManager(mContext)
         investor=sharedPrefManager.getUser()
         setimage()
-        binding.updatepassword.setOnClickListener {
+        binding.layPin.setOnClickListener {
             showUpdatePinDialog()
         }
 

@@ -444,6 +444,7 @@
                         android:layout_below="@+id/v1">
 
                         <LinearLayout
+                            android:id="@+id/layPin"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="horizontal"
