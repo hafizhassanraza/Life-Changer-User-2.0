@@ -61,7 +61,7 @@ class TransactionsAdapter (var activity:String, val data: List<TransactionModel>
                         itemBinding.tvApprovedDate.visibility = View.GONE
                      }
 
-                    if (activity == constant.FROM_APPROVED_WITHDRAW_REQ) {
+                    if (activity == constant.FROM_APPROVED_WITHDRAW_REQ || activity == constant.FROM_APPROVED_INVESTMENT_REQ ) {
 
                          itemBinding.tvApprovedDate.text = formattedDate
                      }

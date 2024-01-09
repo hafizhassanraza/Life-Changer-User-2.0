@@ -221,6 +221,18 @@ class SharedPrefManager(context: Context) {
             emptyList()
         }
     }
+    fun getTransactionList(): List<TransactionModel>{
+
+        val json = sharedPref.getString("ListTransaction", "") ?: ""
+        val type: Type = object : TypeToken<List<TransactionModel?>?>() {}.getType()
+        //return Gson().fromJson(json, type)
+
+        return if (!json.isNullOrEmpty()) {
+            Gson().fromJson(json, type) ?: emptyList()
+        } else {
+            emptyList()
+        }
+    }
 
 
 
@@ -258,6 +270,10 @@ class SharedPrefManager(context: Context) {
     }
     fun putInvestmentReqList(list: List<TransactionModel>) {
         editor.putString("ListInvestmentReq", Gson().toJson(list))
+        editor.commit()
+    }
+    fun putTransactionList(list: List<TransactionModel>) {
+        editor.putString("ListTransaction", Gson().toJson(list))
         editor.commit()
     }
     fun putInvestorPhoneNumber(IsPhoneNumberAdded: Boolean) {

@@ -44,6 +44,7 @@ import com.enfotrix.lifechanger.ui.ActivityNavDrawer
 import com.enfotrix.lifechanger.ui.ActivityNewInvestmentReq
 import com.enfotrix.lifechanger.ui.ActivityNewWithdrawReq
 import com.enfotrix.lifechanger.ui.ActivityProfitTax
+import com.enfotrix.lifechanger.ui.ActivityStatment
 import com.enfotrix.lifechanger.ui.ActivityTax
 import com.enfotrix.lifechanger.ui.ActivityWithdraw
 import com.google.firebase.Timestamp
@@ -82,8 +83,6 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-
         mContext=requireContext()
         utils = Utils(mContext)
         constants= Constants()
@@ -144,6 +143,12 @@ class HomeFragment : Fragment() {
 
 
         }
+        binding.layStatment.setOnClickListener{
+            if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
+            else startActivity(Intent(mContext, ActivityStatment::class.java))
+
+
+        }
         binding.layProfit.setOnClickListener{
             if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
             else startActivity(Intent(mContext, ActivityProfitTax::class.java))
@@ -183,6 +188,7 @@ class HomeFragment : Fragment() {
                 snapshot?.let { task ->
 
                     val transactionList = task.documents.mapNotNull { document -> document.toObject(TransactionModel::class.java) }
+                    sharedPrefManager.putTransactionList(transactionList)
                     sharedPrefManager.putInvestmentReqList(transactionList.filter { it.type == constants.TRANSACTION_TYPE_INVESTMENT })
                     sharedPrefManager.putWithdrawReqList(transactionList.filter { it.type == constants.TRANSACTION_TYPE_WITHDRAW })
                     sharedPrefManager.putProfitList(transactionList.filter { it.type == constants.TRANSACTION_TYPE_PROFIT })
@@ -281,30 +287,26 @@ class HomeFragment : Fragment() {
 
         binding.tvUserName.text= sharedPrefManager.getUser().firstName
         //binding.uName.text= sharedPrefManager.getUser().firstName
-        binding.tvBalance.text= sharedPrefManager.getInvestment().investmentBalance
+        //binding.tvBalance.text= sharedPrefManager.getInvestment().investmentBalance
 
-        if(sharedPrefManager.getInvestment().lastProfit.isEmpty())
-        {
-            binding.availableProfit.text="0"
-        }
-        else if(sharedPrefManager.getInvestment().lastProfit==null){
-            binding.availableProfit.text="0"
-        }
-        else
-        {
-            binding.availableProfit.text=sharedPrefManager.getInvestment().lastProfit
-        }
-        if(sharedPrefManager.getInvestment().lastInvestment.isEmpty())
-        {
-            binding.tvInActiveInvestment.text="0"
-        }
-        else if(sharedPrefManager.getInvestment().lastInvestment==null){
-            binding.tvInActiveInvestment.text="0"
-        }
-        else
-        {
-            binding.tvInActiveInvestment.text=sharedPrefManager.getInvestment().lastInvestment
-        }
+
+
+
+        val investmentBalance = sharedPrefManager.getInvestment().investmentBalance
+        val lastProfit = sharedPrefManager.getInvestment().lastProfit
+        val lastInvestment = sharedPrefManager.getInvestment().lastInvestment
+        val ExpextedSum = getTextFromInvestment(investmentBalance).toDouble() + getTextFromInvestment(lastProfit).toDouble() + getTextFromInvestment(lastInvestment).toDouble()
+
+        binding.tvBalance.text = getTextFromInvestment(investmentBalance)
+        binding.availableProfit.text = getTextFromInvestment(lastProfit)
+        binding.tvInActiveInvestment.text = getTextFromInvestment(lastInvestment)
+        binding.tvExpectedSum.text = getTextFromInvestment(ExpextedSum.toInt().toString())
+
+
+    }
+
+    fun getTextFromInvestment(value: String?): String {
+        return if (value.isNullOrEmpty()) "0" else value
     }
 
     override fun onDestroyView() {

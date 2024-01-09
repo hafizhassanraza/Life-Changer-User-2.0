@@ -162,32 +162,30 @@ class ActivitySignup : AppCompatActivity() {
         val inputTextViews = arrayOf(tvInput1, tvInput2, tvInput3, tvInput4, tvInput5, tvInput6)
         val backSpaceViews = arrayOf(tvOne, tvTwo, tvThree, tvFour, tvFive, tvSix)
 
+
+
+
         numberButtons.forEachIndexed { index, button ->
             button.setOnClickListener {
                 if (counter < 6) {
                     vibrate(mContext, 50)
-
                     counter++
                     if (counter <= inputTextViews.size) {
-                        inputTextViews[counter - 1].text = (index + 1).toString()
+                        inputTextViews[counter - 1].text = if (index == 9) "0" else (index + 1).toString()
                     }
-
                 }
                 if (counter == 6) {
-
 
                     if (user != null) {
                         user.pin=""+tvInput1.text+tvInput2.text+tvInput3.text+tvInput4.text+tvInput5.text+tvInput6.text
                         saveUser(user)
 
                     }
-
-
-
-
                 }
             }
         }
+
+
 
         imgBack.setOnClickListener { dialog.dismiss() }
         imgBackSpace.setOnClickListener {

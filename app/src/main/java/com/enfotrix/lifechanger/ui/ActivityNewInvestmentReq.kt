@@ -108,6 +108,14 @@ class ActivityNewInvestmentReq : AppCompatActivity(), InvestorAccountsAdapter.On
 
             else {
 
+
+                val investmentBalance = sharedPrefManager.getInvestment().investmentBalance
+                val lastProfit = sharedPrefManager.getInvestment().lastProfit
+                val lastInvestment = sharedPrefManager.getInvestment().lastInvestment
+                val ExpextedSum = getTextFromInvestment(investmentBalance).toDouble() + getTextFromInvestment(lastProfit).toDouble() + getTextFromInvestment(lastInvestment).toDouble()
+
+
+
                 addInvestmentReq(
                     TransactionModel(
                         sharedPrefManager.getToken(),
@@ -115,7 +123,7 @@ class ActivityNewInvestmentReq : AppCompatActivity(), InvestorAccountsAdapter.On
                         constants.TRANSACTION_STATUS_PENDING,
                         binding.tvBalance.text.toString(),
                         adminAccountID,
-                        sharedPrefManager.getInvestment().investmentBalance,
+                        ExpextedSum.toInt().toString(),
                         accountID
                     )
                 )
@@ -124,6 +132,9 @@ class ActivityNewInvestmentReq : AppCompatActivity(), InvestorAccountsAdapter.On
         }
 
 
+    }
+    fun getTextFromInvestment(value: String?): String {
+        return if (value.isNullOrEmpty()) "0" else value
     }
 
     fun showReceiptDialog() {

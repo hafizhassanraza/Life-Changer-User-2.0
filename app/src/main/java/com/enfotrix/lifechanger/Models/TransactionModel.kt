@@ -5,7 +5,7 @@ import com.google.firebase.Timestamp
 
 data class TransactionModel @JvmOverloads constructor(
     var investorID: String = "",
-    var type: String = "", //invest, withdraw
+    var type: String = "", //invest, withdraw , tax, proft
     var status: String = "", // pending ,approved , reject
     var amount: String = "",
     var receiverAccountID: String = "", // account id

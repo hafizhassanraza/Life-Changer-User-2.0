@@ -129,30 +129,23 @@ class ActivityLogin : AppCompatActivity() {
         val imgBack = dialog.findViewById<ImageView>(R.id.imgBack)
         val imgBackSpace = dialog.findViewById<ImageView>(R.id.imgBackSpace)
 
-
         val numberButtons = arrayOf(tvOne, tvTwo, tvThree, tvFour, tvFive, tvSix, tvSeven, tvEight, tvNine, tvZero)
         val inputTextViews = arrayOf(tvInput1, tvInput2, tvInput3, tvInput4, tvInput5, tvInput6)
-        val backSpaceViews = arrayOf(tvOne, tvTwo, tvThree, tvFour, tvFive, tvSix)
+        val backSpaceViews = arrayOf(imgBackSpace) // Move tvZero to numberButtons array
 
         numberButtons.forEachIndexed { index, button ->
             button.setOnClickListener {
                 if (counter < 6) {
                     vibrate(mContext, 50)
-
                     counter++
                     if (counter <= inputTextViews.size) {
-                        inputTextViews[counter - 1].text = (index + 1).toString()
+                        inputTextViews[counter - 1].text = if (index == 9) "0" else (index + 1).toString()
                     }
-
                 }
                 if (counter == 6) {
-
-
                     Toast.makeText(mContext, "Checking...", Toast.LENGTH_SHORT).show()
-
-                    val pin=""+tvInput1.text+tvInput2.text+tvInput3.text+tvInput4.text+tvInput5.text+tvInput6.text
-                    loginUser(user,pin,token)
-
+                    val pin = "" + tvInput1.text + tvInput2.text + tvInput3.text + tvInput4.text + tvInput5.text + tvInput6.text
+                    loginUser(user, pin, token)
                 }
             }
         }
@@ -166,11 +159,10 @@ class ActivityLogin : AppCompatActivity() {
             }
         }
 
-
-         tvForgotPassword.setOnClickListener{
-             dialog.dismiss()
-             showForgetPasswordDialog()
-         }
+        tvForgotPassword.setOnClickListener {
+            dialog.dismiss()
+            showForgetPasswordDialog()
+        }
 
 
 

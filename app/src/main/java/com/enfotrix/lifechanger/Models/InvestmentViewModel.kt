@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.enfotrix.lifechanger.Adapters.InvestorAccountsAdapter
 import com.enfotrix.lifechanger.Adapters.ProfitTaxAdapter
+import com.enfotrix.lifechanger.Adapters.StatmentAdapter
 import com.enfotrix.lifechanger.Adapters.TransactionsAdapter
 import com.enfotrix.lifechanger.Constants
 import com.enfotrix.lifechanger.Data.Repo
@@ -72,6 +73,9 @@ class InvestmentViewModel(context: Application) : AndroidViewModel(context) {
 
     fun getApprovedInvestmentReqAdapter( from:String): TransactionsAdapter {
         return TransactionsAdapter(from,sharedPrefManager.getInvestmentReqList().filter{ it.status.equals(constants.TRANSACTION_STATUS_APPROVED) }.sortedByDescending { it.createdAt })
+    }
+    fun getStatmentAdapter( ): StatmentAdapter {
+        return StatmentAdapter(sharedPrefManager.getTransactionList().filter{ it.status.equals(constants.TRANSACTION_STATUS_APPROVED) }.sortedByDescending { it.createdAt })
     }
 
 

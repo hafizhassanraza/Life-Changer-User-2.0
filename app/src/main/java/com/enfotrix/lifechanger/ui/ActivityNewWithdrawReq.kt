@@ -273,6 +273,14 @@ class ActivityNewWithdrawReq : AppCompatActivity(), InvestorAccountsAdapter.OnIt
             confirmationDialog.dismiss()
         }
         btnSave.setOnClickListener {
+
+            val investmentBalance = sharedPrefManager.getInvestment().investmentBalance
+            val lastProfit = sharedPrefManager.getInvestment().lastProfit
+            val lastInvestment = sharedPrefManager.getInvestment().lastInvestment
+            val ExpextedSum = getTextFromInvestment(investmentBalance).toDouble() + getTextFromInvestment(lastProfit).toDouble() + getTextFromInvestment(lastInvestment).toDouble()
+
+
+
             addWithdrawReq(
                 TransactionModel(
                     sharedPrefManager.getToken(),
@@ -280,11 +288,16 @@ class ActivityNewWithdrawReq : AppCompatActivity(), InvestorAccountsAdapter.OnIt
                     constants.TRANSACTION_STATUS_PENDING,
                     binding.tvBalance.text.toString(),
                     accountID,
-                    sharedPrefManager.getInvestment().investmentBalance
+                    ExpextedSum.toInt().toString(),
                 )
             )
             confirmationDialog.dismiss()
         }
         confirmationDialog.show()
+    }
+
+
+    fun getTextFromInvestment(value: String?): String {
+        return if (value.isNullOrEmpty()) "0" else value
     }
 }

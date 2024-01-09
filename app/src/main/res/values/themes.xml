@@ -17,7 +17,7 @@
         <item name="android:textColor">@color/black</item>
         <!-- Customize your theme here. -->
     </style>
-    <style name="CustomTabLayoutTextAppearance" par ent="TextAppearance.Design.Tab">
+    <style name="CustomTabLayoutTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">12sp</item>
     </style>
     <style name="Theme.LifeChanger.NoActionBar">
