@@ -1127,7 +1127,7 @@
                             android:layout_height="100dp"
                             android:layout_centerInParent="true"
                             android:layout_marginBottom="20dp"
-                            android:src="@drawable/ic_tax" />
+                            android:src="@drawable/ic_statment" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"

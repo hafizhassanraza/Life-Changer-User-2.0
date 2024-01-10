@@ -279,8 +279,6 @@ class ActivityNewWithdrawReq : AppCompatActivity(), InvestorAccountsAdapter.OnIt
             val lastInvestment = sharedPrefManager.getInvestment().lastInvestment
             val ExpextedSum = getTextFromInvestment(investmentBalance).toDouble() + getTextFromInvestment(lastProfit).toDouble() + getTextFromInvestment(lastInvestment).toDouble()
 
-
-
             addWithdrawReq(
                 TransactionModel(
                     sharedPrefManager.getToken(),
