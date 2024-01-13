@@ -18,12 +18,12 @@
             android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/img_drawer"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="15dp"
+                android:padding="5dp"
                 android:layout_centerVertical="true"
-                android:tint="#414042"
-                android:src="@drawable/baseline_dehaze_24"/>
+                android:src="@drawable/ic_nav"/>
 
 
         </RelativeLayout>
@@ -33,7 +33,7 @@
             android:id="@+id/cd1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:layout_marginHorizontal="15dp"
             android:elevation="15dp"
             app:cardCornerRadius="8dp"

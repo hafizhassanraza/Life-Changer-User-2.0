@@ -447,24 +447,25 @@ class ActivityLogin : AppCompatActivity() {
     }
     private fun checkNomineeCnic() {
 
-            dialog1 = Dialog(this) // Use 'this' or 'requireContext()' depending on your context
+        dialog1 = Dialog(this) // Use 'this' or 'requireContext()' depending on your context
 
-            dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog1.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog1.setCancelable(true)
-            dialog1.setContentView(R.layout.dialog_forget_password)
+        dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog1.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog1.setCancelable(true)
+        dialog1.setContentView(R.layout.dialog_forget_password)
 
-            val cnicTextInputLayout = dialog1.findViewById<TextInputLayout>(R.id.etcnic)
-            val cnicEditText = cnicTextInputLayout.editText // Find the EditText within the TextInputLayout
+        val cnicTextInputLayout = dialog1.findViewById<TextInputLayout>(R.id.etcnic)
+        val cnicEditText = cnicTextInputLayout.editText // Find the EditText within the TextInputLayout
 
-            val btn = dialog1.findViewById<MaterialButton>(R.id.btnEnter)
-            val title = dialog1.findViewById<TextView>(R.id.title)
+        val btn = dialog1.findViewById<MaterialButton>(R.id.btnEnter)
+        val title = dialog1.findViewById<TextView>(R.id.title)
         title.text="Enter your Nominee CNIC"
-            btn.setOnClickListener {
-                var cnic = cnicEditText?.text.toString() // Retrieve the text from the EditText
-                checkNomineeCNIC(cnic)
-                dialog1.dismiss()
-            }
+
+        btn.setOnClickListener {
+            var cnic = cnicEditText?.text.toString() // Retrieve the text from the EditText
+            checkNomineeCNIC(cnic)
+            dialog1.dismiss()
+        }
 
             dialog1.show()
 
@@ -657,9 +658,9 @@ class ActivityLogin : AppCompatActivity() {
 
     }
 
-    override fun onBackPressed() {
+    /*override fun onBackPressed() {
         finishAffinity()
-    }
+    }*/
 }
 
 
