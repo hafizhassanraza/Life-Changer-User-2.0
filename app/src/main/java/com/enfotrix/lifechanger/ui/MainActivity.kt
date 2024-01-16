@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         appUpdateManager= AppUpdateManagerFactory.create(this@MainActivity)
         checkUpdates()
 
-        val navView: BottomNavigationView = binding.navView
+       //val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         // Passing each menu ID as a set of Ids because each
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
             )
         )
         //setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+     //   navView.setupWithNavController(navController)
     }
 
 
@@ -80,21 +80,21 @@ class MainActivity : AppCompatActivity() {
 
     private val listener = InstallStateUpdatedListener { state ->
         if (state.installStatus() == InstallStatus.DOWNLOADED) {
-            popupSnackbarForCompleteUpdate()
+    //        popupSnackbarForCompleteUpdate()
         }
     }
 
-    private fun popupSnackbarForCompleteUpdate() {
-        Snackbar.make(
-            findViewById(R.id.linear),
-            "An update has just been downloaded",
-            Snackbar.LENGTH_INDEFINITE
-        ).apply {
-            setAction("Install") { appUpdateManager.completeUpdate() }
-                .setActionTextColor(getColor(android.R.color.holo_blue_dark))
-            show()
-        }
-    }
+//    private fun popupSnackbarForCompleteUpdate() {
+//        Snackbar.make(
+//            findViewById(R.id.linear),
+//            "An update has just been downloaded",
+//            Snackbar.LENGTH_INDEFINITE
+//        ).apply {
+//            setAction("Install") { appUpdateManager.completeUpdate() }
+//                .setActionTextColor(getColor(android.R.color.holo_blue_dark))
+//            show()
+//        }
+//    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity() {
         appUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
 
             if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
-                popupSnackbarForCompleteUpdate()
+          //      popupSnackbarForCompleteUpdate()
             }
         }
     }

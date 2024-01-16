@@ -43,6 +43,7 @@ import com.enfotrix.lifechanger.ui.ActivityInvestment
 import com.enfotrix.lifechanger.ui.ActivityNavDrawer
 import com.enfotrix.lifechanger.ui.ActivityNewInvestmentReq
 import com.enfotrix.lifechanger.ui.ActivityNewWithdrawReq
+import com.enfotrix.lifechanger.ui.ActivityNotifications
 import com.enfotrix.lifechanger.ui.ActivityProfitTax
 import com.enfotrix.lifechanger.ui.ActivityStatment
 import com.enfotrix.lifechanger.ui.ActivityTax
@@ -140,6 +141,12 @@ class HomeFragment : Fragment() {
         binding.layInvestment.setOnClickListener{
             if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
             else startActivity(Intent(mContext, ActivityInvestment::class.java))
+
+
+        }
+        binding.imgNotification.setOnClickListener{
+            if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
+            else startActivity(Intent(mContext, ActivityNotifications::class.java))
 
 
         }
