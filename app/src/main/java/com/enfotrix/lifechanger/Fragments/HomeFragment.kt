@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.enfotrix.lifechanger.Constants
 import com.enfotrix.lifechanger.databinding.FragmentHomeBinding
 import com.enfotrix.lifechanger.Models.HomeViewModel
@@ -44,6 +45,7 @@ import com.enfotrix.lifechanger.ui.ActivityNavDrawer
 import com.enfotrix.lifechanger.ui.ActivityNewInvestmentReq
 import com.enfotrix.lifechanger.ui.ActivityNewWithdrawReq
 import com.enfotrix.lifechanger.ui.ActivityNotifications
+import com.enfotrix.lifechanger.ui.ActivityProfile
 import com.enfotrix.lifechanger.ui.ActivityProfitTax
 import com.enfotrix.lifechanger.ui.ActivityStatment
 import com.enfotrix.lifechanger.ui.ActivityTax
@@ -170,6 +172,10 @@ class HomeFragment : Fragment() {
             if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
             else startActivity(Intent(mContext, ActivityTax::class.java))
 
+        }
+
+        binding.cd10.setOnClickListener{
+            startActivity(Intent(mContext, ActivityProfile::class.java))
         }
 
 
@@ -299,6 +305,7 @@ class HomeFragment : Fragment() {
 
 
 
+
         val investmentBalance = sharedPrefManager.getInvestment().investmentBalance
         val lastProfit = sharedPrefManager.getInvestment().lastProfit
         val lastInvestment = sharedPrefManager.getInvestment().lastInvestment
@@ -309,6 +316,13 @@ class HomeFragment : Fragment() {
         binding.tvInActiveInvestment.text = getTextFromInvestment(lastInvestment)
         binding.tvExpectedSum.text = getTextFromInvestment(ExpextedSum.toInt().toString())
 
+
+
+        Glide.with(mContext)
+            .load(sharedPrefManager.getUser().photo)
+            .centerCrop()
+            .placeholder(R.drawable.profile_person_icon) // Placeholder image while loading
+            .into(binding.imageView)
 
     }
 

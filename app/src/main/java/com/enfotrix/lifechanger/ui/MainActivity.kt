@@ -113,9 +113,11 @@ class MainActivity : AppCompatActivity() {
 
     private val activityResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
+
             if (result.resultCode != RESULT_OK) {
                 Toast.makeText(this@MainActivity, "Error", Toast.LENGTH_SHORT).show()
             }
+
         }
 
 

@@ -78,8 +78,8 @@ class ActivityProfile : AppCompatActivity() {
         }*/
 
         binding.imgUser.setOnClickListener {
-            Toast.makeText(mContext, "Available soon", Toast.LENGTH_SHORT).show()
-            // showPhotoDialog()
+            //Toast.makeText(mContext, "Available soon", Toast.LENGTH_SHORT).show()
+            openGallery()
         }
 
         utils = Utils(mContext)

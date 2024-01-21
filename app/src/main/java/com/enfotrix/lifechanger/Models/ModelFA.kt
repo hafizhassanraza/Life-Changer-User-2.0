@@ -17,6 +17,7 @@ data class ModelFA  @JvmOverloads constructor(
     var pin: String = "",
     var id: String = "",
     var designantion: String = "",
+    var profit: String = "0",
     val createdAt: Timestamp = Timestamp.now() // Creation timestamp
 ){
 
