@@ -102,6 +102,64 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:62412168385:android:b43cd238cbced8a33e4840",
+        "android_client_info": {
+          "package_name": "com.enfotrix.adminlifechanger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "62412168385-1acqn8ftedenabcq414naui4tlrtidua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5FJL1Ce63V3CZ0XCMJMidDlwvC69MA8E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "62412168385-1acqn8ftedenabcq414naui4tlrtidua.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:62412168385:android:0ad8f488b7b04a2c3e4840",
+        "android_client_info": {
+          "package_name": "com.enfotrix.agentlifechanger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "62412168385-1acqn8ftedenabcq414naui4tlrtidua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5FJL1Ce63V3CZ0XCMJMidDlwvC69MA8E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "62412168385-1acqn8ftedenabcq414naui4tlrtidua.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:62412168385:android:1696fbf47a6c2f463e4840",
         "android_client_info": {
           "package_name": "com.enfotrix.agentpanel"
@@ -131,9 +189,67 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:62412168385:android:9f0a0092631a7f793e4840",
+        "mobilesdk_app_id": "1:62412168385:android:07b092578efef3e63e4840",
         "android_client_info": {
-          "package_name": "com.enfotrix.lifechanger"
+          "package_name": "com.enfotrix.falifechanger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "62412168385-1acqn8ftedenabcq414naui4tlrtidua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5FJL1Ce63V3CZ0XCMJMidDlwvC69MA8E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "62412168385-1acqn8ftedenabcq414naui4tlrtidua.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:62412168385:android:1a444832f20a7d473e4840",
+        "android_client_info": {
+          "package_name": "com.enfotrix.life_changer_user_2_0"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "62412168385-1acqn8ftedenabcq414naui4tlrtidua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5FJL1Ce63V3CZ0XCMJMidDlwvC69MA8E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "62412168385-1acqn8ftedenabcq414naui4tlrtidua.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:62412168385:android:9a60ba546cc54f6f3e4840",
+        "android_client_info": {
+          "package_name": "com.enfotrix.lifechanger_new"
         }
       },
       "oauth_client": [
@@ -269,6 +385,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "62412168385-rhd4611rtuv1btk7r0al7th4n8so0csi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.enfotrix.lifechanger.agent",
+            "certificate_hash": "c1eea82b1323286eab6d76252ea2d804322b2742"
+          }
+        },
         {
           "client_id": "62412168385-1acqn8ftedenabcq414naui4tlrtidua.apps.googleusercontent.com",
           "client_type": 3

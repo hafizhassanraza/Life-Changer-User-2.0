@@ -7,16 +7,16 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.enfotrix.lifechanger.Fragments.HomeFragment"
+        android:name="com.enfotrix.life_changer_user_2_0.Fragments.HomeFragment"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.enfotrix.lifechanger.Fragments.DashboardFragment"
+        android:name="com.enfotrix.life_changer_user_2_0.Fragments.DashboardFragment"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.enfotrix.lifechanger.Fragments.NotificationsFragment"
+        android:name="com.enfotrix.life_changer_user_2_0.Fragments.NotificationsFragment"
         tools:layout="@layout/fragment_notifications" />
 </navigation>

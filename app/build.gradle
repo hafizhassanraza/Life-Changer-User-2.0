@@ -5,13 +5,13 @@ plugins {
 }
 
 android {
-    namespace 'com.enfotrix.lifechanger'
+    namespace 'com.enfotrix.life_changer_user_2_0'
     compileSdk 34
 
 
     defaultConfig {
 
-        applicationId "com.enfotrix.lifechanger"
+        applicationId "com.enfotrix.life_changer_user_2_0"
         minSdk 23
         targetSdk 33
         versionCode 8
