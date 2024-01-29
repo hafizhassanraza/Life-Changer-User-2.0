@@ -83,7 +83,7 @@ class ActivityPhoneNumber : AppCompatActivity() {
             })*/
             if(IsValid() ){
                 lifecycleScope.launch {
-                    var user:User=sharedPrefManager.getUser()
+                    var user:User=sharedPrefManager.getUser()!!
                     user.phone= binding.ccp.getFullNumberWithPlus()
 
                     userViewModel.updateUser(user).observe(this@ActivityPhoneNumber) {
@@ -155,7 +155,7 @@ class ActivityPhoneNumber : AppCompatActivity() {
                     dialog.dismiss()
 
                     lifecycleScope.launch {
-                        var user:User=sharedPrefManager.getUser()
+                        var user:User=sharedPrefManager.getUser()!!
                         user.phone= binding.ccp.getFullNumberWithPlus()
 
                         userViewModel.updateUser(user).observe(this@ActivityPhoneNumber) {

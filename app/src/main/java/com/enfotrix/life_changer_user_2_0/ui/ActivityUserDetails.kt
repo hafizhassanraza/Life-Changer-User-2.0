@@ -227,7 +227,7 @@ class ActivityUserDetails : AppCompatActivity() {
     }
 
     fun startApp() {
-        var user: User = sharedPrefManager.getUser()
+        var user: User = sharedPrefManager.getUser()!!
 
         if (user.status.equals(constants.INVESTOR_STATUS_INCOMPLETE)) {
             utils.startLoadingAnimation()
@@ -713,7 +713,7 @@ if(etAccountTittle.text.isNotEmpty() || etAccountNumber.text.isNotEmpty()  ) {
         userViewModel.uploadPhoto(imageUri, type)
             .addOnSuccessListener { taskSnapshot ->
                 taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
-                    var user: User = sharedPrefManager.getUser()
+                    var user: User = sharedPrefManager.getUser()!!
                     user.photo = uri.toString()
 
                     lifecycleScope.launch {
@@ -797,7 +797,7 @@ if(etAccountTittle.text.isNotEmpty() || etAccountNumber.text.isNotEmpty()  ) {
 
                 if (type.equals(constants.VALUE_DIALOG_FLOW_INVESTOR_CNIC)) {
                     // Update user photo in the user object
-                    val user: User = sharedPrefManager.getUser()
+                    val user: User = sharedPrefManager.getUser()!!
                     user.cnic_front = downloadUrls[0] // Assuming the front image URL is at index 0
                     user.cnic_back = downloadUrls[1] // Assuming the front image URL is at index 0
 

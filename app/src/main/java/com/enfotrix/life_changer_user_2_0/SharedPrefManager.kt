@@ -361,19 +361,18 @@ class SharedPrefManager(context: Context) {
 
     }*/
 
-    fun getUser(): User {
+    fun getUser(): User? {
         val json = sharedPref.getString("Investor", "") ?: ""
-        return Gson().fromJson(json, User::class.java)
-        /*return User(
-            sharedPref.getString("cnic", "")!!,
-            sharedPref.getString("firstName", "")!!,
-            sharedPref.getString("lastName", "")!!,
-            sharedPref.getString("address", "")!!,
-            sharedPref.getString("phone", "")!!,
-            sharedPref.getString("status", "")!!,
-            sharedPref.getString("pin", "")!!
-
-        )*/
+        if (json.isEmpty()) {
+            return null
+        } else {
+            return try {
+                Gson().fromJson(json, User::class.java)
+            } catch (e: JsonSyntaxException) {
+                // Handle parsing exception, log error, or return null
+                null
+            }
+        }
     }
 
 

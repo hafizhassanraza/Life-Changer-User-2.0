@@ -249,10 +249,10 @@ class ActivityNavDrawer : AppCompatActivity() {
     }
 
     private fun setData() {
-        Glide.with(mContext).load(sharedPrefManager.getUser().photo).centerCrop()
+        Glide.with(mContext).load(sharedPrefManager.getUser()!!.photo).centerCrop()
             .placeholder(R.drawable.ic_launcher_background).into(binding.imgUser);
-        binding.tvUserName.text = sharedPrefManager.getUser().firstName
-        binding.tvCNIC.text = sharedPrefManager.getUser().cnic
+        binding.tvUserName.text = sharedPrefManager.getUser()!!.firstName
+        binding.tvCNIC.text = sharedPrefManager.getUser()!!.cnic
 
     }
     fun showLogoutDialog(): Boolean {

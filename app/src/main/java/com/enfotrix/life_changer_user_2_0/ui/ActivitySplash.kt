@@ -62,7 +62,7 @@ class ActivitySplash : AppCompatActivity() {
 
 
              if(sharedPrefManager.isLoggedIn()==true){
-                 if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_ACTIVE)||sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING))
+                 if(sharedPrefManager.getUser()!!.status.equals(constants.INVESTOR_STATUS_ACTIVE)||sharedPrefManager.getUser()!!.status.equals(constants.INVESTOR_STATUS_PENDING))
                  {
 
                      startActivity(Intent(mContext,MainActivity::class.java))

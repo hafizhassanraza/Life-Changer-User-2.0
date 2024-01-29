@@ -89,7 +89,7 @@ class NotificationsFragment : Fragment() {
         utils = Utils(mContext)
         constants = Constants()
         sharedPrefManager = SharedPrefManager(mContext)
-        investor=sharedPrefManager.getUser()
+        investor=sharedPrefManager.getUser()!!
         setimage()
         binding.updatepassword.setOnClickListener {
             showUpdatePinDialog()
@@ -155,7 +155,7 @@ dialogPhoto.show()
             val taskSnapshot = userViewModel.uploadPhoto(imageUri, type).await()
 
             taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
-                val modelFa: User = sharedPrefManager.getUser()
+                val modelFa: User = sharedPrefManager.getUser()!!
                 modelFa.photo = uri.toString()
 
                 lifecycleScope.launch {
@@ -252,8 +252,8 @@ dialogPhoto.show()
     }
 
     private fun checkData() {
-        if (!sharedPrefManager.getUser().fa_id.equals("")) {
-            db.collection(constants.FA_COLLECTION).document(sharedPrefManager.getUser().fa_id)
+        if (!sharedPrefManager.getUser()!!.fa_id.equals("")) {
+            db.collection(constants.FA_COLLECTION).document(sharedPrefManager.getUser()!!.fa_id)
                 .addSnapshotListener { snapshot, firebaseFirestoreException ->
                     firebaseFirestoreException?.let {
                         Toast.makeText(mContext, it.message.toString(), Toast.LENGTH_SHORT).show()
@@ -287,13 +287,14 @@ dialogPhoto.show()
     }
 
     private fun setData() {
-        Glide.with(mContext).load(sharedPrefManager.getUser().photo).centerCrop()
+
+        Glide.with(mContext).load(sharedPrefManager.getUser()!!.photo).centerCrop()
             .placeholder(R.drawable.ic_launcher_background).into(binding.imgUser);
-        binding.tvUserName.text = sharedPrefManager.getUser().firstName
-        binding.tvCNIC.text = sharedPrefManager.getUser().cnic
-        binding.tvAddress.text = sharedPrefManager.getUser().address
-        binding.tvFatherName.text = sharedPrefManager.getUser().lastName
-        binding.tvPhoneNumber.text = sharedPrefManager.getUser().phone
+        binding.tvUserName.text = sharedPrefManager.getUser()!!.firstName
+        binding.tvCNIC.text = sharedPrefManager.getUser()!!.cnic
+        binding.tvAddress.text = sharedPrefManager.getUser()!!.address
+        binding.tvFatherName.text = sharedPrefManager.getUser()!!.lastName
+        binding.tvPhoneNumber.text = sharedPrefManager.getUser()!!.phone
 
         binding.tvNomineeName.text = sharedPrefManager.getNominee().firstName
         binding.tvNomineeFatherName.text = sharedPrefManager.getNominee().lastName
@@ -360,7 +361,7 @@ dialogPhoto.show()
 
         btnSetPin.setOnClickListener {
             val completePin = "${pin1.text}${pin2.text}${pin3.text}${pin4.text}${pin5.text}${pin6.text}"
-            if (completePin == sharedPrefManager.getUser().pin) {
+            if (completePin == sharedPrefManager.getUser()!!.pin) {
                 if (completePin.contains("-")) {
                     Toast.makeText(requireContext(), "Enter valid pin", Toast.LENGTH_SHORT).show()
                 } else {

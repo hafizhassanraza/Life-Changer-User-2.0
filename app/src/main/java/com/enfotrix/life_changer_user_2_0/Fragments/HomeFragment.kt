@@ -80,7 +80,7 @@ class HomeFragment : Fragment() {
 
 
         binding.btnInvest.setOnClickListener{
-            if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
+            if(sharedPrefManager.getUser()!!.status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
             else {/*
             //handle the code for notification
                             val notification = Notificaion(user.userdevicetoken, NotificationData("Withdraw Request", "Body work title"))
@@ -114,47 +114,47 @@ class HomeFragment : Fragment() {
 
 
         binding.imgDrawer.setOnClickListener{
-            if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
+            if(sharedPrefManager.getUser()!!.status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
             else startActivity(Intent(mContext, ActivityNavDrawer::class.java))
 
         }
 
         binding.btnWithdraw.setOnClickListener{
-            if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
+            if(sharedPrefManager.getUser()!!.status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
             else startActivity(Intent(mContext, ActivityNewWithdrawReq::class.java))
 
         }
 
         binding.layInvestment.setOnClickListener{
-            if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
+            if(sharedPrefManager.getUser()!!.status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
             else startActivity(Intent(mContext, ActivityInvestment::class.java))
 
 
         }
         binding.imgNotification.setOnClickListener{
-            if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
+            if(sharedPrefManager.getUser()!!.status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
             else startActivity(Intent(mContext, ActivityNotifications::class.java))
 
 
         }
         binding.layStatment.setOnClickListener{
-            if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
+            if(sharedPrefManager.getUser()!!.status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
             else startActivity(Intent(mContext, ActivityStatment::class.java))
 
 
         }
         binding.layProfit.setOnClickListener{
-            if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
+            if(sharedPrefManager.getUser()!!.status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
             else startActivity(Intent(mContext, ActivityProfitTax::class.java))
         }
 
         binding.layWithdraw.setOnClickListener{
-            if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
+            if(sharedPrefManager.getUser()!!.status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
             else startActivity(Intent(mContext, ActivityWithdraw::class.java))
         }
 
         binding.layTax.setOnClickListener{
-            if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
+            if(sharedPrefManager.getUser()!!.status.equals(constants.INVESTOR_STATUS_PENDING)) showDialogRequest()
             else startActivity(Intent(mContext, ActivityTax::class.java))
 
         }
@@ -220,9 +220,6 @@ class HomeFragment : Fragment() {
 
             }
 
-        if(sharedPrefManager.getUser().userdevicetoken.isNullOrEmpty()){
-
-
             FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
                 if (!task.isSuccessful) {
                     Log.w(TAG, "Fetching FCM registration token failed", task.exception)
@@ -233,13 +230,12 @@ class HomeFragment : Fragment() {
                 val deviceTokenFCM = task.result
                 Log.d("token", deviceTokenFCM)
 
-                var user =sharedPrefManager.getUser()
-                user.userdevicetoken=deviceTokenFCM
-                db.collection(constants.INVESTOR_COLLECTION).document(sharedPrefManager.getToken())
-                    .set(user)
-                })
 
-            }
+                var user =sharedPrefManager.getUser()
+                user!!.userdevicetoken=deviceTokenFCM
+                db.collection(constants.INVESTOR_COLLECTION).document(sharedPrefManager.getToken())
+                    .set(user!!)
+            })
 
         /*FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
@@ -352,7 +348,7 @@ class HomeFragment : Fragment() {
 
         binding.tvAnnouncement.text=sharedPrefManager.getAnnouncement().announcement
 
-        binding.tvUserName.text= sharedPrefManager.getUser().firstName
+        binding.tvUserName.text= sharedPrefManager.getUser()!!.firstName
         //binding.uName.text= sharedPrefManager.getUser().firstName
         //binding.tvBalance.text= sharedPrefManager.getInvestment().investmentBalance
 
@@ -371,7 +367,7 @@ class HomeFragment : Fragment() {
         binding.tvExpectedSum.text = getTextFromInvestment(ExpextedSum.toInt().toString())
 
         Glide.with(mContext)
-            .load(sharedPrefManager.getUser().photo)
+            .load(sharedPrefManager.getUser()!!.photo)
             .centerCrop()
             .placeholder(R.drawable.profile_person_icon) // Placeholder image while loading
             .into(binding.imageView)

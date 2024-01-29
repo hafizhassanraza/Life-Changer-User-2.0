@@ -11,8 +11,12 @@ import android.util.Log
 import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import com.enfotrix.life_changer_user_2_0.Constants
 import com.enfotrix.life_changer_user_2_0.R
+import com.enfotrix.life_changer_user_2_0.SharedPrefManager
 import com.enfotrix.life_changer_user_2_0.ui.ActivityNotifications
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.google.firebase.messaging.remoteMessage
@@ -21,8 +25,23 @@ import kotlin.random.Random
 class NotificationService : FirebaseMessagingService(){
 
 
+
     override fun onNewToken(token: String) {
         super.onNewToken(token)
+
+
+        var user =SharedPrefManager(applicationContext).getUser()
+
+
+        // if user profile not created yet
+        if(user!=null){
+            if(!user.userdevicetoken.isNullOrEmpty()){
+                user.userdevicetoken= token
+                Firebase.firestore.collection(Constants().INVESTOR_COLLECTION).document(user.id).set(user)
+            }
+        }
+
+
     }
 
     val channelId="AssignId"

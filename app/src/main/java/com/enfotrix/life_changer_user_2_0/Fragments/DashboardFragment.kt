@@ -178,9 +178,9 @@ class DashboardFragment : Fragment() {
 
     private fun checkData() {
 
-        if(!sharedPrefManager.getUser().fa_id.equals("")){
+        if(!sharedPrefManager.getUser()!!.fa_id.equals("")){
 
-            db.collection(constants.FA_COLLECTION).document(sharedPrefManager.getUser().fa_id)
+            db.collection(constants.FA_COLLECTION).document(sharedPrefManager.getUser()!!.fa_id)
                 .addSnapshotListener { snapshot, firebaseFirestoreException ->
                     firebaseFirestoreException?.let {
                         Toast.makeText( mContext, it.message.toString(), Toast.LENGTH_SHORT).show()

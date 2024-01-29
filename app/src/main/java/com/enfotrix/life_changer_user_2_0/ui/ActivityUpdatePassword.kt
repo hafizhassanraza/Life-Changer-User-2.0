@@ -77,7 +77,7 @@ class ActivityUpdatePassword : AppCompatActivity() {
 
     private fun storeInFireStore(completePin: String) {
         var user1 = sharedPrefManager.getUser()
-        user1.pin = completePin
+        user1!!.pin = completePin
         db.collection("Investors").document(sharedPrefManager.getToken()).set(user1)
             .addOnCompleteListener {
                 if (it.isSuccessful){
