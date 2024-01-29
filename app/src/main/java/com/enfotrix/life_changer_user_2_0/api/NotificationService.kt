@@ -40,8 +40,6 @@ class NotificationService : FirebaseMessagingService(){
                 Firebase.firestore.collection(Constants().INVESTOR_COLLECTION).document(user.id).set(user)
             }
         }
-
-
     }
 
     val channelId="AssignId"

@@ -232,9 +232,12 @@ class HomeFragment : Fragment() {
 
 
                 var user =sharedPrefManager.getUser()
-                user!!.userdevicetoken=deviceTokenFCM
-                db.collection(constants.INVESTOR_COLLECTION).document(sharedPrefManager.getToken())
-                    .set(user!!)
+                if(!(user!!.userdevicetoken.equals(deviceTokenFCM))){
+                    user!!.userdevicetoken=deviceTokenFCM
+
+                    db.collection(constants.INVESTOR_COLLECTION).document(sharedPrefManager.getToken())
+                        .set(user!!)
+                }
             })
 
         /*FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
