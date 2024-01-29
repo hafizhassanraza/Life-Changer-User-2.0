@@ -33,7 +33,6 @@ class ActivityNotifications : AppCompatActivity() {
 
         binding = ActivityNotificationsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.title = "Investment Request"
 
         mContext = this@ActivityNotifications
         utils = Utils(mContext)
@@ -44,55 +43,10 @@ class ActivityNotifications : AppCompatActivity() {
         adapter = AdapterNotifications(notificationsList)
         binding.rvNoti.adapter = adapter
 
-        setTitle("")
-        getNotificationsList() // Initialize the list when the activity is created
+        setData()
     }
 
 
-    private fun getNotificationsList() {
-        val notificationCollection = FirebaseFirestore.getInstance().collection(constants.NOTIFICATION_COLLECTION)
-
-        // Fetch the documents
-        notificationCollection.get().addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                // Create a batched write to update the "read" field for all documents
-                val batch = FirebaseFirestore.getInstance().batch()
-
-                for (document in task.result!!) {
-                    val notification = document.toObject(NotificationModel::class.java)
-
-                    // Update the "read" field to true
-                    batch.update(notificationCollection.document(document.id), "read", true)
-                }
-
-                // Commit the batched write
-                batch.commit().addOnCompleteListener { commitTask ->
-                    if (commitTask.isSuccessful) {
-                        // Handle the success
-                        Toast.makeText(mContext, "All notifications marked as read", Toast.LENGTH_SHORT).show()
-                    } else {
-                        // Handle the failure
-                        Toast.makeText(mContext, "Error updating notifications", Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-                // Clear the previous list to avoid duplicates
-                notificationsList.clear()
-
-                // Iterate through the documents and add them to the list
-                for (document in task.result!!) {
-                    val notification = document.toObject(NotificationModel::class.java)
-                    notification.id = document.id
-                    notificationsList.add(notification)
-                }
-
-                // Notify the adapter that the dataset has changed
-                adapter.notifyDataSetChanged()
-            } else {
-                // Handle the error
-                Toast.makeText(mContext, "Error fetching notifications", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
+    private fun setData() { binding.rvNoti.adapter = AdapterNotifications(sharedPrefManager.getNotificationList()) }
 
 }

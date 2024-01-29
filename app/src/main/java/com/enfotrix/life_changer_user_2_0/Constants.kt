@@ -24,6 +24,7 @@ public class Constants  {
     public var INVESTOR_PIN= "pin"
     public var ACCOUNT_HOLDER= "account_holder"
     public var INVESTOR_ID= "investorID"
+    public var USER_ID= "userID"
     public var type= "investorID"
     public var TRANSACTION_TYPE= "type"
 

@@ -25,17 +25,33 @@
                 android:src="@drawable/ic_nav"/>
 
 
-
-            <ImageView
-                android:id="@+id/img_notification"
+            <RelativeLayout
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:padding="5dp"
-                android:alpha="0.8"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="2dp"
-                android:layout_toLeftOf="@+id/cd10"
-                android:src="@drawable/notification_icon"/>
+                android:layout_toLeftOf="@+id/cd10">
+                <ImageView
+                    android:id="@+id/imgNotificationDot"
+                    android:visibility="gone"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="7dp"
+                    android:elevation="2dp"
+                    android:src="@drawable/baseline_circle_24"/>
+                <ImageView
+                    android:id="@+id/img_notification"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="5dp"
+                    android:alpha="0.8"
+
+                    android:src="@drawable/notification_icon"/>
+            </RelativeLayout>
+
+
+
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cd10"

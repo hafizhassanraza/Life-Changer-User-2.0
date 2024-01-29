@@ -10,6 +10,7 @@ import com.enfotrix.life_changer_user_2_0.Models.ModelBankAccount
 import com.enfotrix.life_changer_user_2_0.Models.ModelFA
 import com.enfotrix.life_changer_user_2_0.Models.ModelNominee
 import com.enfotrix.life_changer_user_2_0.Models.ModelProfitTax
+import com.enfotrix.life_changer_user_2_0.Models.NotificationModel
 import com.enfotrix.life_changer_user_2_0.Models.TransactionModel
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
@@ -388,7 +389,23 @@ class SharedPrefManager(context: Context) {
         editor.putString("docID", docID)
         editor.commit()
     }
+    fun putNotificationList(list: List<NotificationModel>) {
+        editor.putString("ListNotification", Gson().toJson(list))
+        editor.commit()
+        }
 
+    fun getNotificationList(): List<NotificationModel> {
+
+        val json = sharedPref.getString("ListNotification", "") ?: ""
+        val type: Type = object : TypeToken<List<NotificationModel?>?>() {}.getType()
+        //return Gson().fromJson(json, type)
+
+        return if (!json.isNullOrEmpty()) {
+            Gson().fromJson(json, type) ?: emptyList()
+        } else {
+            emptyList()
+        }
+    }
 
     fun getToken(): String {
         return sharedPref.getString("docID", "")!!

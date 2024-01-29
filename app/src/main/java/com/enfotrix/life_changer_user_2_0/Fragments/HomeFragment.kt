@@ -23,6 +23,7 @@ import com.enfotrix.life_changer_user_2_0.Models.InvestmentModel
 import com.enfotrix.life_changer_user_2_0.Models.InvestmentViewModel
 import com.enfotrix.life_changer_user_2_0.Models.ModelAnnouncement
 import com.enfotrix.life_changer_user_2_0.Models.ModelBankAccount
+import com.enfotrix.life_changer_user_2_0.Models.NotificationModel
 import com.enfotrix.life_changer_user_2_0.Models.TransactionModel
 import com.enfotrix.life_changer_user_2_0.Models.UserViewModel
 import com.enfotrix.life_changer_user_2_0.R
@@ -191,6 +192,30 @@ class HomeFragment : Fragment() {
                     sharedPrefManager.putProfitList(transactionList.filter { it.type == constants.TRANSACTION_TYPE_PROFIT })
                     sharedPrefManager.putTaxList(transactionList.filter { it.type == constants.TRANSACTION_TYPE_TAX })
 
+                }
+
+            }
+
+
+
+        db.collection(constants.NOTIFICATION_COLLECTION)
+            .whereEqualTo(constants.USER_ID, sharedPrefManager.getToken())
+            .addSnapshotListener { snapshot, firebaseFirestoreException ->
+                firebaseFirestoreException?.let {
+                    Toast.makeText(mContext, it.message.toString(), Toast.LENGTH_SHORT).show()
+                    return@addSnapshotListener
+                }
+                snapshot?.let { task ->
+
+                    var notificationList=task.documents.mapNotNull { document -> document.toObject(
+                        NotificationModel::class.java) }
+                    sharedPrefManager.putNotificationList(notificationList)
+
+                    if(!notificationList.isNullOrEmpty()){
+
+                        if (notificationList.count { !it.read }>0) binding.imgNotificationDot.visibility= View.VISIBLE
+                        else binding.imgNotificationDot.visibility= View.GONE
+                    }
                 }
 
             }
