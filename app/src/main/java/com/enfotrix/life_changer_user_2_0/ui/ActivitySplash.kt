@@ -52,7 +52,6 @@ class ActivitySplash : AppCompatActivity() {
                  if(sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_ACTIVE)||sharedPrefManager.getUser().status.equals(constants.INVESTOR_STATUS_PENDING))
                  {
 
-                     getData()
 
 
                  }

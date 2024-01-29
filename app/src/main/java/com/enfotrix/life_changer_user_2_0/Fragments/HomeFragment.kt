@@ -220,7 +220,26 @@ class HomeFragment : Fragment() {
 
             }
 
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+        if(sharedPrefManager.getUser().userdevicetoken.isNullOrEmpty()){
+            FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                    return@OnCompleteListener
+                }
+
+                // Get new FCM registration token
+                val deviceTokenFCM = task.result
+                Log.d("token", deviceTokenFCM)
+
+                var user =sharedPrefManager.getUser()
+                user.userdevicetoken=deviceTokenFCM
+                db.collection(constants.INVESTOR_COLLECTION).document(sharedPrefManager.getToken())
+                    .set(user)
+                })
+            
+            }
+
+        /*FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
                 Log.w(TAG, "Fetching FCM registration token failed", task.exception)
                 return@OnCompleteListener
@@ -230,7 +249,7 @@ class HomeFragment : Fragment() {
             val token = task.result
             Log.d("token", token)
 
-        })
+        })*/
         /*FirebaseMessaging.getInstance().token
             .addOnCompleteListener{
                 if(it.isSuccessful){
