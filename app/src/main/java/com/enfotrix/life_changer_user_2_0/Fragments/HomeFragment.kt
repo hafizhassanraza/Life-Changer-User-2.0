@@ -208,7 +208,7 @@ class HomeFragment : Fragment() {
                 snapshot?.let { task ->
 
                     var notificationList=task.documents.mapNotNull { document -> document.toObject(
-                        NotificationModel::class.java) }
+                        NotificationModel::class.java)?.apply { id = document.id } }
                     sharedPrefManager.putNotificationList(notificationList)
 
                     if(!notificationList.isNullOrEmpty()){
