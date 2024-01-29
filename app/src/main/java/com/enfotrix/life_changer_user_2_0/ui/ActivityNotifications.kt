@@ -39,7 +39,7 @@ class ActivityNotifications : AppCompatActivity() {
         constants = Constants()
         sharedPrefManager = SharedPrefManager(mContext)
         binding.rvNoti.layoutManager = LinearLayoutManager(mContext)
-        notificationsList.sortBy { it.createdAt}
+
         adapter = AdapterNotifications(notificationsList)
         binding.rvNoti.adapter = adapter
 
@@ -47,6 +47,38 @@ class ActivityNotifications : AppCompatActivity() {
     }
 
 
-    private fun setData() { binding.rvNoti.adapter = AdapterNotifications(sharedPrefManager.getNotificationList()) }
+    private fun setData() {
+        updateData()
+        binding.rvNoti.adapter = AdapterNotifications(sharedPrefManager.getNotificationList().sortedByDescending {it.createdAt}) }
+    private fun updateData() {
+
+        val notificationsFromSharedPref = sharedPrefManager.getNotificationList()
+        notificationsFromSharedPref.forEach { it.read = true }
+        sharedPrefManager.putNotificationList(notificationsFromSharedPref)
+        saveNotificationsToFirestore(notificationsFromSharedPref)
+
+
+    }
+
+
+    private fun saveNotificationsToFirestore(notificationsList: List<NotificationModel>) {
+        val userNotificationsCollection =
+            sharedPrefManager.getUser()?.id?.let {
+                FirebaseFirestore.getInstance().collection(constants.NOTIFICATION_COLLECTION).document(
+           sharedPrefManager.getToken()
+                )
+
+            }
+        if (userNotificationsCollection != null) {
+            userNotificationsCollection.set(mapOf(constants.NOTIFICATION_COLLECTION to notificationsList))
+                .addOnSuccessListener {
+                    Toast.makeText(mContext, "Notifications updated in Firestore", Toast.LENGTH_SHORT).show()
+
+                }
+                .addOnFailureListener {
+                    Toast.makeText(mContext, "Failed to update notifications in Firestore", Toast.LENGTH_SHORT).show()
+                }
+        }
+    }
 
 }

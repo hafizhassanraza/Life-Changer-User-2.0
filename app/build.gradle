@@ -59,7 +59,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.firebase:firebase-auth-ktx:22.3.0'
 
-
+    implementation'com.google.android.play:app-update-ktx:2.1.0'
 
 
     ///notification
