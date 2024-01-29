@@ -221,6 +221,8 @@ class HomeFragment : Fragment() {
             }
 
         if(sharedPrefManager.getUser().userdevicetoken.isNullOrEmpty()){
+
+
             FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
                 if (!task.isSuccessful) {
                     Log.w(TAG, "Fetching FCM registration token failed", task.exception)
@@ -236,7 +238,7 @@ class HomeFragment : Fragment() {
                 db.collection(constants.INVESTOR_COLLECTION).document(sharedPrefManager.getToken())
                     .set(user)
                 })
-            
+
             }
 
         /*FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
