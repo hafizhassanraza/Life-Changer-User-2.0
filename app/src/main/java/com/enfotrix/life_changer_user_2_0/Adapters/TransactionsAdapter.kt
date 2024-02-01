@@ -46,7 +46,6 @@ class TransactionsAdapter (var activity:String, val data: List<TransactionModel>
                     itemBinding.tvReqAmount.setTextColor(Color.RED)
                 }
                 constant.FROM_APPROVED_WITHDRAW_REQ, constant.FROM_APPROVED_INVESTMENT_REQ, constant.FROM_PROFIT, constant.FROM_TAX -> {
-                    itemBinding.tvPreviousBalance.text = transactionModel.previousBalance
                     //itemBinding.tvNewBalance.text = transactionModel.newBalance
 
 

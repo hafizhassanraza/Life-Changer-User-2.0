@@ -4,8 +4,13 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.Window
+import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,12 +18,16 @@ import com.enfotrix.life_changer_user_2_0.Constants
 import com.enfotrix.life_changer_user_2_0.Models.InvestmentViewModel
 import com.enfotrix.life_changer_user_2_0.Models.TransactionModel
 import com.enfotrix.life_changer_user_2_0.Models.UserViewModel
+import com.enfotrix.life_changer_user_2_0.Pdf.PdfTaxHistory
 import com.enfotrix.life_changer_user_2_0.Pdf.PdfTransaction
+import com.enfotrix.life_changer_user_2_0.R
 import com.enfotrix.life_changer_user_2_0.SharedPrefManager
 import com.enfotrix.life_changer_user_2_0.Utils
 import com.enfotrix.life_changer_user_2_0.databinding.ActivityTaxBinding
+import com.enfotrix.life_changer_user_2_0.databinding.DialogDatepickerBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.util.Calendar
 
 class ActivityTax : AppCompatActivity() {
 
@@ -42,6 +51,7 @@ class ActivityTax : AppCompatActivity() {
     private lateinit var constants: Constants
     private lateinit var sharedPrefManager : SharedPrefManager
     private lateinit var dialog : Dialog
+    private var taxList: List<TransactionModel>? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,32 +69,77 @@ class ActivityTax : AppCompatActivity() {
 
 
 
-        /*binding.pdfProfit.setOnClickListener {
-            generatePDF()
-        }*/
+     binding.pdfTaxHistory.setOnClickListener {
+         dialogWithdrawDetails()
+     }
         binding.imgBack.setOnClickListener{finish()}
 
 
     }
+    private fun dialogWithdrawDetails() {
+        val dialogBinding = DialogDatepickerBinding.inflate(LayoutInflater.from(mContext))
+        val dialogDatepicker = Dialog(mContext)
+        dialogDatepicker.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialogDatepicker.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialogDatepicker.setContentView(dialogBinding.root)
+        val yearPicker: NumberPicker = dialogBinding.yearPicker
+        val monthPicker: NumberPicker = dialogBinding.monthPicker
+        val currentYear = Calendar.getInstance().get(Calendar.YEAR)
+        yearPicker.minValue = 2024
+        yearPicker.maxValue = 2050
+        yearPicker.value = 2024
+        val monthNames = resources.getStringArray(R.array.months)
+        val monthValues = (1..12).toList().toIntArray()
+        monthPicker.minValue = 0
+        monthPicker.maxValue = monthNames.size - 1
+        monthPicker.displayedValues = monthNames
+        monthPicker.setFormatter { index -> monthNames[index] }
+        monthPicker.value = Calendar.JULY - 1
+        dialogBinding.btnDownload.setOnClickListener {
+            val selectedYear = yearPicker.value
+            val selectedMonth = monthValues[monthPicker.value]
+            filterTaxList(selectedYear, selectedMonth)
+            dialogDatepicker.dismiss()
+        }
+        dialogDatepicker.show()
+    }
 
 
+    private fun filterTaxList(year: Int, month: Int) {
+        taxList =sharedPrefManager.getTaxList().filter{ it.status.equals(constants.TRANSACTION_STATUS_APPROVED) }.sortedByDescending { it.createdAt }
+            .filter { earning ->
+            val taxDate = earning.createdAt
+            if (taxDate != null) {
+                val calendar = Calendar.getInstance()
+                calendar.timeInMillis = taxDate.seconds * 1000
+                return@filter calendar.get(Calendar.YEAR) == year && calendar.get(Calendar.MONTH) + 1 == month
+            }
+            false
+        }
+
+        if (taxList!!.isEmpty()) {
+            Toast.makeText(mContext, "No data found", Toast.LENGTH_SHORT).show()
+        } else {
+            generatePDF()
+        }
+    }
     private fun generatePDF() {
         val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
             type = "application/pdf"
             putExtra(Intent.EXTRA_TITLE, "tax_details.pdf")
         }
-        startActivityForResult(intent, CREATE_PDF_REQUEST_CODE)
+        startActivityForResult(intent, 123)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == CREATE_PDF_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+        if (requestCode == 123 && resultCode == Activity.RESULT_OK) {
             data?.data?.let { uri ->
                 val outputStream = mContext.contentResolver.openOutputStream(uri)
                 if (outputStream != null) {
                     val success =
-                        PdfTransaction(listTransaction.sortedByDescending { it.createdAt }).generatePdf(
+                        PdfTaxHistory(taxList,sharedPrefManager.getUser()!!.firstName).generatePdf(
                             outputStream
                         )
                     outputStream.close()

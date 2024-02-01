@@ -376,7 +376,22 @@ class SharedPrefManager(context: Context) {
     }
 
 
+    fun putFilteredApprovedInvesmentList(list: List<TransactionModel>) {
+        editor.putString("FilteredApprovedInvesmentList", Gson().toJson(list))
+        editor.commit()
+    }
+    fun getFilteredApprovedInvesmentList(): List<TransactionModel>{
 
+        val json = sharedPref.getString("FilteredApprovedInvesmentList", "") ?: ""
+        val type: Type = object : TypeToken<List<TransactionModel?>?>() {}.getType()
+        //return Gson().fromJson(json, type)
+
+        return if (!json.isNullOrEmpty()) {
+            Gson().fromJson(json, type) ?: emptyList()
+        } else {
+            emptyList()
+        }
+    }
 
 
 

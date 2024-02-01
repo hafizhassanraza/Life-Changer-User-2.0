@@ -49,9 +49,6 @@ class FragmentPendingReq : Fragment() {
 
         binding.rvWithdrawPending.layoutManager = LinearLayoutManager(mContext)
         binding.rvWithdrawPending.adapter= investmentViewModel.getPendingWithdrawReqAdapter(constants.FROM_PENDING_WITHDRAW_REQ)
-
-
-
         return root
 
     }
