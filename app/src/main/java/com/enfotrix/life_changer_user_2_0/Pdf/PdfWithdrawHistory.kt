@@ -47,9 +47,14 @@ class PdfWithdrawHistory(val agentWithdrawList: List<TransactionModel>,  val fir
                 table.addCell(item.amount)
                 table.addCell(item.previousBalance)
                 table.addCell(SimpleDateFormat("dd/MM/yy", Locale.getDefault()).format(item.createdAt.toDate()))
-                table.addCell(item.transactionAt?.toDate()
-                    ?.let { SimpleDateFormat("dd/MM/yy", Locale.getDefault()).format(it) })
+                val transactionAt = item.transactionAt
+                if (transactionAt != null) {
+                    table.addCell(SimpleDateFormat("dd/MM/yy", Locale.getDefault()).format(transactionAt.toDate()))
+                } else {
+                    table.addCell("pending")
+                }
             }
+
             document.add(table)
             document.close()
             return true

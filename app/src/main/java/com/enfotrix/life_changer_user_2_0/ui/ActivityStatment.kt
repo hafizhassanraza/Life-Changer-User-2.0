@@ -125,7 +125,7 @@ class ActivityStatment : AppCompatActivity() {
         val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
             type = "application/pdf"
-            putExtra(Intent.EXTRA_TITLE, "tax_details.pdf")
+            putExtra(Intent.EXTRA_TITLE, "Statement.pdf")
         }
         startActivityForResult(intent, 123)
     }

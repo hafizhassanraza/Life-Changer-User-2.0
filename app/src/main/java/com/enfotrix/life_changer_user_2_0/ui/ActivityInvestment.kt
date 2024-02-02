@@ -241,7 +241,7 @@ class ActivityInvestment : AppCompatActivity() {
         val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
             type = "application/pdf"
-            putExtra(Intent.EXTRA_TITLE, "Withdraw History.pdf")
+            putExtra(Intent.EXTRA_TITLE, "Investment History.pdf")
         }
         startActivityForResult(intent, 123)
     }
