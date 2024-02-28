@@ -58,6 +58,8 @@ class ActivityNewWithdrawReq : AppCompatActivity(), InvestorAccountsAdapter.OnIt
         constants = Constants()
         sharedPrefManager = SharedPrefManager(mContext)
         setTitle("Add Withdraw Request")
+        binding.tvPhone.text= sharedPrefManager.getUser()!!.phone
+
 
         // Initialize the confirmationDialog
         confirmationDialog = Dialog(mContext)
