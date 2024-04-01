@@ -35,4 +35,7 @@
         <item name="cornerSizeTopLeft">7%</item>
         <item name="cornerSizeTopRight">7%</item>
     </style>
+    <style name="Theme.RemoveSplashScreenTheme" parent="@style/Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 </resources>

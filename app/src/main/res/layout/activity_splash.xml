@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,36 +8,17 @@
     android:background="@drawable/splash_gradient"
     tools:context=".ui.ActivitySplash">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical">
+
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="200dp"
-            android:layout_gravity="center_horizontal"
             android:src="@drawable/logo_name"
+            android:layout_centerInParent="true"
             android:layout_margin="85dp"
             />
 
 
-<!--        <TextView-->
-<!--            android:id="@+id/tv1"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_centerInParent="true"-->
-<!--            android:gravity="center_horizontal"-->
-<!--            android:layout_marginTop="7dp"-->
-<!--            android:text="Bank of the future"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:textColor="#CFCECE"-->
-<!--            android:textStyle="bold"-->
-<!--            android:textSize="18dp"-->
-<!--            />-->
-
-    </LinearLayout>
 
     <ImageView
         android:layout_width="150dp"
@@ -49,18 +29,6 @@
         android:alpha="0.7"
         android:src="@drawable/enfotrix_logo"/>
 
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_centerInParent="true"-->
-<!--        android:layout_marginHorizontal="85dp"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:layout_marginBottom="40dp"-->
-<!--        android:gravity="center_horizontal"-->
-<!--        android:text="www.lifechangerpk.com"-->
-<!--        android:textColor="@color/statusbarcolor"-->
-<!--        android:textStyle="bold" />-->
 
 
 </RelativeLayout>

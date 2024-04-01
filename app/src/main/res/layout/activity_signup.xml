@@ -40,7 +40,7 @@
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/imgBack"
-            android:textColor="@color/black_m"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="20dp"/>
 
@@ -192,7 +192,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/term_condition"
                     android:textSize="13dp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_m"
                     android:padding="5dp"/>
             </LinearLayout>
 
