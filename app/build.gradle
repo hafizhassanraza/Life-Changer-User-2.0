@@ -14,8 +14,8 @@ android {
         applicationId "com.enfotrix.life_changer_user_2_0_1"
         minSdk 23
         targetSdk 33
-        versionCode 8
-        versionName "4.4"
+        versionCode 9
+        versionName "4.7"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
@@ -68,6 +68,7 @@ dependencies {
     ///notification
     implementation 'com.google.firebase:firebase-messaging-ktx:23.3.1'
     implementation 'com.google.firebase:firebase-messaging:23.3.1'
+    implementation 'androidx.activity:activity:1.8.0'
     ///
 
 
